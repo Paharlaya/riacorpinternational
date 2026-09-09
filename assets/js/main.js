@@ -75,6 +75,7 @@
       email: form.querySelector("#f-email"),
       phone: form.querySelector("#f-phone"),
       direction: form.querySelector("#f-direction"),
+      product: form.querySelector("#f-product"),
       goods: form.querySelector("#f-goods"),
       message: form.querySelector("#f-message"),
       honey: form.querySelector("#f-website")
@@ -128,6 +129,7 @@
         fields.company.value.trim() ? "Company: " + fields.company.value.trim() : null,
         "Email: " + fields.email.value.trim(),
         fields.phone.value.trim() ? "Phone: " + fields.phone.value.trim() : null,
+        "Product line: " + fields.product.value,
         "Direction: " + fields.direction.value,
         "Goods: " + fields.goods.value.trim(),
         "",
