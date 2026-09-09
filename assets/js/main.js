@@ -52,6 +52,7 @@
       var w = routeDone.parentElement.clientWidth;
       routeDone.style.width = (p * 100).toFixed(2) + "%";
       routeShip.style.transform = "translateX(" + (p * (w - 30)).toFixed(1) + "px)";
+      routeShip.classList.toggle("is-sailing", p > 0.01);
     };
     window.addEventListener("scroll", paint, { passive: true });
     window.addEventListener("resize", paint);
@@ -146,6 +147,26 @@
       }
       status.className = "form__status is-ok";
       form.reset();
+    });
+  }
+
+  /* ---- Scroll reveal: sections fade up as they enter ---------------------- */
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var targets = document.querySelectorAll(
+      ".section-head, .step, .pillar, .ledger__row, .statement, .fact, .contact__details, .form, .cta__inner, .lanes, .manifest__table"
+    );
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    targets.forEach(function (el, i) {
+      var siblings = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      el.classList.add("reveal");
+      el.style.transitionDelay = Math.min(siblings, 5) * 70 + "ms";
+      io.observe(el);
     });
   }
 
