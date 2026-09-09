@@ -369,37 +369,64 @@ ul, ol { padding: 0; list-style: none; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(3.5rem, 7vw, 7rem) 0;
-  background:
-    radial-gradient(60% 50% at 85% 0%, rgba(228, 168, 27, 0.16), transparent 70%),
-    var(--paper);
+  padding-block: clamp(3rem, 6vw, 6rem) 0;
+  background: var(--paper);
 }
 
-.hero__copy {
+/* headline left, lede and actions right, both bottom-aligned on one row */
+.hero__grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   gap: var(--space-4);
-  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+  align-items: end;
 }
-.hero__aside { display: grid; gap: var(--space-3); }
-.hero__aside .lede { max-width: 46ch; }
-@media (min-width: 1024px) {
-  .hero__aside { margin-left: auto; width: min(100%, 46ch); }
+@media (min-width: 900px) {
+  .hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 5rem); }
 }
 
-.hero .display .line { display: block; }
-.hero .display .line--mustard {
-  display: inline;
+.hero .display {
+  font-size: clamp(2.5rem, 1rem + 3.4vw, 4.1rem);
+  max-width: 17ch;
+}
+.hero .line--mustard {
   background: linear-gradient(transparent 62%, var(--mustard-soft) 62%, var(--mustard-soft) 94%, transparent 94%);
   padding-inline: 0.05em;
   margin-inline: -0.05em;
   border-radius: 4px;
 }
 
-/* the voyage: ship, layered waves, ports */
-.voyage { position: relative; }
+.hero__aside {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  padding-top: clamp(4rem, 9vw, 7rem);
+}
+.hero__aside .lede { max-width: 44ch; color: var(--graphite); }
+
+/* the sun sits behind the right-hand text */
+.hero__sun {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: -4%;
+  width: clamp(120px, 15vw, 210px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #f7cb57, var(--mustard) 72%);
+  box-shadow: 0 0 0 22px rgba(228, 168, 27, 0.10), 0 0 0 52px rgba(228, 168, 27, 0.05), 0 0 90px rgba(228, 168, 27, 0.35);
+  opacity: 0.95;
+}
+@media (max-width: 899px) {
+  .hero__aside { padding-top: 5.5rem; }
+  .hero__sun { right: -2%; top: 0; width: 120px; }
+}
+
+/* the sea: ship and layered waves run under both columns */
 .voyage__sea {
   position: relative;
   height: clamp(200px, 26vw, 360px);
+  margin-top: calc(-1 * clamp(1rem, 3vw, 2.5rem));
   overflow: hidden;
   background: linear-gradient(180deg, transparent 0%, var(--wash-light) 100%);
 }
@@ -410,7 +437,7 @@ ul, ol { padding: 0; list-style: none; }
   width: clamp(280px, 46vw, 640px);
   height: auto;
   z-index: 2;
-  filter: drop-shadow(0 18px 24px rgba(40, 30, 0, 0.12));
+  filter: drop-shadow(0 18px 24px rgba(40, 30, 0, 0.14));
 }
 .voyage__wave {
   position: absolute;
@@ -428,17 +455,6 @@ ul, ol { padding: 0; list-style: none; }
   animation: drift 26s linear infinite reverse;
 }
 .voyage__wave--front { animation: drift 16s linear infinite; }
-.voyage__sun {
-  position: absolute;
-  right: 9%;
-  top: 10%;
-  width: clamp(64px, 9vw, 130px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #f6c64a, var(--mustard) 70%);
-  box-shadow: 0 0 0 18px rgba(228, 168, 27, 0.10), 0 0 0 40px rgba(228, 168, 27, 0.05);
-  z-index: 1;
-}
 
 .ports {
   display: grid;
@@ -489,18 +505,18 @@ ul, ol { padding: 0; list-style: none; }
 }
 
 /* page-load orchestration */
-.js .hero .display .line,
-.js .hero__aside > * {
+.js .hero .display,
+.js .hero__aside > .lede,
+.js .hero__aside > .actions {
   opacity: 0;
   transform: translateY(18px);
   animation: rise 900ms var(--ease) forwards;
 }
-.hero .display .line:nth-child(2) { animation-delay: 90ms; }
-.hero .display .line:nth-child(3) { animation-delay: 180ms; }
-.hero__aside > :nth-child(1) { animation-delay: 320ms; }
-.hero__aside > :nth-child(2) { animation-delay: 420ms; }
-.voyage__ship { animation: sail-in 1600ms var(--ease) 200ms both, bob 6s ease-in-out 1800ms infinite; }
-.js .voyage__sun { animation: rise 1400ms var(--ease) 500ms both; }
+.hero__aside > .lede { animation-delay: 160ms; }
+.hero__aside > .actions { animation-delay: 280ms; }
+.js .hero__sun { opacity: 0; animation: sunrise 1400ms var(--ease) 300ms forwards; }
+.voyage__ship { animation: sail-in 1600ms var(--ease) 250ms both, bob 6s ease-in-out 1850ms infinite; }
+@keyframes sunrise { to { opacity: 0.95; transform: none; } from { transform: translateY(24px); } }
 @keyframes rise { to { opacity: 1; transform: none; } }
 @keyframes sail-in {
   from { transform: translateX(-40vw); }
@@ -873,7 +889,7 @@ ul, ol { padding: 0; list-style: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .js .hero .display .line, .js .hero__aside > *, .js .voyage__sun { opacity: 1; transform: none; }
+  .js .hero .display, .js .hero__aside > .lede, .js .hero__aside > .actions, .js .hero__sun { opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; }
   .ports__track { animation: none; }
 }
