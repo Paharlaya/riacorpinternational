@@ -241,7 +241,7 @@ ul, ol { padding: 0; list-style: none; }
   text-decoration: none;
   color: var(--ink);
 }
-.brand__mark { width: 40px; height: 40px; flex: none; border-radius: 10px; }
+.brand__mark { width: 40px; height: 40px; flex: none; }
 .brand__name { display: grid; line-height: 1; }
 .brand__name b {
   font-weight: 700;

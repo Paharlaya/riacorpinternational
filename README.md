@@ -14,6 +14,19 @@ Static website for Ria Corp International, an export and import company. Hand-wr
 
 Shared assets live in `assets/css/style.css`, `assets/js/main.js` and `assets/img/`.
 
+## Logo
+
+An RC monogram built from geometric strokes, so no font is needed. The wordmark in the lockups is Archivo converted to outlines. All files are SVG in `assets/img/`:
+
+| File | Use |
+| --- | --- |
+| `logo-mark.svg` | Primary mark: black tile, white R, mustard C. Also the favicon and app icons. |
+| `logo-mark-light.svg` | Mustard tile with black letters, for dark backgrounds. |
+| `logo-mark-mono.svg` | Letters only in black, for single-colour print or embossing. |
+| `logo-horizontal.svg` | Mark plus "RIA CORP / INTERNATIONAL" for letterheads and headers. |
+| `logo-horizontal-dark.svg` | Same lockup for dark backgrounds. |
+| `logo-stacked.svg` | Mark above the wordmark, for social avatars and square placements. |
+
 ## Design
 
 - Colours: white paper, true black ink, mustard `#E4A81B` as the highlight, a pale mustard wash for panels.
