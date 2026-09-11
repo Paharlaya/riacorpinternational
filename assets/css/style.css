@@ -160,7 +160,8 @@ ul, ol { padding: 0; list-style: none; }
   margin-inline: auto;
 }
 
-.section { padding-block: var(--space-6); }
+.section { position: relative; padding-block: var(--space-6); overflow: hidden; }
+.section > .wrap, .page-hero > .wrap, .hero > .wrap { position: relative; z-index: 1; }
 .section--rule { border-top: 1px solid var(--rule); }
 .section--wash { background: var(--wash-light); }
 .section--mustard {
@@ -369,7 +370,7 @@ ul, ol { padding: 0; list-style: none; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(3rem, 6vw, 6rem) 0;
+  padding-block: 0.75rem 0;
   background: var(--paper);
 }
 
@@ -379,10 +380,11 @@ ul, ol { padding: 0; list-style: none; }
   z-index: 2;
   display: grid;
   gap: var(--space-4);
-  align-items: end;
+  align-items: start;
 }
 @media (min-width: 900px) {
   .hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 5rem); }
+  .hero .display { padding-top: 0.5rem; }
 }
 
 .hero .display {
@@ -400,7 +402,7 @@ ul, ol { padding: 0; list-style: none; }
   position: relative;
   display: grid;
   gap: var(--space-3);
-  padding-top: clamp(4rem, 9vw, 7rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
 }
 .hero__aside .lede { max-width: 44ch; color: var(--graphite); }
 
@@ -409,7 +411,7 @@ ul, ol { padding: 0; list-style: none; }
   position: absolute;
   z-index: -1;
   right: 0;
-  top: -4%;
+  top: 0.25rem;
   width: clamp(120px, 15vw, 210px);
   aspect-ratio: 1;
   border-radius: 50%;
@@ -418,7 +420,7 @@ ul, ol { padding: 0; list-style: none; }
   opacity: 0.95;
 }
 @media (max-width: 899px) {
-  .hero__aside { padding-top: 5.5rem; }
+  .hero__aside { padding-top: 4.5rem; }
   .hero__sun { right: -2%; top: 0; width: 120px; }
 }
 
@@ -773,7 +775,9 @@ ul, ol { padding: 0; list-style: none; }
 
 /* Page hero (inner pages) ------------------------------------------------ */
 .page-hero {
-  padding-block: clamp(3.5rem, 7vw, 7rem) var(--space-5);
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3rem, 6vw, 6rem) var(--space-5);
   border-bottom: 1px solid var(--rule);
   background:
     radial-gradient(50% 60% at 90% 0%, rgba(228, 168, 27, 0.14), transparent 70%),
@@ -871,6 +875,57 @@ ul, ol { padding: 0; list-style: none; }
   padding-top: var(--space-3);
   font-size: var(--fs-7);
   color: rgba(255,255,255,.5);
+}
+
+
+/* Shapes: decorative backdrops per section ------------------------------- */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.shapes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.shape {
+  position: absolute;
+  width: var(--w, 120px);
+  color: var(--mustard);
+  opacity: var(--o, 0.32);
+  will-change: transform;
+}
+.shape__svg { width: 100%; height: auto; overflow: visible; }
+.shape--route .shape__svg { height: 100%; }
+.shape--route { height: var(--h, 40%); }
+.shape--ink { color: var(--ink); }
+.shape .shape__svg { animation: float var(--d, 10s) ease-in-out infinite alternate; }
+.shape--route .shape__svg { animation: none; }
+@keyframes float {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(-16px) rotate(var(--r, 2deg)); }
+}
+.blob {
+  position: absolute;
+  width: var(--w, 480px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c, rgba(228, 168, 27, 0.18)) 0%, transparent 68%);
+  animation: blob var(--d, 24s) ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes blob {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(40px, -30px) scale(1.08); }
+}
+.has-gsap .route-draw,
+.has-gsap .lanes .lane { stroke-dasharray: 1; stroke-dashoffset: 1; }
+@media (max-width: 720px) {
+  .shape { width: calc(var(--w, 120px) * 0.6); }
+  .blob { width: calc(var(--w, 480px) * 0.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shape .shape__svg, .blob { animation: none; }
+  .has-gsap .route-draw, .has-gsap .lanes .lane { stroke-dasharray: none; stroke-dashoffset: 0; }
 }
 
 /* Utilities -------------------------------------------------------------- */

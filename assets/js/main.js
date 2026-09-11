@@ -172,6 +172,31 @@
     });
   }
 
+  /* ---- Shapes: parallax and route drawing with GSAP (optional) ----------- */
+  if (!reduceMotion && window.gsap && window.ScrollTrigger) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    document.documentElement.classList.add("has-gsap");
+
+    document.querySelectorAll(".shape[data-speed]").forEach(function (el) {
+      var speed = parseFloat(el.getAttribute("data-speed")) || 0.25;
+      var scope = el.closest(".section, .page-hero, .hero") || document.body;
+      window.gsap.fromTo(el, { y: speed * 140 }, {
+        y: -speed * 140,
+        ease: "none",
+        scrollTrigger: { trigger: scope, start: "top bottom", end: "bottom top", scrub: 0.6 }
+      });
+    });
+
+    document.querySelectorAll(".route-draw, .lanes .lane").forEach(function (path) {
+      path.setAttribute("pathLength", "1");
+      window.gsap.fromTo(path, { strokeDashoffset: 1 }, {
+        strokeDashoffset: 0,
+        ease: "none",
+        scrollTrigger: { trigger: path.closest(".section, .page-hero") || path, start: "top 85%", end: "bottom 55%", scrub: 0.8 }
+      });
+    });
+  }
+
   /* ---- Footer year ------------------------------------------------------ */
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());

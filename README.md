@@ -1,6 +1,6 @@
 # Ria Corp International
 
-Static website for Ria Corp International, an export and import company. Hand-written HTML, CSS and JavaScript with no build step, made for GitHub Pages with a custom domain.
+Static website for Ria Corp International, an export and import company. Hand-written HTML, CSS and JavaScript with no build step, made for GitHub Pages with a custom domain. The only dependency is GSAP 3.13 with ScrollTrigger from cdnjs (about 40 KB gzipped) for scroll-driven shape motion.
 
 ## Pages
 
@@ -18,7 +18,7 @@ Shared assets live in `assets/css/style.css`, `assets/js/main.js` and `assets/im
 
 - Colours: white paper, true black ink, mustard `#E4A81B` as the highlight, a pale mustard wash for panels.
 - Type: Archivo variable from Google Fonts. Wide weights for headlines, condensed for labels, normal for reading.
-- Motion: one page-load sequence on the home hero, a ship that sails the header line as you scroll, and a slow port ticker. Everything respects `prefers-reduced-motion`.
+- Motion: one page-load sequence on the home hero, a ship that sails the header line as you scroll, a slow port ticker, and shape backdrops on every section (containers, crates, route lines, rings, plus a leaf, mortar and peptide chain for the three product lines). Shapes float with CSS and parallax with GSAP ScrollTrigger loaded from cdnjs; route lines draw in as you scroll. If GSAP fails to load the shapes simply stay still. Everything respects `prefers-reduced-motion`.
 
 ## Before going live
 
