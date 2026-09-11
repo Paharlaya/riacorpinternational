@@ -35,7 +35,7 @@ An RC monogram built from geometric strokes, so no font is needed. The wordmark 
 
 ## Before going live
 
-1. **Domain.** Run `./set-domain.sh yourdomain.com` to replace `riacorpinternational.com` everywhere and rewrite `CNAME`. Then point DNS at GitHub Pages (the script prints the records) and set the custom domain under Settings, Pages.
+1. **Domain.** There is no `CNAME` file yet on purpose: with one present, GitHub Pages redirects the github.io address to the custom domain, which would break the site until DNS exists. When the domain is bought, run `./set-domain.sh yourdomain.com`. It replaces `riacorpinternational.com` everywhere, writes `CNAME`, and prints the DNS records. Then set the custom domain under Settings, Pages, and tick Enforce HTTPS.
 2. **Contact details.** Replace the placeholder phone number and address in the footer of every page and in `contact.html`. Search for `+00 000 000 0000` and `Street address`.
 3. **WhatsApp.** In `assets/js/main.js`, set `WHATSAPP_NUMBER` to digits only with country code. Until it is set, the enquiry form falls back to opening the visitor's email app addressed to `SITE_EMAIL`.
 4. **Product lines.** The site is built around three lines: agro products (spices first), wellness raw materials, and collagen raw materials. The wellness list (ashwagandha, moringa, amla, tulsi, shatavari, essential oils, Himalayan salt) is a placeholder until the confirmed list arrives; replace it in `services.html` and the home manifest. The direction badges (agro = export, wellness = export and import, collagen = import) are assumptions to confirm.

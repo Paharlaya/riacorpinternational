@@ -14,7 +14,7 @@ if [ $# -ne 1 ]; then
 fi
 
 NEW="${1#http://}"; NEW="${NEW#https://}"; NEW="${NEW%/}"
-OLD="$(cat CNAME)"
+OLD="$( [ -f CNAME ] && cat CNAME || echo riacorpinternational.com )"
 
 FILES=$(grep -rl "$OLD" . --include="*.html" --include="*.txt" --include="*.xml" --include="*.js" --include="*.webmanifest" 2>/dev/null || true)
 
