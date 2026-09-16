@@ -14,7 +14,7 @@ if [ $# -ne 1 ]; then
 fi
 
 NEW="${1#http://}"; NEW="${NEW#https://}"; NEW="${NEW%/}"
-OLD="$( [ -f CNAME ] && cat CNAME || echo riacorpinternational.com )"
+OLD="$( [ -f CNAME ] && cat CNAME || echo paharlaya.github.io/riacorpinternational )"
 
 FILES=$(grep -rl "$OLD" . --include="*.html" --include="*.txt" --include="*.xml" --include="*.js" --include="*.webmanifest" 2>/dev/null || true)
 
@@ -37,3 +37,5 @@ echo "       A     @     185.199.110.153"
 echo "       A     @     185.199.111.153"
 echo "       CNAME www   paharlaya.github.io"
 echo "  2. GitHub repo -> Settings -> Pages -> set the custom domain, tick Enforce HTTPS."
+echo "  3. Drop the noindex line from tools/partials/head.html, set robots.txt to Allow: /,"
+echo "     then re-run: node tools/build-pages.mjs"

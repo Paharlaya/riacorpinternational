@@ -1,4 +1,6 @@
 User-agent: *
-Allow: /
+Disallow: /
 
-Sitemap: https://riacorpinternational.com/sitemap.xml
+# Demo build. Replace with the two lines below when going live:
+#   Allow: /
+#   Sitemap: https://paharlaya.github.io/riacorpinternational/sitemap.xml

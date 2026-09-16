@@ -1,22 +1,24 @@
 /* ==========================================================================
-   Ria Corp International — stylesheet
-   Palette: white paper, black ink, mustard highlight with soft tints.
-   Type: Archivo variable, one family for everything.
+   RiaCorp International — stylesheet
+   Palette: white paper, black ink, brand gold with soft tints.
+   The gold is sampled straight from the logo artwork by tools/logo-build.mjs.
+   Type: Archivo for everything, Montserrat for the brand lockup only.
    ========================================================================== */
 
 :root {
   --paper: #ffffff;
   --ink: #000000;
   --graphite: #57534a;
-  --mustard: #e4a81b;
-  --mustard-deep: #b5820e;
-  --mustard-soft: #f3dc9a;
-  --wash: #fbf3dc;
+  --mustard: #dba629;          /* sampled from riacorplogo.png */
+  --mustard-deep: #a67c1c;     /* same hue, dark enough for body text on white */
+  --mustard-soft: #f2d99b;
+  --wash: #fbf3db;
   --wash-light: #fdf8ea;
   --rule: #ebe6d9;
   --rule-mid: #d9d3c4;
 
   --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-brand: "Montserrat", "Archivo", "Helvetica Neue", Arial, sans-serif;
 
   --fs-1: clamp(2.5rem, 1rem + 4.4vw, 5.25rem);
   --fs-2: clamp(1.9rem, 1.2rem + 2.4vw, 3.25rem);
@@ -42,7 +44,7 @@
   --r-pill: 999px;
   --shadow-soft: 0 12px 40px -18px rgba(40, 30, 0, 0.25);
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 30px -18px rgba(40, 30, 0, 0.18);
-  --header-h: 76px;
+  --header-h: 92px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -237,24 +239,42 @@ ul, ol { padding: 0; list-style: none; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.7rem;
   text-decoration: none;
   color: var(--ink);
 }
-.brand__mark { width: 40px; height: 40px; flex: none; }
+/* The mark is a raster crop of the artwork; srcset carries the 2x. */
+.brand__mark {
+  width: 64px; height: 64px;
+  flex: none;
+  object-fit: contain;
+}
 .brand__name { display: grid; line-height: 1; }
 .brand__name b {
-  font-weight: 700;
-  font-variation-settings: "wdth" 104;
-  letter-spacing: -0.02em;
-  font-size: 1.1rem;
+  font-family: var(--font-brand);
+  font-weight: 800;
+  font-size: 1.62rem;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
 }
 .brand__name span {
-  font-weight: 500;
+  font-family: var(--font-brand);
+  font-weight: 300;
   font-size: 0.72rem;
-  letter-spacing: 0.04em;
+  /* The trailing letter-space pushes the word off-centre; the negative margin
+     pulls it back so it optically aligns with the R above it. */
+  letter-spacing: 0.315em;
+  margin-right: -0.315em;
+  text-transform: uppercase;
   color: var(--graphite);
-  margin-top: 0.2rem;
+  margin-top: 0.5rem;
+}
+@media (max-width: 899px) { :root { --header-h: 78px; } .brand__mark { width: 54px; height: 54px; } }
+@media (max-width: 420px) {
+  .brand { gap: 0.55rem; }
+  .brand__mark { width: 46px; height: 46px; }
+  .brand__name b { font-size: 1.24rem; }
+  .brand__name span { font-size: 0.56rem; letter-spacing: 0.26em; margin-right: -0.26em; }
 }
 
 .nav { display: flex; align-items: center; gap: var(--space-3); }
@@ -262,16 +282,17 @@ ul, ol { padding: 0; list-style: none; }
 .nav__link {
   position: relative;
   display: inline-block;
-  padding: 0.55rem 0.9rem;
+  padding: 0.5rem 0.72rem;
   border-radius: var(--r-pill);
   font-weight: 500;
-  font-size: var(--fs-6);
+  font-size: var(--fs-7);
   color: var(--graphite);
   text-decoration: none;
   transition: background-color 200ms var(--ease), color 200ms var(--ease);
 }
 .nav__link:hover { background: var(--wash); color: var(--ink); }
 .nav__link[aria-current="page"] { color: var(--ink); font-weight: 600; }
+.nav__link[aria-current="true"] { color: var(--ink); font-weight: 600; }
 .nav__link[aria-current="page"]::after {
   content: "";
   position: absolute;
@@ -283,7 +304,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 
 .nav__cta { display: none; }
-@media (min-width: 1024px) { .nav__cta { display: inline-flex; padding: 0.75rem 1.25rem; } }
+@media (min-width: 1024px) { .nav__cta { display: inline-flex; padding: 0.62rem 1.1rem; font-size: var(--fs-7); } }
 
 .nav-toggle {
   display: none;
@@ -310,7 +331,7 @@ ul, ol { padding: 0; list-style: none; }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   .nav-toggle { display: block; }
   .nav {
     position: absolute;
@@ -569,7 +590,7 @@ ul, ol { padding: 0; list-style: none; }
   font-weight: 600;
   line-height: 1.2;
 }
-.badge--soft { background: rgba(228, 168, 27, 0.22); }
+.badge--soft { background: rgba(219, 166, 41, 0.22); }
 @media (max-width: 720px) {
   .manifest__table thead { display: none; }
   .manifest__table tr { display: grid; gap: 0.45rem; padding: 1.1rem 0; border-top: 1px solid rgba(0,0,0,.08); }
@@ -857,7 +878,24 @@ ul, ol { padding: 0; list-style: none; }
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 @media (min-width: 900px) { .footer__grid { grid-template-columns: minmax(0, 5fr) repeat(3, minmax(0, 2fr)); } }
-.footer__brand .brand__name span { color: rgba(255,255,255,.6); }
+/* The footer lockup sits on black at the very bottom of the page, so it is
+   scaled up well past the header's and given its own breathing room -- it is
+   the last thing a buyer sees, and it should read as a mark, not a bullet. */
+.footer__brand .brand { gap: 1rem; align-items: center; }
+.footer__brand .brand__mark { width: 92px; height: 92px; }
+.footer__brand .brand__name b { font-size: 2rem; }
+.footer__brand .brand__name span {
+  color: rgba(255,255,255,.72);
+  font-size: 0.86rem;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  margin-top: 0.58rem;
+}
+@media (max-width: 480px) {
+  .footer__brand .brand__mark { width: 70px; height: 70px; }
+  .footer__brand .brand__name b { font-size: 1.55rem; }
+  .footer__brand .brand__name span { font-size: 0.68rem; }
+}
 .footer__brand p { margin-top: var(--space-3); color: rgba(255,255,255,.65); max-width: 36ch; font-size: var(--fs-6); }
 .footer__col h3 {
   font-weight: 500;
@@ -865,7 +903,14 @@ ul, ol { padding: 0; list-style: none; }
   color: var(--mustard);
   margin-bottom: 1rem;
 }
-.footer__col li { color: rgba(255,255,255,.85); font-size: var(--fs-6); }
+.footer__col li {
+  color: rgba(255,255,255,.85);
+  font-size: var(--fs-6);
+  /* The email address is one long unbreakable token and the contact column is
+     the narrowest in the grid; without this it pushes the page wider than the
+     viewport in a band around 1024px. */
+  overflow-wrap: anywhere;
+}
 .footer__col li + li { margin-top: 0.6rem; }
 .footer__foot {
   display: flex;
@@ -877,6 +922,351 @@ ul, ol { padding: 0; list-style: none; }
   color: rgba(255,255,255,.5);
 }
 
+
+
+/* Nav submenu (Products) -------------------------------------------------
+   Opens on hover and on focus-within, so it works from the keyboard with no
+   JS at all. Below the nav breakpoint it is simply an indented sub-list. */
+.nav__item { position: relative; }
+.nav__sub { display: grid; }
+.nav__sub .nav__link { font-size: var(--fs-6); }
+@media (min-width: 900px) {
+  .nav__item--has-sub > .nav__link::after {
+    content: "";
+    display: inline-block;
+    width: 6px; height: 6px;
+    margin-left: 0.45rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+  .nav__sub {
+    position: absolute;
+    top: 100%; left: 0;
+    min-width: 13rem;
+    padding: 0.4rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-sm);
+    background: var(--paper);
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 180ms var(--ease), transform 180ms var(--ease), visibility 180ms;
+    z-index: 30;
+  }
+  .nav__item:hover > .nav__sub,
+  .nav__item:focus-within > .nav__sub {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav__sub .nav__link { display: block; padding: 0.5rem 0.75rem; border-radius: 6px; }
+  .nav__sub .nav__link[aria-current="page"]::after { display: none; }
+}
+@media (max-width: 899px) {
+  .nav__sub { padding-left: var(--space-3); }
+  .nav__sub .nav__link { opacity: 0.85; }
+}
+
+/* Product grid (square image tiles, name beneath) -------------------------
+   The image is a background, not an <img>, so a photo that has not been
+   supplied yet degrades to the wash tile and its label rather than a broken
+   image icon. Dropping a file into assets/img/products/ needs no code change. */
+.prodgrid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 720px) { .prodgrid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .prodgrid { grid-template-columns: repeat(4, 1fr); } }
+.prodgrid__item { display: grid; gap: 0.75rem; }
+.prodgrid__img {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  border-radius: var(--r-md);
+  border: 1px solid var(--rule);
+  background-color: var(--wash);
+  /* Globe watermark sits under the photo. A photo that has not been supplied
+     yet fails to paint and leaves the watermark showing, so dropping files
+     into assets/img/products/ needs no code change. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23dba629' stroke-width='2.5' opacity='.45'/%3E%3Cellipse cx='50' cy='50' rx='13' ry='30' fill='none' stroke='%23dba629' stroke-width='2' opacity='.35'/%3E%3Cpath d='M20 50h60M26 36h48M26 64h48' stroke='%23dba629' stroke-width='2' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 38% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  transition: transform 300ms var(--ease), border-color 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+.prodgrid__item:hover .prodgrid__img {
+  transform: translateY(-4px);
+  border-color: var(--mustard-soft);
+  box-shadow: var(--shadow-card);
+}
+/* The photo covers the watermark once it exists. alt="" means a missing file
+   paints nothing at all rather than a broken-image icon, so the tile simply
+   falls back to its placeholder state. */
+.prodgrid__img > img,
+.ledger__media > img,
+.cert__scan > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+}
+.cert__scan > img { object-fit: contain; padding: 6%; }
+/* display:block above would beat the UA stylesheet's [hidden]{display:none},
+   so the slot images need this to actually disappear when hidden. */
+.prodgrid__img > img[hidden],
+.ledger__media > img[hidden],
+.cert__scan > img[hidden] { display: none; }
+
+.prodgrid__name { font-weight: 600; font-size: var(--fs-6); text-align: center; }
+.prodgrid__meta { font-size: var(--fs-7); color: var(--graphite); text-align: center; margin-top: -0.45rem; }
+
+/* Specification table ---------------------------------------------------- */
+.spectable-wrap { overflow-x: auto; }
+.spectable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-6);
+}
+.spectable th, .spectable td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.9rem 1rem 0.9rem 0;
+  border-top: 1px solid var(--rule);
+}
+.spectable thead th {
+  border-top: 0;
+  padding-top: 0;
+  font-weight: 500;
+  font-size: var(--fs-7);
+  color: var(--graphite);
+  white-space: nowrap;
+}
+.spectable tbody th { font-weight: 600; color: var(--ink); padding-right: var(--space-3); }
+.spectable td { color: var(--graphite); }
+.spectable tbody tr:last-child th, .spectable tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+@media (max-width: 720px) {
+  .spectable, .spectable thead, .spectable tbody, .spectable tr, .spectable th, .spectable td { display: block; }
+  .spectable thead { display: none; }
+  .spectable tbody tr { padding: 1rem 0; border-top: 1px solid var(--rule); }
+  .spectable tbody th, .spectable tbody td { border: 0; padding: 0 0 0.35rem; }
+  .spectable tbody td::before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    color: var(--ink);
+  }
+}
+
+/* FAQ accordion (native <details>, works with JS disabled) ---------------- */
+.faq { display: grid; gap: var(--space-3); }
+.faq__group + .faq__group { margin-top: var(--space-5); }
+.faq__group h3 {
+  font-size: var(--fs-6);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mustard-deep);
+  margin-bottom: var(--space-3);
+}
+.faq__item {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  overflow: hidden;
+}
+.faq__item + .faq__item { margin-top: 0.75rem; }
+.faq__item[open] { border-color: var(--mustard-soft); box-shadow: var(--shadow-card); }
+.faq__item summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "";
+  flex: none;
+  width: 9px; height: 9px;
+  margin-top: 0.45em;
+  border-right: 2px solid var(--mustard-deep);
+  border-bottom: 2px solid var(--mustard-deep);
+  transform: rotate(45deg);
+  transition: transform 220ms var(--ease);
+}
+.faq__item[open] summary::after { transform: rotate(-135deg); }
+.faq__item summary:hover { background: var(--wash-light); }
+.faq__answer {
+  padding: 0 var(--space-4) var(--space-4);
+  color: var(--graphite);
+  max-width: 68ch;
+}
+.faq__answer > * + * { margin-top: var(--space-2); }
+.faq__answer ul { display: grid; gap: 0.4rem; margin-top: var(--space-2); }
+.faq__answer li { padding-left: 1.3rem; position: relative; }
+.faq__answer li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--mustard);
+}
+
+/* Testimonials ----------------------------------------------------------- */
+.quotes { display: grid; gap: var(--space-3); }
+@media (min-width: 720px) { .quotes { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .quotes { grid-template-columns: repeat(3, 1fr); } }
+.quote {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding: var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper);
+}
+.quote__stars { color: var(--mustard); letter-spacing: 0.1em; font-size: var(--fs-6); }
+.quote blockquote { color: var(--graphite); }
+.quote figcaption { font-size: var(--fs-7); }
+.quote figcaption b { display: block; font-weight: 600; color: var(--ink); font-size: var(--fs-6); }
+.quote figcaption span { color: var(--graphite); }
+.quote__product { margin-top: 0.5rem; }
+
+/* Certification cards ---------------------------------------------------- */
+.certs { display: grid; gap: var(--space-3); grid-template-columns: repeat(1, 1fr); }
+@media (min-width: 640px) { .certs { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .certs { grid-template-columns: repeat(3, 1fr); } }
+.cert {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding: var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  transition: border-color 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+.cert:hover { border-color: var(--mustard-soft); box-shadow: var(--shadow-card); }
+/* Slot for a scanned certificate; same degrade-gracefully trick as .prodgrid. */
+.cert__scan {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-sm);
+  border: 1px dashed var(--rule-mid);
+  background-color: var(--wash-light);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23dba629' stroke-width='2.5' opacity='.45'/%3E%3Cellipse cx='50' cy='50' rx='13' ry='30' fill='none' stroke='%23dba629' stroke-width='2' opacity='.35'/%3E%3Cpath d='M20 50h60M26 36h48M26 64h48' stroke='%23dba629' stroke-width='2' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 24% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+.cert h3 { font-size: var(--fs-4); }
+.cert__issuer { font-size: var(--fs-7); color: var(--mustard-deep); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.cert p { color: var(--graphite); font-size: var(--fs-6); }
+
+/* Document checklist ----------------------------------------------------- */
+.doclist { display: grid; gap: 0.75rem; }
+@media (min-width: 640px) { .doclist { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .doclist { grid-template-columns: repeat(3, 1fr); } }
+.doclist li {
+  position: relative;
+  padding: 0.85rem 1rem 0.85rem 2.6rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  font-size: var(--fs-6);
+}
+.doclist li::before {
+  content: "";
+  position: absolute;
+  left: 1rem; top: 1.15em;
+  width: 11px; height: 6px;
+  border-left: 2px solid var(--mustard-deep);
+  border-bottom: 2px solid var(--mustard-deep);
+  transform: rotate(-45deg);
+}
+
+/* Timeline (about) ------------------------------------------------------- */
+.timeline { display: grid; gap: var(--space-4); position: relative; }
+@media (min-width: 900px) { .timeline { grid-template-columns: repeat(4, 1fr); } }
+.timeline__item { position: relative; padding-top: var(--space-3); border-top: 2px solid var(--rule); }
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  top: -7px; left: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--mustard);
+}
+.timeline__item b { display: block; font-size: var(--fs-7); letter-spacing: 0.1em; text-transform: uppercase; color: var(--mustard-deep); margin-bottom: 0.5rem; }
+.timeline__item p { color: var(--graphite); font-size: var(--fs-6); }
+
+/* Numbered reasons (why choose us) --------------------------------------- */
+.reasons { display: grid; gap: var(--space-3); counter-reset: reason; }
+@media (min-width: 720px) { .reasons { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .reasons { grid-template-columns: repeat(3, 1fr); } }
+.reason {
+  counter-increment: reason;
+  padding: var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper);
+}
+.reason::before {
+  content: counter(reason, decimal-leading-zero);
+  display: block;
+  font-size: var(--fs-3);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--mustard);
+  margin-bottom: var(--space-3);
+}
+.reason h3 { font-size: var(--fs-4); margin-bottom: 0.5rem; }
+.reason p { color: var(--graphite); font-size: var(--fs-6); }
+
+/* Product row image slot (used inside .ledger__row) ----------------------- */
+.ledger__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-md);
+  border: 1px solid var(--rule);
+  background-color: var(--wash);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23dba629' stroke-width='2.5' opacity='.45'/%3E%3Cellipse cx='50' cy='50' rx='13' ry='30' fill='none' stroke='%23dba629' stroke-width='2' opacity='.35'/%3E%3Cpath d='M20 50h60M26 36h48M26 64h48' stroke='%23dba629' stroke-width='2' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 26% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  margin-bottom: var(--space-3);
+}
+
+/* Placeholder notice ----------------------------------------------------- */
+.notice {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-3);
+  border: 1px dashed var(--rule-mid);
+  border-radius: var(--r-sm);
+  background: var(--wash-light);
+  font-size: var(--fs-7);
+  color: var(--graphite);
+}
+.notice b { color: var(--mustard-deep); flex: none; }
+
+/* Regions ---------------------------------------------------------------- */
+.region h3 { font-size: var(--fs-4); margin-bottom: 0.6rem; }
+.region p { color: var(--graphite); font-size: var(--fs-6); max-width: none; }
 
 /* Shapes: decorative backdrops per section ------------------------------- */
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }

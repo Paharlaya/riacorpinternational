@@ -1,4 +1,4 @@
-/* Ria Corp International — site behaviour
+/* RiaCorp International — site behaviour
    Vanilla JS, no dependencies. Every feature is guarded so any page can omit it. */
 (function () {
   "use strict";
@@ -8,6 +8,28 @@
   var SITE_EMAIL = "info@riacorpinternational.com";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- Current page highlight -------------------------------------------
+     Marking the active link here rather than in the markup keeps the <header>
+     block byte-identical across every page, so changing the nav is one
+     find-and-replace instead of eight careful edits. */
+  (function () {
+    var path = window.location.pathname.split("/").pop() || "index.html";
+    var links = document.querySelectorAll(".nav__link");
+    var matched = null;
+    Array.prototype.forEach.call(links, function (link) {
+      var href = (link.getAttribute("href") || "").split("/").pop();
+      if (href === path) matched = matched || link;
+    });
+    if (!matched) return;
+    matched.setAttribute("aria-current", "page");
+    // A submenu match should also light up its parent Products link.
+    var sub = matched.closest(".nav__sub");
+    if (sub && sub.parentElement) {
+      var parent = sub.parentElement.querySelector(":scope > .nav__link");
+      if (parent) parent.setAttribute("aria-current", "true");
+    }
+  })();
 
   /* ---- Mobile navigation ----------------------------------------------- */
   var toggle = document.querySelector("[data-nav-toggle]");
@@ -152,18 +174,65 @@
     });
   }
 
+  /* ---- Product/certificate image slots -----------------------------------
+     Each slot shows a globe watermark until its photo is supplied. A photo
+     that is not there yet still paints a small broken-image marker, so hide
+     any slot image that fails to load and let the placeholder stand alone.
+     Listeners go on each image directly, and a sweep on window load catches
+     anything that had already failed or is lazy-loaded further down. */
+  (function () {
+    // Each selector needs its own "> img"; appending it to a comma-separated
+    // list would bind the child combinator to the last selector only.
+    var imgs = document.querySelectorAll(
+      ".prodgrid__img > img, .ledger__media > img, .cert__scan > img"
+    );
+    if (!imgs.length) return;
+
+    var check = function (img) {
+      if (img.complete && img.naturalWidth === 0) img.hidden = true;
+      else if (img.naturalWidth > 0) img.hidden = false;
+    };
+
+    Array.prototype.forEach.call(imgs, function (img) {
+      img.addEventListener("error", function () { img.hidden = true; });
+      img.addEventListener("load", function () { check(img); });
+      check(img);
+    });
+
+    // Lazy images below the fold settle later; sweep again once and on scroll.
+    var sweep = function () { Array.prototype.forEach.call(imgs, check); };
+    window.addEventListener("load", sweep);
+    window.addEventListener("scroll", sweep, { passive: true });
+  })();
+
   /* ---- Scroll reveal: sections fade up as they enter ---------------------- */
   if (!reduceMotion && "IntersectionObserver" in window) {
     var targets = document.querySelectorAll(
-      ".section-head, .step, .pillar, .ledger__row, .statement, .fact, .contact__details, .form, .cta__inner, .lanes, .manifest__table"
+      ".section-head, .step, .pillar, .ledger__row, .statement, .fact, .contact__details, " +
+      ".form, .cta__inner, .lanes, .manifest__table, .prodgrid__item, .spectable-wrap, " +
+      ".quote, .faq__item, .cert, .reason, .timeline__item, .doclist li"
     );
+    var observerFired = false;
     var io = new IntersectionObserver(function (entries) {
+      observerFired = true;
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("is-visible");
         io.unobserve(entry.target);
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+
+    /* Safety net. .reveal hides its element until the observer says otherwise,
+       so anything that stops those callbacks arriving would leave the page
+       blank rather than merely un-animated. If nothing has been reported after
+       three seconds, show everything. Costs nothing when the observer works. */
+    window.setTimeout(function () {
+      if (observerFired) return;
+      Array.prototype.forEach.call(targets, function (el) {
+        el.classList.add("is-visible");
+      });
+    }, 3000);
+
     targets.forEach(function (el, i) {
       var siblings = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
       el.classList.add("reveal");

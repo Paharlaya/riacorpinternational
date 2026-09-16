@@ -3,3 +3,6 @@
 
 # Local editor / tool state
 .claude/settings.local.json
+
+# Salesforce CLI cache, unrelated to this site
+.sf/
