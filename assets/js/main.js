@@ -1,4 +1,4 @@
-/* RiaCorp International — site behaviour
+/* Riacorp International — site behaviour
    Vanilla JS, no dependencies. Every feature is guarded so any page can omit it. */
 (function () {
   "use strict";
@@ -87,92 +87,154 @@
     track.innerHTML += track.innerHTML;
   }
 
-  /* ---- Contact form: validate, then hand off to WhatsApp or email -------- */
-  var form = document.querySelector("[data-enquiry]");
-  if (form) {
+  /* ---- Corporate intake form ---------------------------------------------
+     Eleven fields, a dependent material list, and a soft check on free email
+     domains. Everything degrades: with JS off the form still submits natively
+     and the material list simply shows every product. */
+  (function () {
+    var form = document.querySelector("[data-enquiry]");
+    if (!form) return;
+
+    /* The markup ships without novalidate and with a mailto action, so with
+       JavaScript off the browser validates and the form still reaches us.
+       Both are taken over here once this script runs. */
+    form.setAttribute("novalidate", "");
+
     var status = form.querySelector("[data-form-status]");
-    var fields = {
-      name: form.querySelector("#f-name"),
-      company: form.querySelector("#f-company"),
-      email: form.querySelector("#f-email"),
-      phone: form.querySelector("#f-phone"),
-      direction: form.querySelector("#f-direction"),
-      product: form.querySelector("#f-product"),
-      goods: form.querySelector("#f-goods"),
-      message: form.querySelector("#f-message"),
-      honey: form.querySelector("#f-website")
+    var category = form.querySelector("[data-category]");
+    var material = form.querySelector("[data-material]");
+    var emailField = form.querySelector("[data-corporate-email]");
+    var emailHint = form.querySelector("[data-email-hint]");
+
+    /* Field 7 depends on Field 6. */
+    var MATERIALS = {
+      "Premium Himalayan Botanicals": [
+        "Himalayan Large Cardamom — Bold",
+        "Himalayan Large Cardamom — Jumbo",
+        "Pristine Nepal Ginger — Whole Dry Rhizome",
+        "Pristine Nepal Ginger — Sliced Flakes",
+        "Pristine Nepal Ginger — Powder",
+        "High-Curcumin Turmeric — Finger",
+        "High-Curcumin Turmeric — Powder"
+      ],
+      "Plant-Based Bio-Nutrients": [
+        "Psyllium Husk 95%",
+        "Psyllium Husk 98%",
+        "Psyllium Husk 99%",
+        "Psyllium Husk Powder (40–100 mesh)",
+        "Organic Psyllium Husk",
+        "High-Purity Berberine Extract 95%",
+        "High-Purity Berberine Extract 97%",
+        "High-Purity Berberine Extract 98%"
+      ],
+      "Collagen Raw Materials": [
+        "Marine Collagen Peptides",
+        "Bovine Collagen Peptides"
+      ]
     };
 
-    var setInvalid = function (input, bad) {
-      var wrap = input.closest(".field");
-      if (!wrap) return;
-      wrap.classList.toggle("is-invalid", bad);
-      input.setAttribute("aria-invalid", bad ? "true" : "false");
-    };
+    if (category && material) {
+      material.disabled = false;
+      var fillMaterials = function (preserve) {
+        var list = MATERIALS[category.value] || [];
+        var previous = preserve ? material.value : "";
+        material.innerHTML = "";
+        var first = document.createElement("option");
+        first.value = "";
+        first.textContent = list.length ? "Select a material" : "Select a product category first";
+        material.appendChild(first);
+        list.forEach(function (name) {
+          var o = document.createElement("option");
+          o.textContent = name;
+          material.appendChild(o);
+        });
+        if (previous && list.indexOf(previous) > -1) material.value = previous;
+        material.disabled = list.length === 0;
+      };
+      fillMaterials(false);
+      category.addEventListener("change", function () { fillMaterials(false); });
+    }
 
-    var validate = function () {
-      var ok = true;
-      var required = [fields.name, fields.email, fields.goods, fields.message];
-      required.forEach(function (input) {
-        var bad = !input.value.trim();
-        setInvalid(input, bad);
-        if (bad) ok = false;
-      });
-      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value.trim());
-      if (fields.email.value.trim() && !emailOk) {
-        setInvalid(fields.email, true);
-        ok = false;
-      }
-      return ok;
+    /* Free-domain check. A warning, never a block: plenty of legitimate buyers
+       trade from a personal address, and locking them out costs more than it
+       saves. */
+    var FREE = ["gmail.com","googlemail.com","yahoo.com","yahoo.co.uk","hotmail.com","outlook.com",
+                "live.com","aol.com","icloud.com","me.com","proton.me","protonmail.com",
+                "mail.com","gmx.com","yandex.com","zoho.com","rediffmail.com"];
+    var isFreeDomain = function (value) {
+      var at = value.lastIndexOf("@");
+      if (at < 0) return false;
+      return FREE.indexOf(value.slice(at + 1).trim().toLowerCase()) > -1;
     };
+    if (emailField && emailHint) {
+      var checkEmail = function () {
+        emailHint.hidden = !isFreeDomain(emailField.value);
+      };
+      emailField.addEventListener("blur", checkEmail);
+      emailField.addEventListener("input", function () { if (!emailHint.hidden) checkEmail(); });
+    }
 
-    Object.keys(fields).forEach(function (k) {
-      var input = fields[k];
-      if (!input) return;
-      input.addEventListener("input", function () { setInvalid(input, false); });
-    });
+    var setInvalid = function (field, bad) {
+      var wrap = field.closest(".field");
+      if (wrap) wrap.classList.toggle("is-invalid", bad);
+    };
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (fields.honey && fields.honey.value) return; // bot
 
-      if (!validate()) {
-        status.textContent = "Please fill in the highlighted fields.";
+      if (form.querySelector(".honey input").value) return; // bot
+
+      var required = form.querySelectorAll("[required]");
+      var firstBad = null;
+      Array.prototype.forEach.call(required, function (field) {
+        var bad = !field.value.trim();
+        if (!bad && field.type === "email") bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(field.value.trim());
+        setInvalid(field, bad);
+        if (bad && !firstBad) firstBad = field;
+      });
+
+      if (firstBad) {
+        status.textContent = "Please complete the highlighted fields.";
         status.className = "form__status is-error";
-        var firstBad = form.querySelector(".is-invalid input, .is-invalid textarea, .is-invalid select");
-        if (firstBad) firstBad.focus();
+        firstBad.focus();
         return;
       }
 
+      var val = function (n) { var f = form.querySelector('[name="' + n + '"]'); return f ? f.value.trim() : ""; };
       var lines = [
-        "Enquiry from riacorpinternational.com",
+        "CORPORATE INQUIRY — Riacorp International",
         "",
-        "Name: " + fields.name.value.trim(),
-        fields.company.value.trim() ? "Company: " + fields.company.value.trim() : null,
-        "Email: " + fields.email.value.trim(),
-        fields.phone.value.trim() ? "Phone: " + fields.phone.value.trim() : null,
-        "Product line: " + fields.product.value,
-        "Direction: " + fields.direction.value,
-        "Goods: " + fields.goods.value.trim(),
+        "Full name:            " + val("name"),
+        "Corporate email:      " + val("email"),
+        "Company legal name:   " + val("company"),
+        "Company website:      " + (val("website_url") || "—"),
+        "Country of destination: " + val("country"),
         "",
-        fields.message.value.trim()
-      ].filter(function (l) { return l !== null; });
-
+        "Product category:     " + val("category"),
+        "Specific material:    " + val("material"),
+        "Format / purity:      " + val("grade"),
+        "Estimated volume:     " + val("volume"),
+        "Application industry: " + val("industry"),
+        "",
+        "Technical specifications / packaging:",
+        val("message") || "—"
+      ];
       var body = lines.join("\n");
-      var subject = "Trade enquiry: " + fields.goods.value.trim();
-      var waReady = /^\d{8,15}$/.test(WHATSAPP_NUMBER);
+      var subject = "Bulk quotation request — " + (val("material") || val("category"));
 
-      if (waReady) {
-        window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(body), "_blank", "noopener");
-        status.textContent = "Opening WhatsApp with your enquiry. We reply within one working day.";
+      var wa = WHATSAPP_NUMBER.replace(/\D/g, "");
+      if (/^\d{8,15}$/.test(wa)) {
+        status.textContent = "Opening WhatsApp with your enquiry ready to send.";
+        window.location.href = "https://wa.me/" + wa + "?text=" + encodeURIComponent(body);
       } else {
-        window.location.href = "mailto:" + SITE_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-        status.textContent = "Opening your email app with the enquiry ready to send. We reply within one working day.";
+        status.textContent = "Opening your email client with the enquiry ready to send. We reply within 24–48 hours.";
+        window.location.href = "mailto:" + SITE_EMAIL +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
       }
       status.className = "form__status is-ok";
-      form.reset();
     });
-  }
+  })();
 
   /* ---- Product/certificate image slots -----------------------------------
      Each slot shows a globe watermark until its photo is supplied. A photo

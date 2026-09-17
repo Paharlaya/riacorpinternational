@@ -1,8 +1,11 @@
-# RiaCorp International
+# Riacorp International
 
-Static website for RiaCorp International, an Indian supplier and exporter of
-spices and psyllium husk. Hand-written HTML, CSS and JavaScript — no framework,
-no build step, no package manager. GitHub Pages serves the repository root.
+Static website for Riacorp International — global B2B supplier and exporter of
+premium Himalayan botanicals and advanced bio-nutrients. Hand-written HTML, CSS
+and JavaScript: no framework, no build step at runtime, no package manager.
+GitHub Pages serves the repository root.
+
+Working plan and requirement coverage: `PLAN.md`.
 
 ## Running locally
 
@@ -15,16 +18,17 @@ python3 -m http.server 8000
 
 | File | Purpose |
 |---|---|
-| `index.html` | Home |
-| `products.html` | Catalogue index |
-| `spices.html` | Spice range, specifications, packing, QC |
-| `psyllium-husk.html` | Psyllium grades, specifications, applications |
-| `certifications.html` | Registrations, food-safety standards, shipment documents |
-| `about.html` | Story, timeline, values, markets, leadership |
-| `faq.html` | Buyer FAQ (native `<details>`, works without JavaScript) |
-| `contact.html` | Enquiry form and contact details |
+| `index.html` | Home — hero, dual-pillar matrix, dual-gateway logistics, compliance ticker |
+| `products.html` | Portfolio overview |
+| `himalayan-botanicals.html` | Cardamom, ginger, turmeric |
+| `bio-nutrients.html` | Psyllium husk, berberine extract |
+| `collagen-peptides.html` | Marine and bovine peptides |
+| `compliance.html` | Registrations, food-safety standards, shipment documents |
+| `about.html` | Institutional overview |
+| `faq.html` | Procurement FAQ (native `<details>`, works without JavaScript) |
+| `contact.html` | 11-field corporate intake form |
 | `404.html` | Not found |
-| `services.html` | Redirect stub kept so old links do not 404 |
+| `services.html`, `spices.html`, `psyllium-husk.html`, `certifications.html` | Redirect stubs so older links do not 404 |
 
 ## Editing
 
@@ -54,6 +58,13 @@ Everything in `assets/img/` is generated from it:
 node tools/logo-build.mjs
 ```
 
+The crest's mountains are **knockouts, not white paint** — there is not one
+opaque white pixel in it. So it cannot be inverted for a dark background: the
+snow caps would fill with whatever is behind them. Everywhere the mark meets
+emerald it sits on a white plate instead, which is why only the dark variant is
+generated. The crest is 218px tall in the source and the script refuses to
+upscale, so large icons place it at native size on a padded canvas.
+
 The script has no dependencies. It decodes the PNG with node's built-in `zlib`,
 keys the white background out to real transparency, splits the mark from the
 wordmark, downsamples, and re-encodes. It also prints the brand gold sampled
@@ -63,12 +74,23 @@ token to match.
 
 | File | Used for |
 |---|---|
-| `logo-mark-88.png` / `-176.png` | Header lockup (1x / 2x) |
-| `logo-mark-light-88.png` / `-176.png` | Footer lockup — white ink, for dark backgrounds |
-| `logo-mark-512.png` | `og:image`, JSON-LD logo |
-| `logo-lockup.png` / `-light.png` | Full stacked lockup for documents |
+| `crest-56/112/168/224.png` | Header and footer mark, in its white plate |
+| `lockup.png` | Full stacked lockup, footer |
 | `favicon-32.png`, `favicon-64.png` | Favicon |
-| `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` | App icons (opaque, as maskable icons require) |
+| `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` | App icons (mark on white) |
+
+## Specifications catalogue
+
+The "Download Specifications Catalog" button needs a real file behind it:
+
+```bash
+node tools/build-catalog.mjs
+```
+
+Writes `assets/docs/riacorp-specifications.pdf` — a four-page A4 catalogue built
+from the same figures as the on-page spec tables, with no dependencies. Re-run it
+whenever a specification changes so the PDF cannot drift from the site.
+
 
 The company name beside the mark is live text, not part of the image:
 Montserrat 800 for `RIACORP`, Montserrat 300 letterspaced for `INTERNATIONAL`.
@@ -80,20 +102,13 @@ degrades to a styled placeholder tile rather than a broken-image icon. Drop
 files in and they appear — no code change needed.
 
 ```
-assets/img/products/spices/<slug>.jpg      turmeric, red-chilli, cumin, coriander,
-                                           black-pepper, fennel, fenugreek, mustard,
-                                           ajwain, cardamom, clove, cinnamon,
-                                           bay-leaf, nutmeg, star-anise, onion-garlic,
-                                           dry-ginger, asafoetida, brown-cardamom,
-                                           poppy-seed
-assets/img/products/psyllium/<slug>.jpg    husk-85, husk-95, husk-98, husk-99,
-                                           husk-powder, organic-husk, seed, kha-kha
-assets/img/products/<line>/_cover.jpg      4:3 cover for the product cards
-assets/img/certificates/<slug>.jpg         iec, apeda, fssai, gst, spices-board,
-                                           star-export, udyam, factory-licence,
-                                           brc, iso-22000, haccp, gmp, usfda, fsma,
-                                           npop, usda-nop, eu-organic, kosher,
-                                           halal, msds
+assets/img/products/botanicals/<slug>.jpg      large-cardamom, nepal-ginger, turmeric
+assets/img/products/bio-nutrients/<slug>.jpg   psyllium-husk, berberine
+assets/img/products/collagen/<slug>.jpg        peptides
+assets/img/certificates/<slug>.jpg             iec, apeda, fssai, gst, spices-board,
+                                               star-export, brc, iso-22000, haccp,
+                                               gmp, usfda, fsma, npop, usda-nop,
+                                               eu-organic, kosher, halal, msds
 ```
 
 Square 1:1 for grid tiles, ideally 800×800 or larger, compressed under ~200 KB.
@@ -107,28 +122,31 @@ domain root, which it is, both on GitHub Pages and under `python3 -m http.server
 
 ## Replace before launch
 
-This is a demo build. The following are placeholders:
-
 - [ ] **Phone number** — `+00 000 000 0000` in `tools/partials/footer.html` and `tools/pages/contact.html`
 - [ ] **Office address** — same two files
-- [ ] **WhatsApp number** — `WHATSAPP_NUMBER` in `assets/js/main.js`; until it is a real number the enquiry form falls back to `mailto:`
+- [ ] **WhatsApp number** — `WHATSAPP_NUMBER` in `assets/js/main.js`. Until it is a real number the intake form falls back to `mailto:`
 - [ ] **Social links** — LinkedIn, Instagram, Facebook on the contact page
-- [ ] **Statistics** — countries served, shipment count, on the home and about pages
-- [ ] **Testimonials** — the six quotes on the home page are written for the demo, not supplied by real buyers
-- [ ] **Leadership** — founder name, photograph and quotation on the about page
-- [ ] **Timeline dates** — the about-page timeline has no years yet
-- [ ] **Specifications** — spice and psyllium spec tables follow standard Indian export grades and should be checked against your own certificates of analysis
+- [ ] **Product photography** — see the folder convention above
 - [ ] **Certificate scans** — `assets/img/certificates/`
-- [ ] **Product photography** — see above
+- [ ] **Remove `noindex`** — one line in `tools/partials/head.html`, plus `robots.txt`, once the real content and domain are live
 
-Every placeholder is marked in the page with a visible `[placeholder]` note or
-a dashed "Demo note" callout, so nothing ships silently.
+Every placeholder is marked in the page with a visible `[placeholder]` note or a
+dashed callout, so nothing ships silently.
+
+## Specification sourcing
+
+Psyllium figures follow the published specifications of the partner
+manufacturing units. Berberine and collagen parameters reflect standard export
+grades for those materials and carry a visible source note saying lot values come
+from the Certificate of Analysis. **No specification figure on this site was
+invented** — where nothing verifiable existed, the page says so rather than
+filling the gap.
 
 ## Certifications
 
-The certifications page presents all listed certifications as RiaCorp's own,
+The certifications page presents all listed certifications as Riacorp's own,
 which was a deliberate choice for the demo. If some are in fact held by
-manufacturing partners rather than by RiaCorp, relabel the relevant section
+manufacturing partners rather than by Riacorp, relabel the relevant section
 heading in `tools/pages/certifications.html` — the page is already split into
 three blocks to make that a one-line change.
 

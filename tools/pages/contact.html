@@ -1,20 +1,19 @@
 <!--
-title: Contact | Request a Quote or Sample | RiaCorp International
-description: Contact RiaCorp International for pricing, samples and specifications on Indian spices and psyllium husk. Enquiries answered within 24 hours.
+title: Request Technical Specifications & Bulk Quotation | Riacorp International
+description: Request technical specifications, bulk quotation and sample COA workflows from Riacorp International. Corporate enquiries answered within 24 to 48 hours.
 -->
 <main id="main">
 
   <section class="page-hero" aria-labelledby="page-title">
     <div class="shapes" aria-hidden="true">
-      <div class="blob" style="--w:600px;left:-15%;top:-32%;--c:rgba(219,166,41,.22);--d:25s"></div>
-      <div class="shape " data-speed="0.26" style="--w:230px;right:-2%;bottom:-8%;--o:0.24;--d:13s;--r:5deg"><svg class="shape__svg" viewBox="0 0 120 64"><use href="#s-container"/></svg></div>
+      <div class="shape " data-speed="0.26" style="--w:230px;right:-2%;bottom:-8%;--o:0.13;--d:13s;--r:5deg"><svg class="shape__svg" viewBox="0 0 120 64"><use href="#s-grid"/></svg></div>
     </div>
     <div class="wrap page-hero__grid">
       <div>
-        <span class="page-hero__crumb">Contact</span>
-        <h1 class="display" id="page-title">Let's start a trade conversation.</h1>
+        <span class="page-hero__crumb">Corporate enquiry</span>
+        <h1 class="display" id="page-title">Request Technical Specifications &amp; Bulk Quotation</h1>
       </div>
-      <p class="lede">Send the product, grade, quantity, destination port and Incoterm. You get pricing, availability and shipping options back within 24 hours &mdash; from a person, not an autoresponder.</p>
+      <p class="lede">Please complete the form below with your precise procurement requirements. Our corporate sales team and technical compliance officers will review your parameters and respond with standard commercial terms, initial pricing structures, and sample COA (Certificate of Analysis) workflows within 24&ndash;48 hours.</p>
     </div>
   </section>
 
@@ -23,12 +22,12 @@ description: Contact RiaCorp International for pricing, samples and specificatio
     <div class="wrap">
       <div class="section-head">
         <h2 class="title" id="promise-title">Our response promise</h2>
-        <p class="lede">Serious enquiries get a serious answer, quickly. That is most of what separates a good exporter from a bad one.</p>
+        <p class="lede">Corporate enquiries are reviewed by technical compliance officers, not a sales queue.</p>
       </div>
       <div class="facts facts--4">
         <div class="fact"><b>1&ndash;2 hrs</b><span>WhatsApp reply during business hours</span></div>
-        <div class="fact"><b>24 hrs</b><span>Email reply on working days</span></div>
-        <div class="fact"><b>24&ndash;48 hrs</b><span>Proforma invoice after a full enquiry</span></div>
+        <div class="fact"><b>24&ndash;48 hrs</b><span>Technical review &amp; commercial terms</span></div>
+        <div class="fact"><b>COA</b><span>Sample certificate workflow initiated</span></div>
         <div class="fact"><b>Mon &ndash; Sat</b><span>9:00 AM &ndash; 7:00 PM IST</span></div>
       </div>
     </div>
@@ -67,107 +66,311 @@ description: Contact RiaCorp International for pricing, samples and specificatio
         </dl>
       </div>
 
-      <form class="form" data-enquiry novalidate>
+      <form class="form form--intake" data-enquiry action="mailto:info@riacorpinternational.com" method="post" enctype="text/plain">
         <div class="form__row">
           <div class="field">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required>
-            <span class="field__error">Please enter your name.</span>
+            <label for="f-name">Full Name <abbr title="required">*</abbr></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g., John Doe" required>
+            <span class="field__error">Please enter your full name.</span>
           </div>
           <div class="field">
-            <label for="f-company">Company</label>
-            <input id="f-company" name="company" type="text" autocomplete="organization">
-          </div>
-        </div>
-        <div class="form__row">
-          <div class="field">
-            <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <label for="f-email">Corporate Email Address <abbr title="required">*</abbr></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="e.g., purchasing@company.com" required data-corporate-email>
             <span class="field__error">Please enter a valid email address.</span>
-          </div>
-          <div class="field">
-            <label for="f-phone">Phone or WhatsApp</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+            <span class="field__hint" data-email-hint hidden>This looks like a personal address. Corporate enquiries are processed faster from a company domain &mdash; you can still submit.</span>
           </div>
         </div>
+
         <div class="form__row">
           <div class="field">
-            <label for="f-country">Country</label>
-            <input id="f-country" name="country" type="text" autocomplete="country-name" placeholder="Destination market">
+            <label for="f-company">Company Legal Name <abbr title="required">*</abbr></label>
+            <input id="f-company" name="company" type="text" autocomplete="organization" placeholder="e.g., Global Nutraceuticals Inc." required>
+            <span class="field__error">Please enter your registered company name.</span>
           </div>
           <div class="field">
-            <label for="f-enquiry">Enquiry type</label>
-            <select id="f-enquiry" name="enquiry">
-              <option>Request a quotation</option>
-              <option>Request a sample</option>
-              <option>Request certificates or documents</option>
-              <option>Private label / OEM</option>
-              <option>General enquiry</option>
-            </select>
+            <label for="f-website">Company Website URL</label>
+            <input id="f-website-url" name="website_url" type="url" autocomplete="url" placeholder="e.g., company.com">
           </div>
         </div>
+
         <div class="form__row">
           <div class="field">
-            <label for="f-product">Product of interest</label>
-            <select id="f-product" name="product">
-              <option>Spices &mdash; whole</option>
-              <option>Spices &mdash; ground</option>
-              <option>Turmeric</option>
-              <option>Red chilli</option>
-              <option>Cumin / coriander</option>
-              <option>Dehydrated onion &amp; garlic</option>
-              <option>Psyllium husk 98%</option>
-              <option>Psyllium husk 99%</option>
-              <option>Psyllium husk powder</option>
-              <option>Organic psyllium</option>
-              <option>Psyllium seed / Kha-Kha powder</option>
-              <option>Something else</option>
+            <label for="f-country">Country of Destination <abbr title="required">*</abbr></label>
+            <select id="f-country" name="country" required>
+              <option value="">Select destination country</option>
+              <option>Afghanistan</option>
+              <option>Albania</option>
+              <option>Algeria</option>
+              <option>Andorra</option>
+              <option>Angola</option>
+              <option>Antigua and Barbuda</option>
+              <option>Argentina</option>
+              <option>Armenia</option>
+              <option>Australia</option>
+              <option>Austria</option>
+              <option>Azerbaijan</option>
+              <option>Bahamas</option>
+              <option>Bahrain</option>
+              <option>Bangladesh</option>
+              <option>Barbados</option>
+              <option>Belarus</option>
+              <option>Belgium</option>
+              <option>Belize</option>
+              <option>Benin</option>
+              <option>Bhutan</option>
+              <option>Bolivia</option>
+              <option>Bosnia and Herzegovina</option>
+              <option>Botswana</option>
+              <option>Brazil</option>
+              <option>Brunei</option>
+              <option>Bulgaria</option>
+              <option>Burkina Faso</option>
+              <option>Burundi</option>
+              <option>Cabo Verde</option>
+              <option>Cambodia</option>
+              <option>Cameroon</option>
+              <option>Canada</option>
+              <option>Central African Republic</option>
+              <option>Chad</option>
+              <option>Chile</option>
+              <option>China</option>
+              <option>Colombia</option>
+              <option>Comoros</option>
+              <option>Congo</option>
+              <option>Costa Rica</option>
+              <option>Côte d'Ivoire</option>
+              <option>Croatia</option>
+              <option>Cuba</option>
+              <option>Cyprus</option>
+              <option>Czechia</option>
+              <option>Denmark</option>
+              <option>Djibouti</option>
+              <option>Dominica</option>
+              <option>Dominican Republic</option>
+              <option>Ecuador</option>
+              <option>Egypt</option>
+              <option>El Salvador</option>
+              <option>Equatorial Guinea</option>
+              <option>Eritrea</option>
+              <option>Estonia</option>
+              <option>Eswatini</option>
+              <option>Ethiopia</option>
+              <option>Fiji</option>
+              <option>Finland</option>
+              <option>France</option>
+              <option>Gabon</option>
+              <option>Gambia</option>
+              <option>Georgia</option>
+              <option>Germany</option>
+              <option>Ghana</option>
+              <option>Greece</option>
+              <option>Grenada</option>
+              <option>Guatemala</option>
+              <option>Guinea</option>
+              <option>Guinea-Bissau</option>
+              <option>Guyana</option>
+              <option>Haiti</option>
+              <option>Honduras</option>
+              <option>Hong Kong SAR</option>
+              <option>Hungary</option>
+              <option>Iceland</option>
+              <option>India</option>
+              <option>Indonesia</option>
+              <option>Iran</option>
+              <option>Iraq</option>
+              <option>Ireland</option>
+              <option>Israel</option>
+              <option>Italy</option>
+              <option>Jamaica</option>
+              <option>Japan</option>
+              <option>Jordan</option>
+              <option>Kazakhstan</option>
+              <option>Kenya</option>
+              <option>Kiribati</option>
+              <option>Kuwait</option>
+              <option>Kyrgyzstan</option>
+              <option>Laos</option>
+              <option>Latvia</option>
+              <option>Lebanon</option>
+              <option>Lesotho</option>
+              <option>Liberia</option>
+              <option>Libya</option>
+              <option>Liechtenstein</option>
+              <option>Lithuania</option>
+              <option>Luxembourg</option>
+              <option>Madagascar</option>
+              <option>Malawi</option>
+              <option>Malaysia</option>
+              <option>Maldives</option>
+              <option>Mali</option>
+              <option>Malta</option>
+              <option>Marshall Islands</option>
+              <option>Mauritania</option>
+              <option>Mauritius</option>
+              <option>Mexico</option>
+              <option>Micronesia</option>
+              <option>Moldova</option>
+              <option>Monaco</option>
+              <option>Mongolia</option>
+              <option>Montenegro</option>
+              <option>Morocco</option>
+              <option>Mozambique</option>
+              <option>Myanmar</option>
+              <option>Namibia</option>
+              <option>Nauru</option>
+              <option>Nepal</option>
+              <option>Netherlands</option>
+              <option>New Zealand</option>
+              <option>Nicaragua</option>
+              <option>Niger</option>
+              <option>Nigeria</option>
+              <option>North Macedonia</option>
+              <option>Norway</option>
+              <option>Oman</option>
+              <option>Pakistan</option>
+              <option>Palau</option>
+              <option>Palestine</option>
+              <option>Panama</option>
+              <option>Papua New Guinea</option>
+              <option>Paraguay</option>
+              <option>Peru</option>
+              <option>Philippines</option>
+              <option>Poland</option>
+              <option>Portugal</option>
+              <option>Qatar</option>
+              <option>Romania</option>
+              <option>Russia</option>
+              <option>Rwanda</option>
+              <option>Saint Kitts and Nevis</option>
+              <option>Saint Lucia</option>
+              <option>Saint Vincent and the Grenadines</option>
+              <option>Samoa</option>
+              <option>San Marino</option>
+              <option>Sao Tome and Principe</option>
+              <option>Saudi Arabia</option>
+              <option>Senegal</option>
+              <option>Serbia</option>
+              <option>Seychelles</option>
+              <option>Sierra Leone</option>
+              <option>Singapore</option>
+              <option>Slovakia</option>
+              <option>Slovenia</option>
+              <option>Solomon Islands</option>
+              <option>Somalia</option>
+              <option>South Africa</option>
+              <option>South Korea</option>
+              <option>South Sudan</option>
+              <option>Spain</option>
+              <option>Sri Lanka</option>
+              <option>Sudan</option>
+              <option>Suriname</option>
+              <option>Sweden</option>
+              <option>Switzerland</option>
+              <option>Syria</option>
+              <option>Taiwan</option>
+              <option>Tajikistan</option>
+              <option>Tanzania</option>
+              <option>Thailand</option>
+              <option>Timor-Leste</option>
+              <option>Togo</option>
+              <option>Tonga</option>
+              <option>Trinidad and Tobago</option>
+              <option>Tunisia</option>
+              <option>Türkiye</option>
+              <option>Turkmenistan</option>
+              <option>Tuvalu</option>
+              <option>Uganda</option>
+              <option>Ukraine</option>
+              <option>United Arab Emirates</option>
+              <option>United Kingdom</option>
+              <option>United States</option>
+              <option>Uruguay</option>
+              <option>Uzbekistan</option>
+              <option>Vanuatu</option>
+              <option>Vatican City</option>
+              <option>Venezuela</option>
+              <option>Vietnam</option>
+              <option>Yemen</option>
+              <option>Zambia</option>
+              <option>Zimbabwe</option>
             </select>
+            <span class="field__error">Please select the destination country.</span>
           </div>
           <div class="field">
-            <label for="f-direction">Shipment terms</label>
-            <select id="f-direction" name="direction">
-              <option>FOB</option>
-              <option>CIF</option>
-              <option>CFR / CNF</option>
-              <option>EXW</option>
-              <option>Not sure yet</option>
+            <label for="f-category">Product Category <abbr title="required">*</abbr></label>
+            <select id="f-category" name="category" required data-category>
+              <option value="">Select a category</option>
+              <option>Premium Himalayan Botanicals</option>
+              <option>Plant-Based Bio-Nutrients</option>
+              <option>Collagen Raw Materials</option>
             </select>
+            <span class="field__error">Please select a product category.</span>
           </div>
         </div>
-        <div class="field">
-          <label for="f-goods">Quantity and destination port</label>
-          <input id="f-goods" name="goods" type="text" placeholder="For example: 25 MT turmeric powder 60 mesh, CIF Jebel Ali" required>
-          <span class="field__error">Please tell us the quantity and destination.</span>
+
+        <div class="form__row">
+          <div class="field">
+            <label for="f-material">Specific Material Required <abbr title="required">*</abbr></label>
+            <select id="f-material" name="material" required data-material disabled>
+              <option value="">Select a product category first</option>
+            </select>
+            <span class="field__error">Please select the specific material.</span>
+          </div>
+          <div class="field">
+            <label for="f-grade">Required Format / Purity Grade <abbr title="required">*</abbr></label>
+            <input id="f-grade" name="grade" type="text" placeholder="e.g., 99% Purity, Whole Pods, 80 Mesh" required>
+            <span class="field__error">Please state the format or purity grade.</span>
+          </div>
         </div>
-        <div class="field">
-          <label for="f-message">Specification and details</label>
-          <textarea id="f-message" name="message" required placeholder="Grade, moisture and purity requirements, packing, labelling, target shipment month, and anything your QA team needs."></textarea>
-          <span class="field__error">Please add a few details about the shipment.</span>
+
+        <div class="form__row">
+          <div class="field">
+            <label for="f-volume">Estimated Order Volume <abbr title="required">*</abbr></label>
+            <input id="f-volume" name="volume" type="text" placeholder="e.g., 5 Metric Tons, 500 KG" required>
+            <span class="field__error">Please give an estimated volume.</span>
+          </div>
+          <div class="field">
+            <label for="f-industry">Intended Application Industry <abbr title="required">*</abbr></label>
+            <select id="f-industry" name="industry" required>
+              <option value="">Select an industry</option>
+              <option>Pharma &amp; Nutraceuticals</option>
+              <option>Food Processing</option>
+              <option>Cosmetics</option>
+              <option>Wholesale Spice Blending</option>
+            </select>
+            <span class="field__error">Please select the application industry.</span>
+          </div>
         </div>
+
+        <div class="field">
+          <label for="f-message">Technical Specifications / Custom Packaging Requirements</label>
+          <textarea id="f-message" name="message" placeholder="Moisture and assay thresholds, mesh, packaging and labelling, target shipment month, Incoterm, and anything your QA team needs."></textarea>
+        </div>
+
         <div class="honey" aria-hidden="true">
           <label for="f-website">Leave this field empty</label>
           <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
         </div>
+
         <div class="form__foot">
-          <button class="btn btn--mustard" type="submit">Send enquiry</button>
-          <p class="form__status" data-form-status role="status" aria-live="polite">Sending opens WhatsApp or your email app with the message ready. Nothing is stored on this site.</p>
+          <button class="btn btn--gold" type="submit">Generate Corporate Inquiry</button>
+          <p class="form__status" data-form-status role="status" aria-live="polite">Submitting opens your email client with the enquiry formatted and ready to send. Nothing is stored on this site.</p>
         </div>
       </form>
     </div>
   </section>
 
   <!-- ====================================================== Before you write -->
-  <section class="section section--wash section--rule" aria-labelledby="before-title">
+  <section class="section section--mist section--rule" aria-labelledby="before-title">
     <div class="wrap">
       <div class="section-head">
         <h2 class="title" id="before-title">Before you write</h2>
         <p class="lede">The more of this you send first time, the faster the quote comes back &mdash; usually the same day rather than the third email.</p>
       </div>
       <div class="pillars">
-        <div class="pillar"><h3 class="h4">For spices</h3><p>Name the grade you want, not just the spice: Teja S17 or Byadgi chilli, Singapore 99% or Europe 99.5% cumin, mesh size for anything ground.</p></div>
-        <div class="pillar"><h3 class="h4">For psyllium</h3><p>Tell us purity (98% or 99%), mesh if you want powder, whether it must be certified organic, and the swell volume your formulation needs.</p></div>
-        <div class="pillar"><h3 class="h4">For every enquiry</h3><p>Destination port, target shipment month, packing size and whether you need private labelling. Incoterm too, if your forwarder has told you.</p></div>
+        <div class="pillar"><h3 class="h4">For botanicals</h3><p>Name the grade and format: Bold or Jumbo cardamom, whole rhizome or flakes for ginger, and the curcuminoid threshold your formulation needs.</p></div>
+        <div class="pillar"><h3 class="h4">For bio-nutrients</h3><p>Purity grade, mesh for powders, whether the lot must be certified organic, and for extracts the assay method your QA accepts.</p></div>
+        <div class="pillar"><h3 class="h4">For every enquiry</h3><p>Destination port, target shipment month, packing size, intended application industry, and your Incoterm.</p></div>
       </div>
       <p class="notice" style="margin-top:var(--space-4)"><b>Placeholders</b> <span>Phone number, office address, WhatsApp number and social links on this page are placeholders. See the "Replace before launch" list in the README.</span></p>
     </div>
