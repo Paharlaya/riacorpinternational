@@ -625,6 +625,19 @@ ul, ol { padding: 0; list-style: none; }
 .pillar2__list b { display: block; color: var(--emerald); font-weight: 600; }
 .pillar2__list span { font-size: var(--fs-7); color: var(--graphite); }
 
+/* Category grouping: keeps two categories legible where pages split ------- */
+.catgroup + .catgroup { margin-top: var(--space-5); }
+.catgroup__head {
+  font-size: var(--fs-7);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+  border-bottom: 2px solid var(--gold);
+}
+
 /* Compliance ticker ------------------------------------------------------ */
 .trust { display: grid; gap: var(--space-3); grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 720px) { .trust { grid-template-columns: repeat(3, 1fr); } }
@@ -1081,6 +1094,15 @@ ul, ol { padding: 0; list-style: none; }
   overflow-wrap: anywhere;
 }
 .footer__col li + li { margin-top: 0.6rem; }
+.footer__grouphead {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  margin-top: 1rem !important;
+}
+.footer__grouphead + li a, .footer__grouphead + li + li a { padding-left: 0.8rem; display: inline-block; }
 .footer__foot {
   display: flex;
   flex-wrap: wrap;
@@ -1098,6 +1120,18 @@ ul, ol { padding: 0; list-style: none; }
    JS at all. Below the nav breakpoint it is simply an indented sub-list. */
 .nav__item { position: relative; }
 .nav__sub { display: grid; }
+/* Three flat links read as three categories. The group headings make the real
+   shape visible: two categories, with collagen sitting inside the second. */
+.nav__grouphead {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.7rem 0.75rem 0.3rem;
+}
+.nav__grouphead + li .nav__link { padding-left: 1.5rem; }
+.nav__grouphead + li + li .nav__link { padding-left: 1.5rem; }
 .nav__sub .nav__link { font-size: var(--fs-6); }
 @media (min-width: 900px) {
   .nav__item--has-sub > .nav__link::after {
@@ -1145,6 +1179,9 @@ ul, ol { padding: 0; list-style: none; }
 }
 @media (max-width: 899px) {
   .nav__sub { padding-left: var(--space-3); }
+  .nav__grouphead { color: var(--gold); padding: 0.9rem 0 0.2rem; }
+  .nav__grouphead + li .nav__link,
+  .nav__grouphead + li + li .nav__link { padding-left: 0.9rem; }
   .nav__sub .nav__link { opacity: 0.85; }
 }
 
