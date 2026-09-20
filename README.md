@@ -64,11 +64,17 @@ node tools/logo-build.mjs
 ```
 
 The crest's mountains are **knockouts, not white paint** — there is not one
-opaque white pixel in it. So it cannot be inverted for a dark background: the
-snow caps would fill with whatever is behind them. Everywhere the mark meets
-emerald it sits on a white plate instead, which is why only the dark variant is
-generated. The crest is 218px tall in the source and the script refuses to
-upscale, so large icons place it at native size on a padded canvas.
+opaque white pixel in it. Two variants come out of that:
+
+- `crest-*` keeps each pixel's relative lightness. Correct on a white page.
+- `crest-light-*` flattens every neutral pixel to solid white and keeps only the
+  alpha. That is what sits on the emerald bar: a crisp silhouette with the
+  knockout mountains showing the bar through them, so no white plate is needed
+  behind the mark. Preserving lightness instead would map the dome's mid-tone
+  greens to mid-greys and the mark would go muddy.
+
+The crest is 218px tall in the source and the script refuses to upscale, so
+large icons place it at native size on a padded canvas.
 
 The script has no dependencies. It decodes the PNG with node's built-in `zlib`,
 keys the white background out to real transparency, splits the mark from the
@@ -79,8 +85,9 @@ token to match.
 
 | File | Used for |
 |---|---|
-| `crest-56/112/168/224.png` | Header and footer mark, in its white plate |
-| `lockup.png` | Full stacked lockup, footer |
+| `crest-56/112/168/224.png` | Dark mark, for white backgrounds |
+| `crest-light-56/112/168/224.png` | Flat white mark, for the emerald bar and footer |
+| `lockup.png` / `lockup-light.png` | Full stacked lockup, dark and light |
 | `favicon-32.png`, `favicon-64.png` | Favicon |
 | `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` | App icons (mark on white) |
 

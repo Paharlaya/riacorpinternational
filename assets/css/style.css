@@ -277,18 +277,9 @@ ul, ol { padding: 0; list-style: none; }
   text-decoration: none;
   color: var(--paper);
 }
-/* The crest's mountains are knockouts, not white paint, so it needs white
-   behind it. On emerald it sits in a plate rather than being inverted. */
-.brand__plate {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--paper);
-  border-radius: var(--r-sm);
-  padding: 0.5rem 0.7rem;
-  flex: none;
-}
-.brand__mark { width: 56px; height: auto; display: block; }
+/* Flat white variant of the crest, so it sits straight on the emerald bar with
+   no plate. Its knockout mountains show the bar through them. */
+.brand__mark { width: 62px; height: auto; display: block; flex: none; }
 .brand__name { display: grid; line-height: 1; }
 .brand__name b {
   font-family: var(--font-brand);
@@ -308,11 +299,10 @@ ul, ol { padding: 0; list-style: none; }
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
 }
-@media (max-width: 899px) { :root { --header-h: 80px; } .brand__mark { width: 46px; } }
+@media (max-width: 899px) { :root { --header-h: 80px; } .brand__mark { width: 50px; } }
 @media (max-width: 420px) {
   .brand { gap: 0.6rem; }
-  .brand__plate { padding: 0.4rem 0.5rem; }
-  .brand__mark { width: 38px; }
+  .brand__mark { width: 42px; }
   .brand__name b { font-size: 1.16rem; }
   .brand__name span { font-size: 0.52rem; letter-spacing: 0.28em; margin-right: -0.28em; }
 }
@@ -1058,9 +1048,8 @@ ul, ol { padding: 0; list-style: none; }
 /* The footer lockup sits on black at the very bottom of the page, so it is
    scaled up well past the header's and given its own breathing room -- it is
    the last thing a buyer sees, and it should read as a mark, not a bullet. */
-.brand--footer .brand__plate { padding: 1.1rem 1.4rem; }
-.brand--footer .brand__mark { width: 176px; height: auto; }
-@media (max-width: 480px) { .brand--footer .brand__mark { width: 140px; } }
+.brand--footer .brand__mark { width: 200px; height: auto; }
+@media (max-width: 480px) { .brand--footer .brand__mark { width: 160px; } }
 .footer__brand .brand__name b { font-size: 2rem; }
 .footer__brand .brand__name span {
   color: rgba(255,255,255,.72);

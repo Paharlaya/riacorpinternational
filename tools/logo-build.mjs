@@ -268,23 +268,45 @@ const crest = crop(crestRaw, cb.x0, cb.y0, cb.w, cb.h);
 console.log(`  crest ${crest.width}x${crest.height} (native ceiling for every icon)`);
 
 /**
- * The crest's mountains are knockouts, not white paint — there is not a single
- * opaque white pixel in it. So an "inverted" variant cannot work: on a dark
- * field the snow caps fill with the background and the mark goes muddy.
- * Everywhere the mark meets emerald it sits on a white plate instead, and only
- * the dark variant is ever needed.
+ * Two treatments.
+ *
+ * `recolour` keeps each pixel's relative lightness, which is right on a white
+ * page. It is wrong on emerald: the dome's mid-tone greens map to mid-greys and
+ * the mark goes muddy — which is why the header used to need a white plate.
+ *
+ * `flatten2` paints every neutral pixel one solid colour and keeps only the
+ * alpha. That gives a crisp silhouette which sits directly on the emerald bar
+ * with no plate behind it, and the knockout mountains simply show the bar
+ * through them, which is how the mark is drawn to read.
  */
-const crestDark = recolour(crest, EMERALD, GOLD);
-const lockDark  = recolour(art, EMERALD, GOLD);
+function flatten2(img, inkTarget, goldTarget) {
+  const out = Buffer.from(img.data);
+  for (let i = 0; i < out.length; i += 4) {
+    if (out[i + 3] === 0) continue;
+    const r = out[i], g = out[i + 1], b = out[i + 2];
+    const chroma = Math.max(r, g, b) - Math.min(r, g, b);
+    const t = chroma >= 44 && r > b ? goldTarget : inkTarget;
+    out[i] = t[0]; out[i + 1] = t[1]; out[i + 2] = t[2];
+  }
+  return { width: img.width, height: img.height, data: out };
+}
+
+const crestDark  = recolour(crest, EMERALD, GOLD);
+const crestLight = flatten2(crest, WHITE, GOLD);
+const lockDark   = recolour(art, EMERALD, GOLD);
+const lockLight  = flatten2(art, WHITE, GOLD);
 
 fs.mkdirSync(OUT, { recursive: true });
 console.log("\nWriting assets:");
 
 for (const s of [56, 112, 168, 224]) {
   if (s > crestDark.width) continue;
-  write(`crest-${s}.png`, resize(crestDark, s, Math.round(crestDark.height * s / crestDark.width)));
+  const h = (img) => Math.round(img.height * s / img.width);
+  write(`crest-${s}.png`, resize(crestDark, s, h(crestDark)));
+  write(`crest-light-${s}.png`, resize(crestLight, s, h(crestLight)));
 }
 write("lockup.png", lockDark);
+write("lockup-light.png", lockLight);
 
 // Icons: the mark on white, matching the plate it sits in everywhere else.
 // Placed at native size on a padded canvas so nothing is ever enlarged.
