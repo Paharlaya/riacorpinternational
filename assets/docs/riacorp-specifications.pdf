@@ -243,7 +243,7 @@ endobj
 << /Type /Catalog /Pages 11 0 R >>
 endobj
 13 0 obj
-<< /Title (Riacorp International - Specifications Catalogue) /Author (Riacorp International) /Producer (tools/build-catalog.mjs) >>
+<< /Title (Riacorp International - Specifications Catalogue) /Author (Riacorp International) /Producer (scripts/build-catalog.mjs) >>
 endobj
 xref
 0 14
@@ -264,5 +264,5 @@ xref
 trailer
 << /Size 14 /Root 12 0 R /Info 13 0 R >>
 startxref
-16380
+16382
 %%EOF

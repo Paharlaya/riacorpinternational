@@ -3,7 +3,7 @@
  * ------------------
  * Derives every logo asset from newlogo.png.
  *
- *   node tools/logo-build.mjs
+ *   node scripts/build-logo.mjs
  *
  * Dependency free: PNG decode/encode runs on node's built-in zlib.
  *
@@ -22,7 +22,7 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 
-const SRC = "newlogo.png";
+const SRC = "brand/crest-source.png";
 const OUT = "assets/img";
 
 const EMERALD = [0x0d, 0x3e, 0x36];

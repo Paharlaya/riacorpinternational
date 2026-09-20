@@ -5,12 +5,12 @@
  * variant. The source is a flat vector-style illustration, so it compresses
  * far better than the exporter managed.
  *
- *   node tools/build-hero-bg.mjs
+ *   node scripts/build-hero-bg.mjs
  */
 import fs from "node:fs";
 import zlib from "node:zlib";
 
-const SRC = "bgriacorp.png";
+const SRC = "brand/hero-illustration-source.png";
 const OUT = "assets/img";
 
 function decodePng(buf) {

@@ -5,12 +5,13 @@ premium Himalayan botanicals and advanced bio-nutrients. Hand-written HTML, CSS
 and JavaScript: no framework, no build step at runtime, no package manager.
 GitHub Pages serves the repository root.
 
-Source of truth: `finalplan.md`. Earlier drafts are in `feedback.md`; the
-requirement-coverage audit is in `PLAN.md`.
+Source of truth: `briefs/final-brief.md`. The two drafts it was combined from
+are in `briefs/original-plans.md`, and the coverage audit in
+`briefs/coverage-audit.md`.
 
-Page illustrations live in `tools/art/` — one SVG per page, injected by the
+Page illustrations live in `src/art/` — one SVG per page, injected by the
 assembler via the `art:` field in each page body's metadata. Per-page JSON-LD
-works the same way through `tools/schema/` and the `schema:` field.
+works the same way through `src/schema/` and the `schema:` field.
 
 ## Running locally
 
@@ -19,21 +20,62 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
-## Pages
+## Repository layout
 
-| File | Purpose |
-|---|---|
-| `index.html` | Home — hero, dual-pillar matrix, dual-gateway logistics, compliance ticker |
-| `products.html` | Portfolio overview |
-| `himalayan-botanicals.html` | Cardamom, ginger, turmeric |
-| `bio-nutrients.html` | Psyllium husk, berberine extract |
-| `collagen-peptides.html` | Marine and bovine peptides |
-| `compliance.html` | Registrations, food-safety standards, shipment documents |
-| `about.html` | Institutional overview |
-| `faq.html` | Procurement FAQ (native `<details>`, works without JavaScript) |
-| `contact.html` | 11-field corporate intake form |
-| `404.html` | Not found |
-| `services.html`, `spices.html`, `psyllium-husk.html`, `certifications.html` | Redirect stubs so older links do not 404 |
+GitHub Pages serves this repository from its **root**, so the published pages
+and `assets/` have to live there. Everything that is source rather than output
+is grouped beside them.
+
+```
+.                          published site — served by GitHub Pages
+├── index.html             pages, generated from src/
+├── products.html
+├── himalayan-botanicals.html
+├── bio-nutrients.html
+├── collagen-peptides.html
+├── compliance.html
+├── about.html
+├── faq.html
+├── contact.html
+├── 404.html
+├── services.html          redirect stubs, kept so older links resolve
+├── spices.html
+├── psyllium-husk.html
+├── certifications.html
+├── robots.txt  sitemap.xml  site.webmanifest  .nojekyll
+│
+├── assets/                everything the pages load
+│   ├── css/style.css
+│   ├── js/main.js
+│   ├── img/               logo variants, hero background, product photos
+│   └── docs/              generated specifications catalogue
+│
+├── src/                   authoring source — edit here, then rebuild
+│   ├── pages/             page bodies, one per published page
+│   ├── partials/          head, header, footer, hero, sprite
+│   ├── art/               per-page hero illustrations, one SVG each
+│   └── schema/            per-page JSON-LD
+│
+├── scripts/               build tooling, run by hand
+│   ├── build-pages.mjs    stitches src/ into the root .html files
+│   ├── build-logo.mjs     logo variants and icons from brand/
+│   ├── build-hero-bg.mjs  hero background derivatives
+│   ├── build-catalog.mjs  the downloadable specifications PDF
+│   └── set-domain.sh      switches the site to a custom domain
+│
+├── brand/                 original supplied artwork, not served content
+│   ├── crest-source.png
+│   ├── hero-illustration-source.png
+│   └── archive/           superseded marks
+│
+└── briefs/                client requirements and audit
+    ├── final-brief.md     source of truth for implementation
+    ├── original-plans.md  the two drafts it was combined from
+    └── coverage-audit.md  requirement-by-requirement coverage
+```
+
+Nothing in `src/`, `scripts/`, `brand/` or `briefs/` is linked from the site,
+but Pages does serve the whole repository, so treat all of it as public.
 
 ## Editing
 
@@ -44,23 +86,23 @@ They can also be regenerated, which is the easier route when you are changing
 something that appears on every page:
 
 ```bash
-node tools/build-pages.mjs
+node scripts/build-pages.mjs
 ```
 
-That stitches `tools/partials/` (head, header, footer, sprite, hero, lanes map)
-onto the page bodies in `tools/pages/` and writes the root `.html` files. It
-keeps the shared chrome byte-identical across all nine pages.
+That stitches `src/partials/` (head, header, footer, sprite, hero, lanes map)
+onto the page bodies in `src/pages/` and writes the root `.html` files. It
+keeps the shared chrome byte-identical across every page.
 
 **It overwrites the root files.** If you have edited a root page by hand, copy
-that change into `tools/pages/` before running it.
+that change into `src/pages/` before running it.
 
 ## Logo
 
-The brand artwork is `riacorplogo.png` (2048×2048) — keep it, it is the source.
+The brand artwork is `brand/crest-source.png` — keep it, it is the source.
 Everything in `assets/img/` is generated from it:
 
 ```bash
-node tools/logo-build.mjs
+node scripts/build-logo.mjs
 ```
 
 The crest's mountains are **knockouts, not white paint** — there is not one
@@ -93,10 +135,10 @@ token to match.
 
 ## Hero background
 
-The hero illustration is `bgriacorp.png` (kept as the source). Derivatives:
+The hero illustration is `brand/hero-illustration-source.png`. Derivatives:
 
 ```bash
-node tools/build-hero-bg.mjs
+node scripts/build-hero-bg.mjs
 ```
 
 Writes `assets/img/hero-bg-{760,1200,1920}.png`, served through `srcset`.
@@ -105,7 +147,7 @@ The script quantises each colour channel to a step of 6 before encoding. The
 exporter dithers its sky gradient, and that noise is what PNG cannot compress:
 **the 1920px variant drops from 814 KB to 86 KB** with no visible banding, since
 the artwork is flat colour and soft gradients. Raise `STEP` for a smaller file,
-lower it if banding ever appears (`STEP=2 node tools/build-hero-bg.mjs`).
+lower it if banding ever appears (`STEP=2 node scripts/build-hero-bg.mjs`).
 
 The artwork leaves its left third clear for the headline. A gradient scrim
 behind the copy guarantees contrast anyway, because `object-fit: cover` crops
@@ -116,7 +158,7 @@ inward on narrow screens and pulls the ridgeline under the text.
 The "Download Specifications Catalog" button needs a real file behind it:
 
 ```bash
-node tools/build-catalog.mjs
+node scripts/build-catalog.mjs
 ```
 
 Writes `assets/docs/riacorp-specifications.pdf` — a four-page A4 catalogue built
@@ -154,13 +196,13 @@ domain root, which it is, both on GitHub Pages and under `python3 -m http.server
 
 ## Replace before launch
 
-- [ ] **Phone number** — `+00 000 000 0000` in `tools/partials/footer.html` and `tools/pages/contact.html`
+- [ ] **Phone number** — `+00 000 000 0000` in `src/partials/footer.html` and `src/pages/contact.html`
 - [ ] **Office address** — same two files
 - [ ] **WhatsApp number** — `WHATSAPP_NUMBER` in `assets/js/main.js`. Until it is a real number the intake form falls back to `mailto:`
 - [ ] **Social links** — LinkedIn, Instagram, Facebook on the contact page
 - [ ] **Product photography** — see the folder convention above
 - [ ] **Certificate scans** — `assets/img/certificates/`
-- [ ] **Remove `noindex`** — one line in `tools/partials/head.html`, plus `robots.txt`, once the real content and domain are live
+- [ ] **Remove `noindex`** — one line in `src/partials/head.html`, plus `robots.txt`, once the real content and domain are live
 
 Every placeholder is marked in the page with a visible `[placeholder]` note or a
 dashed callout, so nothing ships silently.
@@ -179,7 +221,7 @@ filling the gap.
 The certifications page presents all listed certifications as Riacorp's own,
 which was a deliberate choice for the demo. If some are in fact held by
 manufacturing partners rather than by Riacorp, relabel the relevant section
-heading in `tools/pages/certifications.html` — the page is already split into
+heading in `src/pages/certifications.html` — the page is already split into
 three blocks to make that a one-line change.
 
 ## Custom domain
@@ -189,7 +231,7 @@ the github.io address to the custom domain, which breaks the site until DNS
 exists. Once the domain is live:
 
 ```bash
-./set-domain.sh riacorpinternational.com
+./scripts/set-domain.sh riacorpinternational.com
 ```
 
 That rewrites the domain across the site, writes `CNAME`, and prints the DNS

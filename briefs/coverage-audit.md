@@ -118,7 +118,7 @@ pharmaceutical and cosmetics raw-material buyers. — Plan A. Handled in 2.9.
 
 No content changes. Nothing user-visible breaks.
 
-1. **1.1** Rewrite `tools/logo-build.mjs` for `newlogo.png` — skip white-keying (already transparent), split crest from wordmark at the measured row gap.
+1. **1.1** Rewrite `scripts/build-logo.mjs` for `newlogo.png` — skip white-keying (already transparent), split crest from wordmark at the measured row gap.
 2. **1.2** Recolour the mark to `#0D3E36` / `#D4AF37`; emit crest, horizontal lockup, light-on-dark variants, favicons and app icons at sizes the 218 px source supports.
 3. **1.3** Replace colour tokens with the 60-30-10 system; retire `--mustard`, `--ink` and all 39 hardcoded mustard hex values.
 4. **1.4** Swap typography to Fraunces (display) + Inter (body, UI, tabular figures); remove Archivo and Montserrat.

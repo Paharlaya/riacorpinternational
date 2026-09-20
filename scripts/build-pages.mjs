@@ -5,30 +5,30 @@
  * have no runtime dependency on this script, and can be edited directly.
  *
  * This exists only so the shared chrome (<head>, <header>, <footer>) stays
- * byte-identical across all eight pages. Edit tools/partials/ or the page
- * bodies in tools/pages/, then:
+ * byte-identical across all eight pages. Edit src/partials/ or the page
+ * bodies in src/pages/, then:
  *
- *   node tools/build-pages.mjs
+ *   node scripts/build-pages.mjs
  *
  * Note it OVERWRITES the root .html files. If you have edited a root page by
- * hand, copy that change back into tools/pages/ first or it will be lost.
+ * hand, copy that change back into src/pages/ first or it will be lost.
  */
 import fs from "node:fs";
 import path from "node:path";
 
 const read = (f) => fs.readFileSync(f, "utf8");
-const head = read("tools/partials/head.html");
-const header = read("tools/partials/header.html");
-const footer = read("tools/partials/footer.html");
-const sprite = read("tools/partials/sprite.html");
-const hero = read("tools/partials/hero.html");
-const lanes = read("tools/partials/lanes.html");
+const head = read("src/partials/head.html");
+const header = read("src/partials/header.html");
+const footer = read("src/partials/footer.html");
+const sprite = read("src/partials/sprite.html");
+const hero = read("src/partials/hero.html");
+const lanes = read("src/partials/lanes.html");
 
-const files = fs.readdirSync("tools/pages").filter((f) => f.endsWith(".html")).sort();
+const files = fs.readdirSync("src/pages").filter((f) => f.endsWith(".html")).sort();
 let built = 0;
 
 for (const file of files) {
-  const src = read(path.join("tools/pages", file));
+  const src = read(path.join("src/pages", file));
   const meta = /^<!--\s*([\s\S]*?)-->\s*/.exec(src);
   if (!meta) throw new Error(`${file}: missing leading metadata comment`);
 
@@ -47,11 +47,11 @@ for (const file of files) {
       .replaceAll("{{TITLE}}", fields.title)
       .replaceAll("{{DESCRIPTION}}", fields.description)
       .replaceAll("{{SLUG}}", slug)
-      .replaceAll("{{SCHEMA}}", fields.schema ? "\n" + fs.readFileSync("tools/schema/" + fields.schema, "utf8").trim() : "") +
+      .replaceAll("{{SCHEMA}}", fields.schema ? "\n" + fs.readFileSync("src/schema/" + fields.schema, "utf8").trim() : "") +
     header +
     "\n" +
     sprite +
-    src.slice(meta[0].length).replaceAll("{{ART}}", fields.art ? read("tools/art/" + fields.art).trimEnd() : "")
+    src.slice(meta[0].length).replaceAll("{{ART}}", fields.art ? read("src/art/" + fields.art).trimEnd() : "")
       .replaceAll("{{HERO}}", hero.trimEnd()).replaceAll("{{LANES}}", lanes.trimEnd()).trimEnd() +
     "\n\n" +
     footer;

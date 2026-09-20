@@ -374,7 +374,7 @@ The following require confirmation:
 
 ## 11. Implementation Approach
 
-The site remains a lightweight static HTML, CSS, and JavaScript project. Shared templates in `tools/partials/` and page bodies in `tools/pages/` are the editable source for generated root pages.
+The site remains a lightweight static HTML, CSS, and JavaScript project. Shared templates in `src/partials/` and page bodies in `src/pages/` are the editable source for generated root pages.
 
 ### Phase 1 — Confirm source material
 

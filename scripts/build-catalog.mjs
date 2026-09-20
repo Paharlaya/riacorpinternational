@@ -5,7 +5,7 @@
  * a real file behind it. This writes one straight from the same figures the
  * spec tables use.
  *
- *   node tools/build-catalog.mjs   ->  assets/docs/riacorp-specifications.pdf
+ *   node scripts/build-catalog.mjs   ->  assets/docs/riacorp-specifications.pdf
  *
  * Dependency free: PDF is a text container, so the pages are assembled by hand
  * with the standard Helvetica faces. Keep it ASCII — no font is embedded.
@@ -195,7 +195,7 @@ pages.forEach((pg) => {
 });
 const pagesObj = add(`<< /Type /Pages /Kids [${kids.join(" ")}] /Count ${pages.length} >>`);
 const catalog = add(`<< /Type /Catalog /Pages ${pagesObj} 0 R >>`);
-const info = add(`<< /Title (Riacorp International - Specifications Catalogue) /Author (Riacorp International) /Producer (tools/build-catalog.mjs) >>`);
+const info = add(`<< /Title (Riacorp International - Specifications Catalogue) /Author (Riacorp International) /Producer (scripts/build-catalog.mjs) >>`);
 
 let out = "%PDF-1.4\n";
 const offsets = [0];
