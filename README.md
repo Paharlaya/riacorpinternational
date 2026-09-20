@@ -79,6 +79,26 @@ token to match.
 | `favicon-32.png`, `favicon-64.png` | Favicon |
 | `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` | App icons (mark on white) |
 
+## Hero background
+
+The hero illustration is `bgriacorp.png` (kept as the source). Derivatives:
+
+```bash
+node tools/build-hero-bg.mjs
+```
+
+Writes `assets/img/hero-bg-{760,1200,1920}.png`, served through `srcset`.
+
+The script quantises each colour channel to a step of 6 before encoding. The
+exporter dithers its sky gradient, and that noise is what PNG cannot compress:
+**the 1920px variant drops from 814 KB to 86 KB** with no visible banding, since
+the artwork is flat colour and soft gradients. Raise `STEP` for a smaller file,
+lower it if banding ever appears (`STEP=2 node tools/build-hero-bg.mjs`).
+
+The artwork leaves its left third clear for the headline. A gradient scrim
+behind the copy guarantees contrast anyway, because `object-fit: cover` crops
+inward on narrow screens and pulls the ridgeline under the text.
+
 ## Specifications catalogue
 
 The "Download Specifications Catalog" button needs a real file behind it:

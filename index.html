@@ -102,12 +102,16 @@
 <main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap hero__grid">
-      <div>
+    <!-- Flat illustration sits behind the copy. Anchored bottom-right so the
+         peaks stay clear of the headline column on the left. -->
+    <img class="hero__bg"
+         src="assets/img/hero-bg-1200.png"
+         srcset="assets/img/hero-bg-760.png 760w, assets/img/hero-bg-1200.png 1200w, assets/img/hero-bg-1920.png 1916w"
+         sizes="100vw" width="1916" height="821" alt="" aria-hidden="true" fetchpriority="high">
+    <div class="wrap">
+      <div class="hero__content">
         <p class="hero__eyebrow">Global B2B supplier &amp; exporter</p>
         <h1 class="display" id="hero-title">Pristine Himalayan Botanicals &amp; Advanced Bio-Nutrients, <span class="line--gold">Delivered Worldwide.</span></h1>
-      </div>
-      <div class="hero__aside">
         <p class="lede">Riacorp International bridges pristine high-altitude agricultural sourcing with certified industrial bio-nutrient manufacturing. Sourced, lab-tested, and optimized for global trade routes.</p>
         <div class="actions">
           <a class="btn btn--gold" href="contact.html">Request Bulk Quote / COA</a>
@@ -115,65 +119,10 @@
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Peaks resolving into clean-room geometry. Left half is the Himalayan
-         source, right half the certified facility; the ridgeline flattens into
-         laboratory rules across the middle. -->
-    <div class="massif" aria-hidden="true">
-      <svg class="massif__svg" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax slice">
-        <defs>
-          <linearGradient id="mg-sky" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#f4f8f6"/><stop offset="0.55" stop-color="#f8f9fa"/><stop offset="1" stop-color="#ffffff"/>
-          </linearGradient>
-          <linearGradient id="mg-front" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#14514a"/><stop offset="1" stop-color="#0d3e36"/>
-          </linearGradient>
-        </defs>
-        <rect width="1600" height="420" fill="url(#mg-sky)"/>
-
-        <!-- gold globe arcs, lifted from the crest -->
-        <g fill="none" stroke="#D4AF37" stroke-width="1.6" opacity="0.5">
-          <path class="route-draw" d="M120 300A300 300 0 0 1 720 300"/>
-          <path class="route-draw" d="M210 300A210 210 0 0 1 630 300"/>
-          <path class="route-draw" d="M60 232c120 66 250 100 360 100s240-34 360-100"/>
-        </g>
-
-        <!-- far ridge -->
-        <path d="M0 330 170 214l86 66 74-52 96 82 90-58 120 96 84-52 110 74v30H0Z" fill="#cfdcd7"/>
-        <!-- middle ridge -->
-        <path d="M0 356 120 258l78 62 92-70 104 92 78-56 128 106 96-64 124 92v40H0Z" fill="#9fb8b0"/>
-        <!-- front ridge with snow -->
-        <path d="M0 420V372l150-118 92 78 70-56 118 106 92-72 138 120 104-84 146 126v48Z" fill="url(#mg-front)"/>
-        <path d="m150 254 44 37-23 9-21-14-20 16-24-11Z" fill="#ffffff"/>
-        <path d="m430 276 40 36-22 8-19-13-18 14-21-10Z" fill="#ffffff"/>
-        <path d="m672 262 46 40-24 9-22-14-20 16-24-12Z" fill="#ffffff"/>
-
-        <!-- mist bands drifting between the ridges -->
-        <g class="massif__mist" opacity="0.62">
-          <path d="M0 322c150-22 290 16 440 6s280-40 430-30 300 44 450 26h280v22H0Z" fill="#ffffff" opacity=".62"/>
-          <path d="M0 360c170-18 300 18 470 10s300-34 470-26 290 38 460 22h200v20H0Z" fill="#ffffff" opacity=".45"/>
-        </g>
-
-        <!-- transition: ridgeline flattens into laboratory rules -->
-        <g stroke="#0d3e36" stroke-width="1" opacity="0.16">
-          <path d="M980 420V300M1040 420V276M1100 420V312M1160 420V264M1220 420V300M1280 420V252M1340 420V296M1400 420V268M1460 420V308M1520 420V280"/>
-          <path d="M980 300h560M980 348h560M980 396h560"/>
-        </g>
-        <!-- clean-room vessels -->
-        <g fill="none" stroke="#0d3e36" stroke-width="1.8" opacity="0.5">
-          <path d="M1218 246v42l-30 76a14 14 0 0 0 13 20h54a14 14 0 0 0 13-20l-30-76v-42Z"/>
-          <path d="M1210 246h36"/>
-          <path d="M1392 262h44v104a22 22 0 0 1-44 0Z"/>
-          <path d="M1386 262h56"/>
-        </g>
-        <g fill="#D4AF37" opacity="0.62">
-          <path d="M1190 350h66l14 34a10 10 0 0 1-9 14h-76a10 10 0 0 1-9-14Z"/>
-          <path d="M1392 326h44v40a22 22 0 0 1-44 0Z"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- the two corridors, origin to port -->
+  <!-- the two corridors, origin to port -->
+  <section class="section section--flush" aria-label="Export corridors">
     <div class="wrap">
       <div class="corridor">
         <div class="corridor__end"><b>Origin</b><span>High-altitude farms, 1,800&ndash;3,000 m</span></div>

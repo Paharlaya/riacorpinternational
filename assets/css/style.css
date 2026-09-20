@@ -433,34 +433,75 @@ ul, ol { padding: 0; list-style: none; }
 }
 .route__ship.is-sailing { opacity: 1; }
 
-/* Hero: peaks resolving into clean-room geometry ------------------------- */
+/* Hero: flat Himalayan illustration behind a left-hand copy column -------- */
 .hero {
   position: relative;
-  padding-top: var(--space-5);
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: clamp(460px, 64vh, 700px);
+  padding-block: var(--space-5);
+  background: var(--mist);
   overflow: hidden;
-  background: var(--paper);
 }
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right bottom;
+}
+/* Legibility scrim. The artwork already leaves the left clear at desktop
+   widths, but `cover` crops inward on narrow screens and pulls the ridge
+   under the headline — this guarantees contrast at every size. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg,
+    var(--mist) 0%, var(--mist) 26%,
+    rgba(248, 249, 250, 0.92) 42%,
+    rgba(248, 249, 250, 0.55) 56%,
+    rgba(248, 249, 250, 0) 72%);
+}
+.hero__content { max-width: 39rem; display: grid; gap: var(--space-4); }
+/* The global display size is tuned for inner page heroes; here it has to share
+   the fold with a lede and two CTAs, so it runs a size smaller. */
+.hero .display { font-size: clamp(2.3rem, 1rem + 3.1vw, 3.85rem); line-height: 1.04; }
 .hero__eyebrow {
   font-size: var(--fs-7);
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-deep);
-  margin-bottom: var(--space-3);
+  margin: 0;
 }
-.hero__grid { display: grid; gap: var(--space-4); position: relative; z-index: 2; }
-@media (min-width: 900px) {
-  .hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; gap: var(--space-5); }
-}
-.hero__aside { display: grid; gap: var(--space-4); align-content: end; }
-.hero .display { max-width: 20ch; }
+.hero__content .display { margin: 0; }
+.hero__content .lede { margin: 0; max-width: 46ch; }
+/* The outline button can land over the ridgeline once `cover` crops inward,
+   so it carries its own ground rather than relying on the page behind it. */
+.hero .btn--ghost { background: rgba(255, 255, 255, 0.88); }
+.hero .btn--ghost:hover { background: var(--paper); }
 
-.massif { position: relative; margin-top: var(--space-5); line-height: 0; }
-.massif__svg { width: 100%; height: clamp(220px, 26vw, 420px); display: block; }
-.massif__mist { animation: drift 26s var(--ease) infinite alternate; }
-@keyframes drift { from { transform: translateX(-1.6%); } to { transform: translateX(1.6%); } }
+@media (max-width: 899px) {
+  .hero { min-height: 0; padding-block: var(--space-4) var(--space-6); }
+  .hero__bg { object-position: 72% bottom; }
+  /* Vertical fade on small screens: the peaks sit below the copy rather than
+     behind it. */
+  .hero::before {
+    background: linear-gradient(180deg,
+      var(--mist) 0%, var(--mist) 38%,
+      rgba(248, 249, 250, 0.88) 58%,
+      rgba(248, 249, 250, 0) 86%);
+  }
+  .hero__content { max-width: none; }
+}
 
 /* Corridor ticker: origin, transit, destination -------------------------- */
+.section--flush { padding-block: 0; }
 .corridor {
   display: grid;
   gap: var(--space-2);
