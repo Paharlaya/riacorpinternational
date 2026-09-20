@@ -117,7 +117,7 @@
         "High-Curcumin Turmeric — Finger",
         "High-Curcumin Turmeric — Powder"
       ],
-      "Plant-Based Bio-Nutrients": [
+      "Plant-Based Bio-Nutrients & Fibers": [
         "Psyllium Husk 95%",
         "Psyllium Husk 98%",
         "Psyllium Husk 99%",
