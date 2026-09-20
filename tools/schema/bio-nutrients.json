@@ -1,0 +1,11 @@
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"Home","item":"https://paharlaya.github.io/riacorpinternational/"},
+ {"@type":"ListItem","position":2,"name":"Products","item":"https://paharlaya.github.io/riacorpinternational/products.html"},
+ {"@type":"ListItem","position":3,"name":"Plant-Based Bio-Nutrients & Fibers","item":"https://paharlaya.github.io/riacorpinternational/bio-nutrients.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","name":"Plant-Based Bio-Nutrients & Fibers","itemListElement":[
+ {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Psyllium Husk (Isabgol)","category":"Plant-Based Bio-Nutrients & Fibers","brand":{"@type":"Brand","name":"Riacorp International"}}},
+ {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"High-Purity Berberine Extract","category":"Plant-Based Bio-Nutrients & Fibers","brand":{"@type":"Brand","name":"Riacorp International"}}}]}
+</script>

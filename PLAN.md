@@ -1,5 +1,8 @@
 # Riacorp International — Website Rebuild Plan
 
+> **Superseded.** `finalplan.md` is now the source of truth for implementation
+> decisions. This file is kept for the requirement-coverage audit only.
+
 Combines **Plan A** (Production-Ready Website Brief) and **Plan B** (Complete
 Website Master Brief) into one sequential build.
 

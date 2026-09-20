@@ -1,0 +1,21 @@
+<svg class="page-hero__art" viewBox="0 0 520 360" role="img" aria-label="Cardamom, ginger and turmeric" preserveAspectRatio="xMaxYMid meet">
+  <g fill="none" stroke="#D4AF37" stroke-width="1.4" opacity=".7"><path d="M70 96a190 120 0 0 1 380 0"/></g>
+  <g fill="none" stroke="#0D3E36" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M132 300c-34-22-46-66-30-104 14-34 44-52 74-46 6 34-6 74-24 102-8 13-14 30-20 48Z"/>
+    <path d="M132 300c6-40 20-78 44-108"/>
+  </g>
+  <path d="M132 300c-34-22-46-66-30-104 14-34 44-52 74-46" fill="#cfdcd7" opacity=".5"/>
+  <g fill="#4a7a6e" opacity=".9">
+    <path d="M250 232c16-16 40-16 52 2 10 15 4 30-8 38 14 4 22 18 16 32-7 16-30 20-46 8-13-10-20-26-20-42 0-14 2-28 6-38Z"/>
+  </g>
+  <g fill="none" stroke="#0D3E36" stroke-width="2.2" stroke-linecap="round">
+    <path d="M250 232c16-16 40-16 52 2 10 15 4 30-8 38 14 4 22 18 16 32-7 16-30 20-46 8-13-10-20-26-20-42 0-14 2-28 6-38Z"/>
+    <path d="M272 262h18M266 292h22"/>
+  </g>
+  <g>
+    <rect x="352" y="214" width="34" height="96" rx="17" fill="#D4AF37" opacity=".85"/>
+    <rect x="396" y="238" width="26" height="72" rx="13" fill="#D4AF37" opacity=".5"/>
+    <path d="M352 250h34M352 278h34" stroke="#0D3E36" stroke-width="2" opacity=".5"/>
+  </g>
+  <path d="M70 318h380" stroke="#cfdcd7" stroke-width="2"/>
+</svg>

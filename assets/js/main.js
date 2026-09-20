@@ -135,6 +135,18 @@
 
     if (category && material) {
       material.disabled = false;
+
+      /* A product-page CTA can arrive with ?category=... (and optionally
+         &material=...) so the buyer lands on a form already scoped to what
+         they were reading. */
+      var params = new URLSearchParams(window.location.search);
+      var wantCategory = params.get("category");
+      var wantMaterial = params.get("material");
+      if (wantCategory) {
+        for (var ci = 0; ci < category.options.length; ci++) {
+          if (category.options[ci].value === wantCategory) { category.value = wantCategory; break; }
+        }
+      }
       var fillMaterials = function (preserve) {
         var list = MATERIALS[category.value] || [];
         var previous = preserve ? material.value : "";
@@ -152,6 +164,11 @@
         material.disabled = list.length === 0;
       };
       fillMaterials(false);
+      if (wantMaterial) {
+        for (var mi = 0; mi < material.options.length; mi++) {
+          if (material.options[mi].value === wantMaterial) { material.value = wantMaterial; break; }
+        }
+      }
       category.addEventListener("change", function () { fillMaterials(false); });
     }
 

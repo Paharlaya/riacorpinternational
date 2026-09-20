@@ -1,0 +1,19 @@
+<svg class="page-hero__art" viewBox="0 0 520 360" role="img" aria-label="Collagen triple helix" preserveAspectRatio="xMaxYMid meet">
+  <g fill="none" stroke-width="3" stroke-linecap="round">
+    <path d="M120 70c60 34 60 68 0 102s-60 68 0 102 60 68 0 86" stroke="#0D3E36"/>
+    <path d="M190 70c60 34 60 68 0 102s-60 68 0 102 60 68 0 86" stroke="#4a7a6e"/>
+    <path d="M260 70c60 34 60 68 0 102s-60 68 0 102 60 68 0 86" stroke="#9fb8b0"/>
+  </g>
+  <g fill="#D4AF37">
+    <circle cx="150" cy="121" r="5"/><circle cx="220" cy="121" r="5"/>
+    <circle cx="150" cy="223" r="5"/><circle cx="220" cy="223" r="5"/>
+    <circle cx="150" cy="325" r="5"/><circle cx="220" cy="325" r="5"/>
+  </g>
+  <g fill="none" stroke="#D4AF37" stroke-width="1.4" opacity=".7">
+    <path d="M330 120a70 70 0 1 1 0 120"/>
+    <path d="M330 150a40 40 0 1 1 0 60"/>
+  </g>
+  <g fill="#4a7a6e" opacity=".8">
+    <circle cx="392" cy="180" r="7"/><circle cx="418" cy="140" r="5"/><circle cx="418" cy="220" r="5"/>
+  </g>
+</svg>

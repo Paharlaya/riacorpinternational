@@ -1,0 +1,20 @@
+<svg class="page-hero__art" viewBox="0 0 520 360" role="img" aria-label="Dual export corridors as a network" preserveAspectRatio="xMaxYMid meet">
+  <g fill="none" stroke="#D4AF37" stroke-width="1.5" opacity=".8">
+    <path d="M60 110a230 150 0 0 1 400 40"/>
+  </g>
+  <g fill="none" stroke="#4a7a6e" stroke-width="2" stroke-dasharray="5 6">
+    <path d="M96 232C180 180 250 262 430 176"/>
+    <path d="M96 232C190 296 300 268 430 292"/>
+  </g>
+  <g>
+    <circle cx="96" cy="232" r="11" fill="#0D3E36"/>
+    <circle cx="232" cy="216" r="8" fill="#fff" stroke="#4a7a6e" stroke-width="2.4"/>
+    <circle cx="300" cy="278" r="8" fill="#fff" stroke="#4a7a6e" stroke-width="2.4"/>
+    <circle cx="430" cy="176" r="10" fill="#D4AF37"/>
+    <circle cx="430" cy="292" r="10" fill="#D4AF37"/>
+  </g>
+  <g fill="none" stroke="#cfdcd7" stroke-width="2">
+    <path d="M60 320h400"/>
+  </g>
+  <path d="M60 300 130 246l32 26 30-22 46 40" fill="none" stroke="#9fb8b0" stroke-width="2.4" stroke-linejoin="round"/>
+</svg>

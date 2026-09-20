@@ -1,0 +1,12 @@
+<svg class="page-hero__art" viewBox="0 0 520 360" role="img" aria-label="Layered question cards" preserveAspectRatio="xMaxYMid meet">
+  <g fill="none" stroke="#D4AF37" stroke-width="1.4" opacity=".7"><path d="M90 92a180 116 0 0 1 350 0"/></g>
+  <rect x="112" y="128" width="200" height="118" rx="3" fill="#cfdcd7"/>
+  <rect x="146" y="158" width="200" height="118" rx="3" fill="#9fb8b0"/>
+  <rect x="180" y="188" width="200" height="118" rx="3" fill="#fff" stroke="#0D3E36" stroke-width="2.4"/>
+  <g stroke="#9fb8b0" stroke-width="3" stroke-linecap="round">
+    <path d="M206 224h148M206 250h148M206 276h96"/>
+  </g>
+  <circle cx="392" cy="150" r="30" fill="#0D3E36"/>
+  <path d="M384 142a9 9 0 1 1 9 11v7" fill="none" stroke="#D4AF37" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="393" cy="169" r="2.6" fill="#D4AF37"/>
+</svg>

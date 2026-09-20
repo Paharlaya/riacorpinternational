@@ -5,7 +5,12 @@ premium Himalayan botanicals and advanced bio-nutrients. Hand-written HTML, CSS
 and JavaScript: no framework, no build step at runtime, no package manager.
 GitHub Pages serves the repository root.
 
-Working plan and requirement coverage: `PLAN.md`.
+Source of truth: `finalplan.md`. Earlier drafts are in `feedback.md`; the
+requirement-coverage audit is in `PLAN.md`.
+
+Page illustrations live in `tools/art/` — one SVG per page, injected by the
+assembler via the `art:` field in each page body's metadata. Per-page JSON-LD
+works the same way through `tools/schema/` and the `schema:` field.
 
 ## Running locally
 

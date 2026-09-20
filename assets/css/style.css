@@ -539,6 +539,65 @@ ul, ol { padding: 0; list-style: none; }
 }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* Trust strip: procurement assurances under the hero ---------------------- */
+.assurances {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border-block: 1px solid var(--rule);
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 900px) { .assurances { grid-template-columns: repeat(4, 1fr); } }
+.assurances li {
+  display: grid;
+  gap: 0.3rem;
+  align-content: start;
+  padding: var(--space-3) var(--space-3) var(--space-3) 0;
+  background: var(--paper);
+}
+@media (min-width: 900px) { .assurances li { padding-inline: var(--space-3); } .assurances li:first-child { padding-left: 0; } }
+.assurances b { font-size: var(--fs-6); font-weight: 600; color: var(--emerald); }
+.assurances span { font-size: var(--fs-7); color: var(--graphite); }
+
+/* Buyer journey: requirement review through dispatch ---------------------- */
+.journey {
+  display: grid;
+  gap: var(--space-3);
+  counter-reset: journey;
+}
+@media (min-width: 720px) { .journey { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .journey { grid-template-columns: repeat(3, 1fr); } }
+.journey__step {
+  counter-increment: journey;
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--gold);
+}
+.journey__step::before {
+  content: counter(journey, decimal-leading-zero);
+  font-size: var(--fs-7);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gold-deep);
+}
+.journey__step b { font-family: var(--font-display); font-size: var(--fs-4); color: var(--emerald); }
+.journey__step span { font-size: var(--fs-6); color: var(--graphite); }
+
+/* Evidence-led compliance blocks ------------------------------------------ */
+.evidence { display: grid; gap: var(--space-4); }
+@media (min-width: 900px) { .evidence { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); } }
+.evidence__item { display: grid; gap: 0.6rem; align-content: start; padding-top: var(--space-3); border-top: 2px solid var(--rule); }
+.evidence__item h3 { font-family: var(--font-display); font-size: var(--fs-4); color: var(--emerald); }
+.evidence__item p { color: var(--graphite); font-size: var(--fs-6); }
+.section--emerald .evidence__item { border-top-color: rgba(255,255,255,.2); }
+.section--emerald .evidence__item h3 { color: var(--paper); }
+.section--emerald .evidence__item p { color: rgba(255,255,255,.76); }
+
 /* Dual-gateway corridors ------------------------------------------------- */
 .gateways { display: grid; gap: var(--space-4); }
 @media (min-width: 900px) { .gateways { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); } }
@@ -564,10 +623,6 @@ ul, ol { padding: 0; list-style: none; }
   border: 1px solid var(--rule);
   border-top: 3px solid var(--gold);
   background: var(--paper);
-}
-.pillar2__no {
-  font-size: var(--fs-7); font-weight: 600; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--gold-deep);
 }
 .pillar2 h3 { font-family: var(--font-display); color: var(--emerald); font-size: var(--fs-3); line-height: 1.1; }
 .pillar2__sub { font-size: var(--fs-7); color: var(--graphite); margin-top: -0.6rem; }
@@ -849,6 +904,33 @@ ul, ol { padding: 0; list-style: none; }
 .form--intake .form__row { display: grid; gap: var(--space-3); align-items: start; }
 @media (min-width: 760px) { .form--intake .form__row { grid-template-columns: 1fr 1fr; } }
 .form--intake .field { align-content: start; }
+.field--check {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 0.7rem;
+  margin-top: var(--space-2);
+}
+.field--check input { width: 18px; height: 18px; margin-top: 0.15rem; accent-color: var(--emerald); }
+.field--check label { font-size: var(--fs-6); font-weight: 400; color: var(--graphite); }
+.field--check .field__error { grid-column: 2; }
+.field--check.is-invalid input { outline: 2px solid #c2402f; outline-offset: 2px; }
+.field input[type="file"] {
+  padding: 0.6rem;
+  font-size: var(--fs-7);
+  background: var(--mist);
+  cursor: pointer;
+}
+.field input[type="file"]::file-selector-button {
+  margin-right: 0.8rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--rule-mid);
+  border-radius: 2px;
+  background: var(--paper);
+  font: inherit;
+  color: var(--emerald);
+  cursor: pointer;
+}
+.field .field__hint:not([hidden]) { display: block; }
 .form__status.is-error { color: #b3261e; }
 .form__status.is-ok { color: var(--gold-deep); }
 .field.is-invalid .field__error { display: block; }
@@ -866,41 +948,64 @@ ul, ol { padding: 0; list-style: none; }
 /* Page hero (inner pages) ------------------------------------------------ */
 .page-hero {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
-  padding-block: clamp(3rem, 6vw, 6rem) var(--space-5);
+  display: grid;
+  align-items: center;
+  min-height: clamp(260px, 34vh, 380px);
+  padding-block: clamp(3rem, 5vw, 5rem);
   border-bottom: 1px solid var(--rule);
-  background:
-    radial-gradient(50% 60% at 90% 0%, rgba(228, 168, 27, 0.14), transparent 70%),
-    var(--paper);
+  background: var(--mist);
 }
-.page-hero__grid { display: grid; gap: var(--space-4); }
+/* Each page carries its own illustration rather than repeating the homepage
+   photograph. Anchored right, sized off the hero height, and held back so it
+   fills the space without competing with the copy. */
+.page-hero__art {
+  position: absolute;
+  top: 50%;
+  right: max(var(--gutter), calc((100% - var(--max)) / 2));
+  transform: translateY(-50%);
+  z-index: -2;
+  height: min(92%, 330px);
+  width: auto;
+  opacity: 1;
+  pointer-events: none;
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg,
+    var(--mist) 0%, var(--mist) 38%,
+    rgba(248, 249, 250, 0.96) 52%,
+    rgba(248, 249, 250, 0.7) 66%,
+    rgba(248, 249, 250, 0) 84%);
+}
+/* Copy stacks on the left, matching the homepage. The old two-column split put
+   the lede over the ridgeline, where it was unreadable, and its top edge never
+   lined up with the heading. */
+/* .page-hero__grid shares its element with .wrap, which is centred — so the
+   width limit belongs on the children, not here, or the whole column centres. */
+.page-hero__grid { display: grid; gap: var(--space-3); align-items: start; justify-items: start; }
+.page-hero__grid .lede { margin: 0; max-width: 44ch; }
 .page-hero .display {
   font-family: var(--font-display);
   color: var(--emerald);
   font-optical-sizing: auto;
-  font-size: clamp(2.2rem, 1rem + 3.2vw, 4rem);
-  max-width: 22ch;
+  font-size: clamp(2.2rem, 1rem + 3.2vw, 3.9rem);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 20ch;
 }
-@media (min-width: 1024px) {
-  .page-hero__grid .lede { margin-left: auto; width: min(100%, 48ch); }
-}
-.page-hero__crumb {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: var(--space-3);
-  padding: 0.35rem 0.85rem 0.35rem 0.6rem;
-  border-radius: var(--r-pill);
-  background: var(--mist-deep);
-  font-weight: 500;
-  font-size: var(--fs-7);
-  color: var(--gold-deep);
-}
-.page-hero__crumb::before {
-  content: "";
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
+@media (max-width: 899px) {
+  .page-hero__art { height: 130px; right: 0; opacity: 0.3; }
+  .page-hero::before {
+    background: linear-gradient(180deg,
+      var(--mist) 0%, var(--mist) 46%,
+      rgba(248, 249, 250, 0.9) 66%,
+      rgba(248, 249, 250, 0) 92%);
+  }
 }
 
 /* CTA card --------------------------------------------------------------- */
@@ -1036,7 +1141,17 @@ ul, ol { padding: 0; list-style: none; }
     visibility: visible;
     transform: translateY(0);
   }
-  .nav__sub .nav__link { display: block; padding: 0.5rem 0.75rem; border-radius: 6px; }
+  /* The panel is white, but .nav__link is white for the emerald bar — without
+     resetting the colour here the dropdown renders as a blank box. */
+  .nav__sub .nav__link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 2px;
+    color: var(--emerald);
+    white-space: nowrap;
+  }
+  .nav__sub .nav__link:hover { background: var(--emerald-soft); color: var(--emerald); }
+  .nav__sub .nav__link[aria-current="page"] { color: var(--gold-deep); }
   .nav__sub .nav__link[aria-current="page"]::after { display: none; }
 }
 @media (max-width: 899px) {

@@ -46,11 +46,13 @@ for (const file of files) {
     head
       .replaceAll("{{TITLE}}", fields.title)
       .replaceAll("{{DESCRIPTION}}", fields.description)
-      .replaceAll("{{SLUG}}", slug) +
+      .replaceAll("{{SLUG}}", slug)
+      .replaceAll("{{SCHEMA}}", fields.schema ? "\n" + fs.readFileSync("tools/schema/" + fields.schema, "utf8").trim() : "") +
     header +
     "\n" +
     sprite +
-    src.slice(meta[0].length).replaceAll("{{HERO}}", hero.trimEnd()).replaceAll("{{LANES}}", lanes.trimEnd()).trimEnd() +
+    src.slice(meta[0].length).replaceAll("{{ART}}", fields.art ? read("tools/art/" + fields.art).trimEnd() : "")
+      .replaceAll("{{HERO}}", hero.trimEnd()).replaceAll("{{LANES}}", lanes.trimEnd()).trimEnd() +
     "\n\n" +
     footer;
 
