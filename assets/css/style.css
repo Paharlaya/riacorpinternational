@@ -545,7 +545,13 @@ ul, ol { padding: 0; list-style: none; }
   padding: var(--space-3) var(--space-3) var(--space-3) 0;
   background: var(--paper);
 }
-@media (min-width: 900px) { .assurances li { padding-inline: var(--space-3); } .assurances li:first-child { padding-left: 0; } }
+/* Two columns below 900px: the right-hand item needs its own gutter off the divider. */
+@media (max-width: 899px) { .assurances li:nth-child(even) { padding-left: var(--space-3); padding-right: 0; } }
+@media (min-width: 900px) {
+  .assurances li { padding-inline: var(--space-3); }
+  .assurances li:first-child { padding-left: 0; }
+  .assurances li:last-child { padding-right: 0; }
+}
 .assurances b { font-size: var(--fs-6); font-weight: 600; color: var(--emerald); }
 .assurances span { font-size: var(--fs-7); color: var(--graphite); }
 
@@ -603,6 +609,8 @@ ul, ol { padding: 0; list-style: none; }
 .gateway__map .lane { fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-dasharray: 4 5; }
 .gateway__map .node { fill: var(--paper); stroke: var(--gold); stroke-width: 2; }
 .gateway__map .node--port { fill: var(--gold); }
+.gateway__map .lane-flow { fill: none; stroke: var(--gold); stroke-width: 2.6; stroke-linecap: round; }
+.gateway__map .lane-head { fill: var(--paper); stroke: var(--gold); stroke-width: 2; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.9)); }
 .gateway__map text { font-family: var(--font); font-size: 11px; font-weight: 500; fill: rgba(255,255,255,.72); }
 
 /* Dual-pillar portfolio matrix ------------------------------------------- */

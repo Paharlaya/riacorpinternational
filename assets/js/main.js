@@ -346,6 +346,46 @@
     });
   }
 
+  /* ---- Corridor flow: a pulse travels each gateway lane, origin to port --
+     The dashed lane stays as the track. A short solid segment and a glowing
+     head run along it with eased SMIL timing, fade out at the port and
+     repeat. Both animations share one clock, so the head stays on the
+     segment's leading edge. */
+  if (!reduceMotion) {
+    var SVGNS = "http://www.w3.org/2000/svg";
+    var TRAIL = 0.16;
+    var make = function (tag, attrs) {
+      var el = document.createElementNS(SVGNS, tag);
+      Object.keys(attrs).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+      return el;
+    };
+    document.querySelectorAll(".gateway__map .lane").forEach(function (lane, i) {
+      var timing = { dur: "4.4s", begin: (i * 0.6) + "s", repeatCount: "indefinite" };
+      var ease = "0.45 0 0.55 1; 0 0 1 1";
+      var group = make("g", { "aria-hidden": "true" });
+      group.appendChild(make("animate", Object.assign({
+        attributeName: "opacity", values: "0;1;1;0", keyTimes: "0;0.08;0.82;1"
+      }, timing)));
+      var flow = make("path", {
+        class: "lane-flow", d: lane.getAttribute("d"), pathLength: "1",
+        "stroke-dasharray": TRAIL + " 1", "stroke-dashoffset": String(TRAIL)
+      });
+      flow.appendChild(make("animate", Object.assign({
+        attributeName: "stroke-dashoffset", values: TRAIL + ";" + (TRAIL - 1) + ";" + (TRAIL - 1),
+        keyTimes: "0;0.82;1", calcMode: "spline", keySplines: ease
+      }, timing)));
+      var head = make("circle", { class: "lane-head", r: "4.5" });
+      head.appendChild(make("animateMotion", Object.assign({
+        path: lane.getAttribute("d"), keyPoints: "0;1;1", keyTimes: "0;0.82;1",
+        calcMode: "spline", keySplines: ease
+      }, timing)));
+      group.appendChild(flow);
+      group.appendChild(head);
+      // Under the station nodes, so the pulse passes behind each stop.
+      lane.parentNode.insertBefore(group, lane.nextSibling);
+    });
+  }
+
   /* ---- Footer year ------------------------------------------------------ */
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());
