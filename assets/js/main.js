@@ -115,7 +115,8 @@
         "Pristine Nepal Ginger — Sliced Flakes",
         "Pristine Nepal Ginger — Powder",
         "High-Curcumin Turmeric — Finger",
-        "High-Curcumin Turmeric — Powder"
+        "High-Curcumin Turmeric — Powder",
+        "Himalayan Churpi"
       ],
       "Plant-Based Bio-Nutrients & Fibers": [
         "Psyllium Husk 95%",
