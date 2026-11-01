@@ -264,7 +264,7 @@
     // Each selector needs its own "> img"; appending it to a comma-separated
     // list would bind the child combinator to the last selector only.
     var imgs = document.querySelectorAll(
-      ".prodgrid__img > img, .ledger__media > img, .cert__scan > img"
+      ".prodgrid__img > img, .ledger__media > img"
     );
     if (!imgs.length) return;
 

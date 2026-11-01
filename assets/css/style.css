@@ -598,6 +598,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 .gateway p { color: var(--graphite); }
 .section--emerald .gateway__tag { color: var(--gold); }
+.section--emerald .gateway p { color: rgba(255,255,255,.76); }
 .gateway__map { width: 100%; height: auto; display: block; margin-bottom: var(--space-2); }
 .gateway__map .lane { fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-dasharray: 4 5; }
 .gateway__map .node { fill: var(--paper); stroke: var(--gold); stroke-width: 2; }
@@ -1057,7 +1058,7 @@ ul, ol { padding: 0; list-style: none; }
   padding-bottom: var(--space-4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
-@media (min-width: 900px) { .footer__grid { grid-template-columns: minmax(0, 5fr) repeat(3, minmax(0, 2fr)); } }
+@media (min-width: 900px) { .footer__grid { grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr)) max-content; } }
 /* The footer lockup sits on black at the very bottom of the page, so it is
    scaled up well past the header's and given its own breathing room -- it is
    the last thing a buyer sees, and it should read as a mark, not a bullet. */
@@ -1094,15 +1095,6 @@ ul, ol { padding: 0; list-style: none; }
   overflow-wrap: anywhere;
 }
 .footer__col li + li { margin-top: 0.6rem; }
-.footer__grouphead {
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.45);
-  margin-top: 1rem !important;
-}
-.footer__grouphead + li a, .footer__grouphead + li + li a { padding-left: 0.8rem; display: inline-block; }
 .footer__foot {
   display: flex;
   flex-wrap: wrap;
@@ -1110,7 +1102,7 @@ ul, ol { padding: 0; list-style: none; }
   justify-content: space-between;
   padding-top: var(--space-3);
   font-size: var(--fs-7);
-  color: rgba(255,255,255,.5);
+  color: rgba(255,255,255,.66);
 }
 
 
@@ -1223,8 +1215,7 @@ ul, ol { padding: 0; list-style: none; }
    paints nothing at all rather than a broken-image icon, so the tile simply
    falls back to its placeholder state. */
 .prodgrid__img > img,
-.ledger__media > img,
-.cert__scan > img {
+.ledger__media > img {
   position: absolute;
   inset: 0;
   display: block;
@@ -1233,12 +1224,10 @@ ul, ol { padding: 0; list-style: none; }
   object-fit: cover;
   border: 0;
 }
-.cert__scan > img { object-fit: contain; padding: 6%; }
 /* display:block above would beat the UA stylesheet's [hidden]{display:none},
    so the slot images need this to actually disappear when hidden. */
 .prodgrid__img > img[hidden],
-.ledger__media > img[hidden],
-.cert__scan > img[hidden] { display: none; }
+.ledger__media > img[hidden] { display: none; }
 
 .prodgrid__name { font-weight: 600; font-size: var(--fs-6); text-align: center; }
 .prodgrid__meta { font-size: var(--fs-7); color: var(--graphite); text-align: center; margin-top: -0.45rem; }
@@ -1369,25 +1358,12 @@ ul, ol { padding: 0; list-style: none; }
   align-content: start;
   padding: var(--space-4);
   border: 1px solid var(--rule);
-  border-radius: var(--r-md);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r-sm);
   background: var(--paper);
   transition: border-color 300ms var(--ease), box-shadow 300ms var(--ease);
 }
 .cert:hover { border-color: var(--gold-soft); box-shadow: var(--shadow-card); }
-/* Slot for a scanned certificate; same degrade-gracefully trick as .prodgrid. */
-.cert__scan {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--r-sm);
-  border: 1px dashed var(--rule-mid);
-  background-color: var(--mist);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23D4AF37' stroke-width='2.5' opacity='.45'/%3E%3Cellipse cx='50' cy='50' rx='13' ry='30' fill='none' stroke='%23D4AF37' stroke-width='2' opacity='.35'/%3E%3Cpath d='M20 50h60M26 36h48M26 64h48' stroke='%23D4AF37' stroke-width='2' opacity='.35'/%3E%3C/svg%3E");
-  background-size: 24% auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  margin-bottom: var(--space-2);
-}
 .cert h3 { font-size: var(--fs-4); }
 .cert__issuer { font-size: var(--fs-7); color: var(--gold-deep); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
 .cert p { color: var(--graphite); font-size: var(--fs-6); }
@@ -1402,6 +1378,7 @@ ul, ol { padding: 0; list-style: none; }
   border: 1px solid var(--rule);
   border-radius: var(--r-sm);
   background: var(--paper);
+  color: var(--ink);
   font-size: var(--fs-6);
 }
 .doclist li::before {
@@ -1480,6 +1457,12 @@ ul, ol { padding: 0; list-style: none; }
   color: var(--graphite);
 }
 .notice b { color: var(--gold-deep); flex: none; }
+.section--emerald .notice {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.24);
+  color: rgba(255,255,255,.8);
+}
+.section--emerald .notice b { color: var(--gold); }
 
 /* Regions ---------------------------------------------------------------- */
 .region h3 { font-size: var(--fs-4); margin-bottom: 0.6rem; }

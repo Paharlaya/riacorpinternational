@@ -179,10 +179,6 @@ files in and they appear — no code change needed.
 assets/img/products/botanicals/<slug>.jpg      large-cardamom, nepal-ginger, turmeric
 assets/img/products/bio-nutrients/<slug>.jpg   psyllium-husk, berberine
 assets/img/products/collagen/<slug>.jpg        peptides
-assets/img/certificates/<slug>.jpg             iec, apeda, fssai, gst, spices-board,
-                                               star-export, brc, iso-22000, haccp,
-                                               gmp, usfda, fsma, npop, usda-nop,
-                                               eu-organic, kosher, halal, msds
 ```
 
 Square 1:1 for grid tiles, ideally 800×800 or larger, compressed under ~200 KB.
@@ -201,7 +197,7 @@ domain root, which it is, both on GitHub Pages and under `python3 -m http.server
 - [x] **WhatsApp number** — `WHATSAPP_NUMBER` in `assets/js/main.js`. Until it is a real number the intake form falls back to `mailto:`
 - [x] **Social links** — removed until the accounts exist
 - [x] **Product photography** — see the folder convention above
-- [ ] **Certificate scans** — `assets/img/certificates/`
+- [x] **Certificate scans** — cards are text-only by choice; copies go to buyers privately on request
 - [ ] **Remove `noindex`** — one line in `src/partials/head.html`, plus `robots.txt`, once the real content and domain are live
 
 Every placeholder is marked in the page with a visible `[placeholder]` note or a
