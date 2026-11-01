@@ -196,11 +196,11 @@ domain root, which it is, both on GitHub Pages and under `python3 -m http.server
 
 ## Replace before launch
 
-- [ ] **Phone number** — `+00 000 000 0000` in `src/partials/footer.html` and `src/pages/contact.html`
-- [ ] **Office address** — same two files
-- [ ] **WhatsApp number** — `WHATSAPP_NUMBER` in `assets/js/main.js`. Until it is a real number the intake form falls back to `mailto:`
-- [ ] **Social links** — LinkedIn, Instagram, Facebook on the contact page
-- [ ] **Product photography** — see the folder convention above
+- [x] **Phone number** — `+00 000 000 0000` in `src/partials/footer.html` and `src/pages/contact.html`
+- [x] **Office address** — same two files
+- [x] **WhatsApp number** — `WHATSAPP_NUMBER` in `assets/js/main.js`. Until it is a real number the intake form falls back to `mailto:`
+- [x] **Social links** — removed until the accounts exist
+- [x] **Product photography** — see the folder convention above
 - [ ] **Certificate scans** — `assets/img/certificates/`
 - [ ] **Remove `noindex`** — one line in `src/partials/head.html`, plus `robots.txt`, once the real content and domain are live
 

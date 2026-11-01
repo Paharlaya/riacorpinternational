@@ -4,7 +4,7 @@
   "use strict";
 
   /* ---- Site constants: edit these once, the whole site follows ----------- */
-  var WHATSAPP_NUMBER = "REPLACE-WITH-WHATSAPP-NUMBER"; // digits only, with country code, e.g. 9779800000000
+  var WHATSAPP_NUMBER = "918826985830"; // digits only, with country code, e.g. 9779800000000
   var SITE_EMAIL = "info@riacorpinternational.com";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
