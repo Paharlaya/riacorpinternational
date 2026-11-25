@@ -1,0 +1,12 @@
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"Home","item":"https://paharlaya.github.io/riacorpinternational/"},
+ {"@type":"ListItem","position":2,"name":"Products","item":"https://paharlaya.github.io/riacorpinternational/products.html"},
+ {"@type":"ListItem","position":3,"name":"Himalayan Spices","item":"https://paharlaya.github.io/riacorpinternational/himalayan-spices.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","name":"Himalayan Spices","itemListElement":[
+ {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Himalayan Large Cardamom","category":"Himalayan Spices","brand":{"@type":"Brand","name":"Riacorp International"}}},
+ {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Himalayan Ginger","category":"Himalayan Spices","brand":{"@type":"Brand","name":"Riacorp International"}}},
+ {"@type":"ListItem","position":3,"item":{"@type":"Product","name":"High-Curcumin Turmeric","category":"Himalayan Spices","brand":{"@type":"Brand","name":"Riacorp International"}}}]}
+</script>

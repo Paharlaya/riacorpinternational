@@ -1,7 +1,7 @@
 # Riacorp International
 
 Static website for Riacorp International — global B2B supplier and exporter of
-premium Himalayan botanicals and advanced bio-nutrients. Hand-written HTML, CSS
+Himalayan pet churpi, high-altitude spices and Indian bio-ingredients. Hand-written HTML, CSS
 and JavaScript: no framework, no build step at runtime, no package manager.
 GitHub Pages serves the repository root.
 
@@ -30,16 +30,18 @@ is grouped beside them.
 .                          published site — served by GitHub Pages
 ├── index.html             pages, generated from src/
 ├── products.html
-├── himalayan-botanicals.html
+├── himalayan-pet-churpi.html
+├── himalayan-spices.html
 ├── bio-nutrients.html
 ├── collagen-peptides.html
 ├── compliance.html
 ├── about.html
-├── faq.html
 ├── contact.html
 ├── 404.html
 ├── services.html          redirect stubs, kept so older links resolve
 ├── spices.html
+├── himalayan-botanicals.html
+├── faq.html               (trade terms now live on contact.html#terms)
 ├── psyllium-husk.html
 ├── certifications.html
 ├── robots.txt  sitemap.xml  site.webmanifest  .nojekyll

@@ -81,12 +81,6 @@
     paint();
   }
 
-  /* ---- Ports ticker: duplicate content once so the loop is seamless ------ */
-  var track = document.querySelector("[data-ticker]");
-  if (track && !reduceMotion) {
-    track.innerHTML += track.innerHTML;
-  }
-
   /* ---- Corporate intake form ---------------------------------------------
      Eleven fields, a dependent material list, and a soft check on free email
      domains. Everything degrades: with JS off the form still submits natively
@@ -108,17 +102,29 @@
 
     /* Field 7 depends on Field 6. */
     var MATERIALS = {
-      "Premium Himalayan Botanicals": [
+      "Himalayan Pet Churpi": [
+        "Churpi Bars — Small",
+        "Churpi Bars — Medium",
+        "Churpi Bars — Large",
+        "Churpi Bars — Extra-Large",
+        "Churpi Bars — Jumbo",
+        "Churpi Nuggets / Puffs",
+        "Churpi Bulk Pieces",
+        "Private-Label Retail Pouches"
+      ],
+      "Himalayan Spices (Cardamom, Ginger, Turmeric)": [
         "Himalayan Large Cardamom — Bold",
         "Himalayan Large Cardamom — Jumbo",
-        "Pristine Nepal Ginger — Whole Dry Rhizome",
-        "Pristine Nepal Ginger — Sliced Flakes",
-        "Pristine Nepal Ginger — Powder",
-        "High-Curcumin Turmeric — Finger",
-        "High-Curcumin Turmeric — Powder",
-        "Himalayan Churpi"
+        "Himalayan Large Cardamom — Medium",
+        "Himalayan Ginger — Dried Whole Rhizome",
+        "Himalayan Ginger — Flakes / Slices",
+        "Himalayan Ginger — Powder",
+        "High-Curcumin Turmeric — Whole Fingers",
+        "High-Curcumin Turmeric — Slices",
+        "High-Curcumin Turmeric — Powder"
       ],
-      "Plant-Based Bio-Nutrients & Fibers": [
+      "Bio-Nutrients & Extracts (Psyllium, Berberine, Collagen)": [
+        "Psyllium Husk 85%",
         "Psyllium Husk 95%",
         "Psyllium Husk 98%",
         "Psyllium Husk 99%",
@@ -126,11 +132,9 @@
         "Organic Psyllium Husk",
         "High-Purity Berberine Extract 95%",
         "High-Purity Berberine Extract 97%",
-        "High-Purity Berberine Extract 98%"
-      ],
-      "Collagen Raw Materials": [
-        "Marine Collagen Peptides",
-        "Bovine Collagen Peptides"
+        "High-Purity Berberine Extract 98%",
+        "Collagen Peptides — Marine",
+        "Collagen Peptides — Bovine"
       ]
     };
 

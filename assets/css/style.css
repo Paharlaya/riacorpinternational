@@ -457,10 +457,11 @@ ul, ol { padding: 0; list-style: none; }
     rgba(248, 249, 250, 0.55) 56%,
     rgba(248, 249, 250, 0) 72%);
 }
-.hero__content { max-width: 39rem; display: grid; gap: var(--space-4); }
-/* The global display size is tuned for inner page heroes; here it has to share
-   the fold with a lede and two CTAs, so it runs a size smaller. */
-.hero .display { font-size: clamp(2.3rem, 1rem + 3.1vw, 3.85rem); line-height: 1.04; }
+.hero__content { max-width: 42rem; display: grid; gap: var(--space-4); }
+/* The global display size is tuned for inner page heroes; here a long
+   three-category headline shares the fold with a lede, two CTAs and the trust
+   strip, so it runs well below that. */
+.hero .display { font-size: clamp(2rem, 0.95rem + 2.35vw, 3.15rem); line-height: 1.06; }
 .hero__eyebrow {
   font-size: var(--fs-7);
   font-weight: 600;
@@ -470,90 +471,49 @@ ul, ol { padding: 0; list-style: none; }
   margin: 0;
 }
 .hero__content .display { margin: 0; }
-.hero__content .lede { margin: 0; max-width: 46ch; }
+/* Inner pages: a short label above the title, e.g. custom-sourcing status. */
+.page-hero__eyebrow {
+  font-size: var(--fs-7);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin: 0 0 var(--space-2);
+}
+.hero__content .lede { margin: 0; max-width: 54ch; }
+.hero__sub { display: grid; gap: var(--space-2); }
+.hero__kicker { margin: 0; font-weight: 600; color: var(--emerald); font-size: var(--fs-5); }
+/* Registrations as a quiet strip under the buttons. Every item carries its
+   own gold mark, so a wrapped line never starts with a stray separator. */
+.hero__trust { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin: 0; padding: 0; list-style: none; }
+.hero__trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--fs-7);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.hero__trust li::before { content: ""; width: 6px; height: 6px; background: var(--gold-deep); transform: rotate(45deg); flex: none; }
 /* The outline button can land over the ridgeline once `cover` crops inward,
    so it carries its own ground rather than relying on the page behind it. */
 .hero .btn--ghost { background: rgba(255, 255, 255, 0.88); }
 .hero .btn--ghost:hover { background: var(--paper); }
 
 @media (max-width: 899px) {
-  .hero { min-height: 0; padding-block: var(--space-4) var(--space-6); }
-  .hero__bg { object-position: 71% 45%; }
-  /* Vertical fade on small screens: the peaks sit below the copy rather than
-     behind it. */
+  /* Small screens: the copy is taller than the photo is wide, so the photo
+     becomes a band of peaks under the copy instead of sitting behind it, and
+     every line of text stays on the light ground. */
+  .hero { min-height: 0; padding-block: var(--space-4) calc(var(--hero-band) + var(--space-4)); --hero-band: 220px; }
+  .hero__bg { top: auto; height: var(--hero-band); object-position: 71% 42%; }
   .hero::before {
     background: linear-gradient(180deg,
-      var(--mist) 0%, var(--mist) 38%,
-      rgba(248, 249, 250, 0.88) 58%,
-      rgba(248, 249, 250, 0) 86%);
+      var(--mist) 0, var(--mist) calc(100% - var(--hero-band)),
+      rgba(248, 249, 250, 0) calc(100% - var(--hero-band) + 70px));
   }
   .hero__content { max-width: none; }
 }
-
-/* Corridor ticker: origin, transit, destination -------------------------- */
-.section--flush { padding-block: 0; }
-.corridor {
-  display: grid;
-  gap: var(--space-2);
-  align-items: center;
-  padding-block: var(--space-3);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-@media (min-width: 900px) {
-  .corridor { grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-4); }
-}
-.corridor__end b {
-  display: block;
-  font-size: var(--fs-7);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--emerald);
-}
-.corridor__end span { font-size: var(--fs-7); color: var(--graphite); }
-@media (min-width: 900px) { .corridor__end--right { text-align: right; } }
-.corridor__ticker {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-}
-.corridor__track { display: flex; gap: var(--space-4); width: max-content; animation: ticker 44s linear infinite; }
-.corridor__track span {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: var(--fs-7); color: var(--graphite); white-space: nowrap;
-}
-.corridor__track span::before {
-  content: ""; width: 5px; height: 5px; border-radius: 50%;
-  background: var(--gold); flex: none;
-}
-@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* Trust strip: procurement assurances under the hero ---------------------- */
-.assurances {
-  display: grid;
-  gap: 1px;
-  background: var(--rule);
-  border-block: 1px solid var(--rule);
-  grid-template-columns: repeat(2, 1fr);
-}
-@media (min-width: 900px) { .assurances { grid-template-columns: repeat(4, 1fr); } }
-.assurances li {
-  display: grid;
-  gap: 0.3rem;
-  align-content: start;
-  padding: var(--space-3) var(--space-3) var(--space-3) 0;
-  background: var(--paper);
-}
-/* Two columns below 900px: the right-hand item needs its own gutter off the divider. */
-@media (max-width: 899px) { .assurances li:nth-child(even) { padding-left: var(--space-3); padding-right: 0; } }
-@media (min-width: 900px) {
-  .assurances li { padding-inline: var(--space-3); }
-  .assurances li:first-child { padding-left: 0; }
-  .assurances li:last-child { padding-right: 0; }
-}
-.assurances b { font-size: var(--fs-6); font-weight: 600; color: var(--emerald); }
-.assurances span { font-size: var(--fs-7); color: var(--graphite); }
 
 /* Buyer journey: requirement review through dispatch ---------------------- */
 .journey {
@@ -590,6 +550,8 @@ ul, ol { padding: 0; list-style: none; }
 .evidence__item { display: grid; gap: 0.6rem; align-content: start; padding-top: var(--space-3); border-top: 2px solid var(--rule); }
 .evidence__item h3 { font-family: var(--font-display); font-size: var(--fs-4); color: var(--emerald); }
 .evidence__item p { color: var(--graphite); font-size: var(--fs-6); }
+.evidence__item p + p { margin-top: var(--space-2); }
+.evidence__item b { color: var(--ink); font-weight: 600; }
 .section--emerald .evidence__item { border-top-color: rgba(255,255,255,.2); }
 .section--emerald .evidence__item h3 { color: var(--paper); }
 .section--emerald .evidence__item p { color: rgba(255,255,255,.76); }
@@ -605,6 +567,9 @@ ul, ol { padding: 0; list-style: none; }
 .gateway p { color: var(--graphite); }
 .section--emerald .gateway__tag { color: var(--gold); }
 .section--emerald .gateway p { color: rgba(255,255,255,.76); }
+.section--emerald .gateway .gateway__route { color: var(--paper); font-weight: 600; font-size: var(--fs-6); }
+.gateways--compact .gateway { gap: var(--space-2); }
+.gateways--compact .gateway__map { margin-bottom: 0; }
 .gateway__map { width: 100%; height: auto; display: block; margin-bottom: var(--space-2); }
 .gateway__map .lane { fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-dasharray: 4 5; }
 .gateway__map .node { fill: var(--paper); stroke: var(--gold); stroke-width: 2; }
@@ -633,10 +598,32 @@ ul, ol { padding: 0; list-style: none; }
 }
 .pillar2__list b { display: block; color: var(--emerald); font-weight: 600; }
 .pillar2__list span { font-size: var(--fs-7); color: var(--graphite); }
+.pillar2 > p:not([class]) { color: var(--graphite); }
+.pillar2__badge {
+  font-size: var(--fs-7);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+/* Three cards: the link sits on the bottom edge so the row lines up whatever
+   each card's copy length. */
+@media (min-width: 1024px) { .pillars2--3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) and (max-width: 1023px) { .pillars2--3 { grid-template-columns: 1fr; } }
+.pillars2--3 .pillar2 { display: flex; flex-direction: column; padding: var(--space-4); }
+/* A single card spanning the row: copy on the left, the product list on the right. */
+@media (min-width: 900px) {
+  .pillar2--wide { grid-template-columns: 1.3fr 1fr; gap: var(--space-5); align-items: center; }
+}
+.pillar2__more { margin-top: auto; padding-top: var(--space-2); }
+.pillar2__link { font-weight: 600; color: var(--emerald); text-decoration: none; border-bottom: 1px solid var(--gold); }
+.pillar2__link:hover { color: var(--gold-deep); }
 
 /* Category grouping: keeps two categories legible where pages split ------- */
 .catgroup + .catgroup { margin-top: var(--space-5); }
 .catgroup__head {
+  font-family: var(--font);
+  line-height: 1.4;
   font-size: var(--fs-7);
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -646,20 +633,6 @@ ul, ol { padding: 0; list-style: none; }
   margin-bottom: var(--space-3);
   border-bottom: 2px solid var(--gold);
 }
-
-/* Compliance ticker ------------------------------------------------------ */
-.trust { display: grid; gap: var(--space-3); grid-template-columns: repeat(2, 1fr); }
-@media (min-width: 720px) { .trust { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1024px) { .trust { grid-template-columns: repeat(5, 1fr); } }
-.trust__item {
-  display: grid; gap: 0.6rem; justify-items: center; text-align: center;
-  padding: var(--space-3) var(--space-2);
-  border: 1px solid var(--rule);
-  background: var(--paper);
-}
-.trust__item svg { width: 34px; height: 34px; color: var(--emerald); opacity: .72; }
-.trust__item b { font-size: var(--fs-6); color: var(--emerald); font-weight: 600; }
-.trust__item span { font-size: var(--fs-7); color: var(--graphite); }
 
 /* Scroll reveal (class added by JS; nothing hides without it) ------------ */
 .reveal {
@@ -766,6 +739,7 @@ ul, ol { padding: 0; list-style: none; }
 .ledger__icon svg { width: 34px; height: 34px; }
 .ledger__title { display: flex; align-items: center; gap: var(--space-3); }
 .ledger__body { max-width: 58ch; color: var(--graphite); }
+.ledger__origin { font-size: var(--fs-7); font-weight: 600; letter-spacing: 0.04em; color: var(--gold-deep); margin-bottom: var(--space-2); }
 .ledger__list { display: grid; gap: 0.55rem; margin-top: var(--space-2); }
 .ledger__sub {
   margin-top: var(--space-3);
@@ -1120,18 +1094,16 @@ ul, ol { padding: 0; list-style: none; }
    JS at all. Below the nav breakpoint it is simply an indented sub-list. */
 .nav__item { position: relative; }
 .nav__sub { display: grid; }
-/* Three flat links read as three categories. The group headings make the real
-   shape visible: two categories, with collagen sitting inside the second. */
-.nav__grouphead {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--gold);
-  padding: 0.7rem 0.75rem 0.3rem;
+/* One link per category, each with a short note saying what is inside, and
+   the full portfolio set apart below them. */
+.nav__note {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--graphite);
 }
-.nav__grouphead + li .nav__link { padding-left: 1.5rem; }
-.nav__grouphead + li + li .nav__link { padding-left: 1.5rem; }
+.nav__subfoot { margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px solid var(--rule); }
 .nav__sub .nav__link { font-size: var(--fs-6); }
 @media (min-width: 900px) {
   .nav__item--has-sub > .nav__link::after {
@@ -1179,9 +1151,8 @@ ul, ol { padding: 0; list-style: none; }
 }
 @media (max-width: 899px) {
   .nav__sub { padding-left: var(--space-3); }
-  .nav__grouphead { color: var(--gold); padding: 0.9rem 0 0.2rem; }
-  .nav__grouphead + li .nav__link,
-  .nav__grouphead + li + li .nav__link { padding-left: 0.9rem; }
+  .nav__note { color: rgba(255, 255, 255, 0.62); }
+  .nav__subfoot { border-top-color: rgba(255, 255, 255, 0.14); }
   .nav__sub .nav__link { opacity: 0.85; }
 }
 
@@ -1417,7 +1388,7 @@ ul, ol { padding: 0; list-style: none; }
 /* Numbered reasons (why choose us) --------------------------------------- */
 .reasons { display: grid; gap: var(--space-3); counter-reset: reason; }
 @media (min-width: 720px) { .reasons { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .reasons { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .reasons { grid-template-columns: repeat(3, 1fr); } .reasons--2 { grid-template-columns: repeat(2, 1fr); } }
 .reason {
   counter-increment: reason;
   padding: var(--space-4);
@@ -1471,6 +1442,23 @@ ul, ol { padding: 0; list-style: none; }
   color: rgba(255,255,255,.8);
 }
 .section--emerald .notice b { color: var(--gold); }
+
+/* Trade terms: one bordered box, four cells divided by hairlines ---------- */
+.terms {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+@media (min-width: 640px) { .terms { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .terms { grid-template-columns: repeat(4, 1fr); } }
+.term { display: grid; gap: var(--space-2); align-content: start; padding: var(--space-4); background: var(--paper); }
+.term h3 { font-size: var(--fs-5); color: var(--emerald); }
+.term p { font-size: var(--fs-6); color: var(--graphite); }
+.term b { color: var(--ink); font-weight: 600; }
 
 /* Regions ---------------------------------------------------------------- */
 .region h3 { font-size: var(--fs-4); margin-bottom: 0.6rem; }

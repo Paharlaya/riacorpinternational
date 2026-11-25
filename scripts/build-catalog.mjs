@@ -58,27 +58,59 @@ p.text("RIACORP INTERNATIONAL", { size: 26, font: "F2", color: EMERALD, gap: 30 
 p.text("Specifications Catalogue", { size: 15, color: GREY, gap: 26 });
 p.rule(GOLD.split(" ").join(" "), 2);
 p.space(8);
-p.text("Global B2B Supplier & Exporter", { size: 11, font: "F2", color: EMERALD, gap: 18 });
-p.text("Premium Himalayan Botanicals & Advanced Bio-Nutrients", { size: 11, color: GREY, gap: 28 });
+p.text("Verified B2B Exporter", { size: 11, font: "F2", color: EMERALD, gap: 18 });
+p.text("Himalayan Pet Chews, High-Altitude Spices & Indian Bio-Ingredients", { size: 11, color: GREY, gap: 28 });
 [
-  "Riacorp International bridges pristine high-altitude agricultural sourcing",
-  "with certified industrial bio-nutrient manufacturing. Sourced, lab-tested,",
-  "and optimized for global trade routes.",
+  "Riacorp International connects global B2B buyers with direct sourcing from",
+  "Darjeeling, North East India and Nepal, alongside specification-driven procurement",
+  "across India's certified bio-ingredient clusters. Lab-tested, lot-traceable, export-ready.",
 ].forEach((l) => p.text(l, { size: 10, color: GREY, gap: 15 }));
 p.space(20);
-p.text("Dual-gateway logistics", { size: 11, font: "F2", color: EMERALD, gap: 17 });
-p.text("East corridor   Kathmandu > Siliguri/Darjeeling > Kolkata", { size: 9.5, color: GREY, gap: 14 });
-p.text("West corridor   Bio-industrial clusters > Mundra / Nhava Sheva / Chennai", { size: 9.5, color: GREY, gap: 14 });
+p.text("Trade & logistics corridors", { size: 11, font: "F2", color: EMERALD, gap: 17 });
+p.text("East route   Darjeeling, NE India & Nepal > Siliguri Transit Hub > Kolkata Port", { size: 9.5, color: GREY, gap: 14 });
+p.text("West route   Audited partner facilities > Mundra / Nhava Sheva / Chennai", { size: 9.5, color: GREY, gap: 14 });
 
-/* ---- botanicals ---- */
+/* ---- pet churpi ---- */
 p = newPage();
-p.text("1.  Premium Himalayan Botanicals", { size: 16, font: "F2", color: EMERALD, gap: 22 });
-p.text("Direct high-altitude extraction & sourcing", { size: 10, color: GREY, gap: 20 });
+p.text("1.  Himalayan Pet Churpi", { size: 16, font: "F2", color: EMERALD, gap: 22 });
+p.text("Darjeeling origin | Worldwide export-ready", { size: 10, color: GREY, gap: 20 });
+p.rule();
+[
+  "Traditional Himalayan hard cheese dog chews crafted from pure, high-altitude cow and yak",
+  "milk using natural curing and smoking methods. 100% natural, grain-free, gluten-free, and",
+  "free from artificial preservatives or binders.",
+].forEach((l) => p.text(l, { size: 9.5, color: GREY, gap: 13 }));
+p.space(10);
+const chw = [130, 330];
+p.row(["PARAMETER", "SPECIFICATION"], chw, { size: 8, bold: true, color: GREY });
+p.rule();
+[
+  ["Sizes", "Small, Medium, Large, Extra-Large, Jumbo"],
+  ["Protein", ">60%"],
+  ["Fat", "<5%"],
+  ["Moisture", "<12%"],
+  ["Formats", "Whole bars, nuggets / puffs, bulk pieces"],
+  ["Packaging", "Bulk master cartons with moisture-barrier liners, or private-label pouches"],
+].forEach((r) => p.row(r, chw));
+p.space(10);
+p.text("Global export & market readiness", { size: 11, font: "F2", color: EMERALD, gap: 16 });
+[
+  "Supplies pet food importers, distributors and private-label brands across North America,",
+  "Europe, the Middle East, Asia-Pacific and other international markets. Regulatory paperwork,",
+  "veterinary health certification protocols and sanitary clearances for the USA, EU and Canada.",
+  "DGFT Import Export Code (IEC) & GST registered. Batch-specific COA verifying moisture,",
+  "protein, fat and microbiological safety.",
+].forEach((l) => p.text(l, { size: 9.5, color: GREY, gap: 13 }));
+
+/* ---- spices ---- */
+p = newPage();
+p.text("2.  Himalayan Spices", { size: 16, font: "F2", color: EMERALD, gap: 22 });
+p.text("NE India & Nepal origin | Direct supply", { size: 10, color: GREY, gap: 20 });
 p.rule();
 const bot = [
-  ["Himalayan Large Cardamom (Black Gold)", "High-altitude cultivated, smoke-dried or sun-dried, sorted into Premium Bold", "and Jumbo grades. Intensive natural essential oil content for extraction and blending."],
-  ["Pristine Nepal Ginger", "Highly fibrous, sharp pungency, harvested from organic mountain soils. Whole dry", "rhizomes, sliced flakes and fine uniform powder formats."],
-  ["High-Curcumin Turmeric", "Sourced from premium high-altitude terrain. Laboratory-tested for high curcuminoid", "content for functional food, cosmetic and health-extract applications."],
+  ["Himalayan Large Cardamom", "Origin: Darjeeling, Sikkim, NE India & Nepal. Bold, Jumbo and Medium grades;", "<12% moisture; 25 / 50 kg food-grade lined bags."],
+  ["Himalayan Ginger", "Origin: NE India & Nepal. Dried whole rhizome, flakes / slices, powder (40-100 mesh);", "<10-12% moisture by format."],
+  ["High-Curcumin Turmeric", "Origin: NE India & Himalayan foothills. Whole fingers, slices, powder (60-100 mesh);", "5%-7%+ curcumin verified per lot COA."],
 ];
 bot.forEach(([t, ...body]) => {
   p.text(t, { size: 11, font: "F2", color: EMERALD, gap: 15 });
@@ -87,25 +119,25 @@ bot.forEach(([t, ...body]) => {
 });
 p.space(6);
 p.text("Formats, packaging & parameters", { size: 11, font: "F2", color: EMERALD, gap: 18 });
-const bw = [150, 95, 85, 75, 90];
-p.row(["MATERIAL", "FORMATS", "GRADES", "MOISTURE", "PACKAGING"], bw, { size: 8, bold: true, color: GREY });
+const bw = [150, 110, 80, 70, 85];
+p.row(["MATERIAL", "FORMATS", "GRADE / MESH", "MOISTURE", "PACKAGING"], bw, { size: 8, bold: true, color: GREY });
 p.rule();
 [
-  ["Large Cardamom", "Whole pods", "Bold / Jumbo", "12% max", "25 / 50 kg"],
-  ["Nepal Ginger - dry", "Whole rhizome", "Export", "10% max", "25 / 50 kg"],
-  ["Nepal Ginger - flakes", "Sliced", "Export", "8% max", "25 kg"],
-  ["Nepal Ginger - powder", "Milled", "60-80 mesh", "8% max", "25 kg"],
-  ["Turmeric - finger", "Whole finger", "Medicinal", "10% max", "25 / 50 kg"],
-  ["Turmeric - powder", "Milled", "60-80 mesh", "8% max", "25 kg"],
+  ["Large Cardamom", "Whole cured pods", "Bold/Jumbo/Med", "<12%", "25 / 50 kg"],
+  ["Ginger - whole", "Dried rhizome", "Export", "<12%", "25 / 50 kg"],
+  ["Ginger - flakes", "Flakes / slices", "Export", "<10%", "25 / 50 kg"],
+  ["Ginger - powder", "Milled", "40-100 mesh", "<10%", "25 / 50 kg"],
+  ["Turmeric - whole", "Fingers / slices", "5-7%+ curcumin", "Per lot", "25 / 50 kg"],
+  ["Turmeric - powder", "Milled", "60-100 mesh", "Per lot", "25 / 50 kg"],
 ].forEach((r) => p.row(r, bw));
 p.space(6);
-p.text("Curcuminoid and essential-oil values are lot-specific and stated on the Certificate of Analysis.", { size: 8.5, color: GREY, gap: 12 });
-p.text("Sourced from pristine high-altitude Nepal terrains | Routed via the Siliguri-Kolkata corridor.", { size: 8.5, color: GREY, gap: 12 });
+p.text("Curcumin and essential-oil values are lot-specific and stated on the Certificate of Analysis.", { size: 8.5, color: GREY, gap: 12 });
+p.text("Darjeeling, NE India & Nepal > Siliguri Transit Hub > Kolkata Port.", { size: 8.5, color: GREY, gap: 12 });
 
 /* ---- bio-nutrients ---- */
 p = newPage();
-p.text("2.  Plant-Based Bio-Nutrients & Fibers", { size: 16, font: "F2", color: EMERALD, gap: 22 });
-p.text("Certified multi-cluster Indian manufacturing", { size: 10, color: GREY, gap: 20 });
+p.text("3.  Indian Bio-Nutrients & Functional Extracts", { size: 16, font: "F2", color: EMERALD, gap: 22 });
+p.text("Custom B2B sourcing / on order | Audited Indian partner facilities", { size: 10, color: GREY, gap: 20 });
 p.rule();
 p.text("Psyllium Husk (Isabgol)", { size: 11, font: "F2", color: EMERALD, gap: 16 });
 const pw = [78, 85, 85, 72, 68, 90];
@@ -141,12 +173,12 @@ p.rule();
   ["Shelf life", "24 months, cool and dry", "-"],
 ].forEach((r) => p.row(r, ew));
 p.space(6);
-p.text("Processed across advanced Western India bio-industrial clusters | Shipped via Mundra port.", { size: 8.5, color: GREY, gap: 12 });
+p.text("Procured from audited partner facilities in Western India | Shipped via Mundra port.", { size: 8.5, color: GREY, gap: 12 });
 
 /* ---- collagen ---- */
 p = newPage();
-p.text("3.  Premium Collagen Peptides", { size: 16, font: "F2", color: EMERALD, gap: 22 });
-p.text("High-bioavailability structural protein raw material", { size: 10, color: GREY, gap: 20 });
+p.text("4.  Premium Collagen Peptides", { size: 16, font: "F2", color: EMERALD, gap: 22 });
+p.text("Custom B2B sourcing / on order | Hydrolyzed marine & bovine grades", { size: 10, color: GREY, gap: 20 });
 p.rule();
 const cw = [130, 140, 140, 90];
 p.row(["PARAMETER", "MARINE", "BOVINE", "METHOD"], cw, { size: 8, bold: true, color: GREY });
@@ -164,17 +196,27 @@ p.rule();
 ].forEach((r) => p.row(r, cw));
 p.space(8);
 p.text("Bovine material originates from grass-fed herds; India holds negligible BSE risk status.", { size: 8.5, color: GREY, gap: 12 });
-p.text("Bio-synthesized across Western and Southern India facilities | Shipped via Nhava Sheva or Chennai.", { size: 8.5, color: GREY, gap: 18 });
+p.text("Procured from audited partner facilities in Western & Southern India | Shipped via Nhava Sheva or Chennai.", { size: 8.5, color: GREY, gap: 18 });
 
 p.text("Compliance", { size: 13, font: "F2", color: EMERALD, gap: 18 });
-p.text("Registrations   IEC | APEDA | FSSAI | GST | Spices Board RCMC | Star Export House", { size: 9.5, color: GREY, gap: 14 });
-p.text("Food safety     BRC | ISO 22000:2018 | HACCP | GMP | USFDA registration | FSMA / FSVP", { size: 9.5, color: GREY, gap: 14 });
-p.text("Market          NPOP | USDA NOP | EU Organic | Kosher (OU) | Halal", { size: 9.5, color: GREY, gap: 14 });
-p.text("Per shipment    Commercial invoice, packing list, BL, certificate of origin, phytosanitary,", { size: 9.5, color: GREY, gap: 13 });
-p.text("                health certificate, COA, quality inspection report, MSDS", { size: 9.5, color: GREY, gap: 20 });
+// Label in a fixed left column, wrapped value lines in a fixed right one.
+const labelled = (label, lines, after = 14) => {
+  p.text(label, { size: 9.5, font: "F2", color: EMERALD, gap: 0 });
+  lines.forEach((l, i) => p.text(l, { size: 9.5, color: GREY, x: M + 108, gap: i === lines.length - 1 ? after : 13 }));
+};
+labelled("Registrations held", ["IEC | Central FSSAI (human-grade food & spices) | GST | APEDA | Spices Board RCMC"]);
+labelled("Partner facilities", [
+  "Certifications held by partner processing & manufacturing facilities, available per",
+  "consignment on request: BRCGS | ISO 22000 | HACCP | GMP | USFDA | FSMA / FSVP |",
+  "NPOP | USDA NOP | EU Organic | Kosher | Halal",
+]);
+labelled("Per shipment", [
+  "Commercial invoice, packing list, BL, certificate of origin, phytosanitary or veterinary",
+  "health certificate, lot-wise COA, quality inspection report",
+], 20);
 p.rule();
 p.text("Request a bulk quotation or a sample COA workflow", { size: 11, font: "F2", color: EMERALD, gap: 16 });
-p.text("info@riacorpinternational.com", { size: 10, color: GREY, gap: 14 });
+p.text("info@riacorpinternational.com  |  WhatsApp +91 88269 85830", { size: 10, color: GREY, gap: 14 });
 p.text("Responses within 24-48 hours from our technical compliance officers.", { size: 9.5, color: GREY, gap: 14 });
 
 /* ---- assemble ---- */
