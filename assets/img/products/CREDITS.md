@@ -12,7 +12,7 @@ stay, the CC BY-SA images need a visible credit on the live site.
 | `bio-nutrients/psyllium-husk.jpg` | Bastique (Cary Bass) | CC BY-SA 3.0 | [Psyllium seed husk pile.JPG](https://commons.wikimedia.org/wiki/File:Psyllium_seed_husk_pile.JPG) |
 | `bio-nutrients/berberine.jpg` | Nadiatalent | CC BY-SA 4.0 | [Berberis thunbergii cut wood colour.jpg](https://commons.wikimedia.org/wiki/File:Berberis_thunbergii_cut_wood_colour.jpg) |
 | `collagen/peptides.jpg` | Supplied by Riacorp | — | — |
-| `local/churpi.jpg` | Supplied by Riacorp | — | — |
+| `churpi/drying-room.jpg` | Supplied by Riacorp (own photo) | — | — |
 
 `bio-nutrients/berberine.jpg` shows the berberine-yellow cut wood of *Berberis*, standing in for the extract itself.
 
