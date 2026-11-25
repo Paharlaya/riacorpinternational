@@ -18,8 +18,6 @@ stay, the CC BY-SA images need a visible credit on the live site.
 
 ## Home page hero
 
-| File | Author | Licence | Source |
-|---|---|---|---|
-| `assets/img/hero-kangchenjunga-*.jpg` | Spattadar | CC BY-SA 4.0 | [Kanchenjunga Sunrise from Gnathnag Valley - Sikkim.jpg](https://commons.wikimedia.org/wiki/File:Kanchenjunga_Sunrise_from_Gnathnag_Valley_-_Sikkim.jpg) |
-
-Cropped so the summit sits right of centre, clear of the headline.
+`assets/img/hero-client-*.jpg` is Riacorp's own photograph of the Himalayan
+range, supplied by the client. No credit required. The file is the 1280 px
+copy sent over WhatsApp; swap in the full-size original when it arrives.
