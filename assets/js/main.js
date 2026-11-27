@@ -390,6 +390,34 @@
     });
   }
 
+  /* ---- Registrations banner: clone the list until the loop is seamless ----
+     The track drifts left to right by exactly one copy's width, so it needs
+     enough copies to cover the band plus one. Speed stays constant (px per
+     second) whatever the screen width. Copies are hidden from screen readers;
+     the original list is the real content. */
+  var marquee = document.querySelector("[data-marquee]");
+  if (marquee && !reduceMotion) {
+    var mTrack = marquee.querySelector(".hero__marquee-track");
+    var mGroup = mTrack.firstElementChild;
+    var fillMarquee = function () {
+      while (mTrack.children.length > 1) mTrack.removeChild(mTrack.lastElementChild);
+      var w = mGroup.getBoundingClientRect().width || 1;
+      var copies = Math.max(2, Math.ceil(marquee.clientWidth / w) + 1);
+      for (var mi = 1; mi < copies; mi++) {
+        var copy = mGroup.cloneNode(true);
+        copy.setAttribute("aria-hidden", "true");
+        copy.removeAttribute("aria-label");
+        mTrack.appendChild(copy);
+      }
+      mTrack.style.setProperty("--groups", copies);
+      mTrack.style.setProperty("--marquee-dur", (w / 38).toFixed(1) + "s");
+      marquee.classList.add("is-running");
+    };
+    fillMarquee();
+    var mResize;
+    window.addEventListener("resize", function () { clearTimeout(mResize); mResize = setTimeout(fillMarquee, 200); });
+  }
+
   /* ---- Footer year ------------------------------------------------------ */
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());

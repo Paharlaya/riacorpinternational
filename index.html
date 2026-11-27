@@ -25,7 +25,7 @@
 <script>document.documentElement.classList.add("js")</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter:wght@300;400;500;600;800&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 
 <script type="application/ld+json">
@@ -60,7 +60,7 @@
 <header class="site-header">
   <div class="wrap site-header__bar">
     <a class="brand" href="index.html" aria-label="Riacorp International, home">
-      <img class="brand__mark" src="assets/img/crest-light-112.png" srcset="assets/img/crest-light-112.png 1x, assets/img/crest-light-224.png 2x" width="112" height="71" alt="" aria-hidden="true">
+      <img class="brand__mark" src="assets/img/crest-112.png" srcset="assets/img/crest-112.png 1x, assets/img/crest-224.png 2x" width="112" height="71" alt="" aria-hidden="true">
       <span class="brand__name"><b>Riacorp</b><span>International</span></span>
     </a>
 
@@ -105,16 +105,10 @@
 <main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
-    <!-- Riacorp's own photo of the Himalayan range sits behind the copy,
-         positioned so the snow line stays clear of the headline column. -->
-    <img class="hero__bg"
-         src="assets/img/hero-client-1280.jpg"
-         srcset="assets/img/hero-client-960.jpg 960w, assets/img/hero-client-1280.jpg 1280w"
-         sizes="100vw" width="1280" height="960" alt="" aria-hidden="true" fetchpriority="high">
-    <div class="wrap">
+    <div class="wrap hero__grid">
       <div class="hero__content">
         <p class="hero__eyebrow">From Himalayan origins to global ports <span aria-hidden="true">&bull;</span> Verified B2B exporter</p>
-        <h1 class="display" id="hero-title">Himalayan Pet Chews, High-Altitude Spices &amp; Indian Bio-Ingredients &mdash; <span class="line--gold">Exported Worldwide.</span></h1>
+        <h1 class="display hero__title" id="hero-title"><span class="hero__line">Himalayan Pet Chews,</span> <span class="hero__line">High-Altitude Spices &amp;</span> <span class="hero__line">Indian Bio-Ingredients</span> <span class="hero__tail">&mdash; Exported Worldwide.</span></h1>
         <div class="hero__sub">
           <p class="hero__kicker">Single-counterparty sourcing from Darjeeling, North East India, and Nepal</p>
           <p class="lede">Riacorp International connects global B2B buyers with direct sourcing from Darjeeling, North East India, and Nepal, alongside specification-driven procurement across India&rsquo;s certified bio-ingredient clusters. Lab-tested, lot-traceable, and export-ready.</p>
@@ -123,6 +117,21 @@
           <a class="btn btn--gold" href="contact.html">Request Bulk Quote / Sample</a>
           <a class="btn btn--ghost" href="products.html">Explore Product Portfolio</a>
         </div>
+      </div>
+      <!-- Mountain to port in one picture: peaks, tea terraces, churpi drying
+           rack, spice sacks and the container ship that carries them out. -->
+      <figure class="hero__art">
+        <img src="assets/img/hero-illustration-1448.jpg"
+             srcset="assets/img/hero-illustration-900.jpg 900w, assets/img/hero-illustration-1448.jpg 1448w"
+             sizes="(min-width: 900px) 50vw, 100vw" width="1448" height="1086"
+             alt="Illustration: Himalayan peaks and tea terraces, churpi drying on a rack, sacks of cardamom, ginger and turmeric, and a container ship ready for export"
+             fetchpriority="high">
+      </figure>
+    </div>
+    <!-- Registrations as a slow banner along the hero's bottom edge. The
+         list is real content; main.js adds the copies the loop needs. -->
+    <div class="hero__marquee" data-marquee>
+      <div class="hero__marquee-track">
         <ul class="hero__trust" aria-label="Registrations and documentation">
           <li>IEC Registered</li>
           <li>Central FSSAI Licensed</li>
