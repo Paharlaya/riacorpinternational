@@ -1,26 +1,35 @@
   <section class="hero" aria-labelledby="hero-title">
+    <!-- Riacorp's own photo of the Himalayan range, under a deep forest
+         gradient so the headline, crest and buttons read clearly. -->
+    <img class="hero__bg"
+         src="assets/img/hero-mountain-1600.jpg"
+         srcset="assets/img/hero-mountain-960.jpg 960w, assets/img/hero-mountain-1600.jpg 1600w, assets/img/hero-mountain-2400.jpg 2400w"
+         sizes="100vw" width="2400" height="1800" alt="" aria-hidden="true" fetchpriority="high">
     <div class="wrap hero__grid">
       <div class="hero__content">
         <p class="hero__eyebrow">From Himalayan origins to global ports <span aria-hidden="true">&bull;</span> Verified B2B exporter</p>
         <h1 class="display hero__title" id="hero-title"><span class="hero__line">Himalayan Pet Chews,</span> <span class="hero__line">High-Altitude Spices &amp;</span> <span class="hero__line">Indian Bio-Ingredients</span> <span class="hero__tail">&mdash; Exported Worldwide.</span></h1>
-        <div class="hero__sub">
-          <p class="hero__kicker">Single-counterparty sourcing from Darjeeling, North East India, and Nepal</p>
-          <p class="lede">Riacorp International connects global B2B buyers with direct sourcing from Darjeeling, North East India, and Nepal, alongside specification-driven procurement across India&rsquo;s certified bio-ingredient clusters. Lab-tested, lot-traceable, and export-ready.</p>
-        </div>
+        <p class="lede">Riacorp International offers global B2B buyers single-counterparty access to direct Himalayan sourcing from Darjeeling, North East India, and Nepal, alongside custom-mandate procurement across India&rsquo;s certified bio-ingredient clusters&mdash;lab-tested, lot-traceable, and export-ready.</p>
         <div class="actions">
           <a class="btn btn--gold" href="contact.html">Request Bulk Quote / Sample</a>
           <a class="btn btn--ghost" href="products.html">Explore Product Portfolio</a>
         </div>
       </div>
-      <!-- Mountain to port in one picture: peaks, tea terraces, churpi drying
-           rack, spice sacks and the container ship that carries them out. -->
-      <figure class="hero__art">
-        <img src="assets/img/hero-illustration-1448.jpg"
-             srcset="assets/img/hero-illustration-900.jpg 900w, assets/img/hero-illustration-1448.jpg 1448w"
-             sizes="(min-width: 900px) 50vw, 100vw" width="1448" height="1086"
-             alt="Illustration: Himalayan peaks and tea terraces, churpi drying on a rack, sacks of cardamom, ginger and turmeric, and a container ship ready for export"
-             fetchpriority="high">
-      </figure>
+      <!-- Origin & compliance at a glance, floating over the landscape. -->
+      <aside class="hero__card" aria-label="Origin and compliance summary">
+        <div class="hero__card-row">
+          <p class="hero__card-label">Origin &amp; Consolidation</p>
+          <p class="hero__card-value">Darjeeling, NE India &amp; Nepal &rarr; Siliguri Transit Hub</p>
+        </div>
+        <div class="hero__card-row">
+          <p class="hero__card-label">Statutory Registrations</p>
+          <p class="hero__card-value">IEC &bull; Central FSSAI &bull; GST &bull; APEDA &bull; Spices Board RCMC</p>
+        </div>
+        <div class="hero__card-row">
+          <p class="hero__card-label">Quality Assurance</p>
+          <p class="hero__card-value">Lot-Wise COA &amp; Pre-Shipment Testing</p>
+        </div>
+      </aside>
     </div>
     <!-- Registrations as a slow banner along the hero's bottom edge. The
          list is real content; main.js adds the copies the loop needs. -->
@@ -29,7 +38,7 @@
         <ul class="hero__trust" aria-label="Registrations and documentation">
           <li>IEC Registered</li>
           <li>Central FSSAI Licensed</li>
-          <li>GST Compliant</li>
+          <li>APEDA &amp; Spices Board RCMC</li>
           <li>Lot-Wise COA &amp; Export Documentation</li>
         </ul>
       </div>

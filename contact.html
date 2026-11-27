@@ -62,10 +62,18 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<!-- Utility bar: scrolls away; the nav below stays pinned. -->
+<div class="utility-bar">
+  <div class="wrap utility-bar__inner">
+    <span class="utility-bar__desk">Siliguri &amp; Darjeeling Export Desk</span>
+    <a href="mailto:info@riacorpinternational.com">info@riacorpinternational.com</a>
+    <a href="https://wa.me/918826985830" target="_blank" rel="noopener">WhatsApp: +91 88269 85830</a>
+  </div>
+</div>
 <header class="site-header">
   <div class="wrap site-header__bar">
     <a class="brand" href="index.html" aria-label="Riacorp International, home">
-      <img class="brand__mark" src="assets/img/crest-112.png" srcset="assets/img/crest-112.png 1x, assets/img/crest-224.png 2x" width="112" height="71" alt="" aria-hidden="true">
+      <img class="brand__mark" src="assets/img/crest-light-112.png" srcset="assets/img/crest-light-112.png 1x, assets/img/crest-light-224.png 2x" width="112" height="71" alt="" aria-hidden="true">
       <span class="brand__name"><b>Riacorp</b><span>International</span></span>
     </a>
 
@@ -168,8 +176,12 @@
             <dd><a href="tel:+918826985830">+91 88269 85830</a><br><a href="https://wa.me/918826985830">Message us on WhatsApp</a></dd>
           </div>
           <div>
-            <dt>Office</dt>
-            <dd>Darjeeling, West Bengal 734101<br>India<br><span class="muted">Operational &amp; export coordination base: Siliguri &amp; Darjeeling, West Bengal</span></dd>
+            <dt>Commercial &amp; Logistics Hub</dt>
+            <dd>Siliguri, West Bengal, India</dd>
+          </div>
+          <div>
+            <dt>Sourcing &amp; Registered Office</dt>
+            <dd>Darjeeling, West Bengal 734101, India</dd>
           </div>
           <div>
             <dt>Business hours</dt>
@@ -182,7 +194,14 @@
         </dl>
       </div>
 
-      <form class="form form--intake" data-enquiry action="mailto:info@riacorpinternational.com" method="post" enctype="text/plain">
+      <!-- Submissions, including the attached specification sheet, are emailed
+           to info@riacorpinternational.com by FormSubmit (formsubmit.co). The
+           first submission sends a one-time activation link to that inbox. -->
+      <form class="form form--intake" data-enquiry action="https://formsubmit.co/info@riacorpinternational.com" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="Bulk quotation request — Riacorp International website" data-subject>
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://paharlaya.github.io/riacorpinternational/contact.html?sent=1#enquiry">
+        <p class="form__sent" data-form-sent hidden>Thank you &mdash; your enquiry has been sent to info@riacorpinternational.com. Our team replies within 24&ndash;48 hours.</p>
         <div class="form__row">
           <div class="field">
             <label for="f-name">Full Name <abbr title="required">*</abbr></label>
@@ -204,7 +223,7 @@
             <span class="field__error">Please enter your registered company name.</span>
           </div>
           <div class="field">
-            <label for="f-website">Company Website URL</label>
+            <label for="f-website-url">Company Website URL</label>
             <input id="f-website-url" name="website_url" type="url" autocomplete="url" placeholder="e.g., company.com">
           </div>
         </div>
@@ -461,7 +480,7 @@
 
         <div class="field">
           <label for="f-spec">Buyer specification sheet</label>
-          <input id="f-spec" name="spec_sheet" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,image/*">
+          <input id="f-spec" name="attachment" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,image/*" data-spec>
           <span class="field__hint">Optional. PDF, Word, Excel or an image, up to 10 MB.</span>
         </div>
 
@@ -472,7 +491,7 @@
 
         <div class="honey" aria-hidden="true">
           <label for="f-website">Leave this field empty</label>
-          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          <input id="f-website" name="_honey" type="text" tabindex="-1" autocomplete="off">
         </div>
 
         <div class="field field--check">
@@ -482,8 +501,11 @@
         </div>
 
         <div class="form__foot">
-          <button class="btn btn--gold" type="submit">Submit Procurement Inquiry</button>
-          <p class="form__status" data-form-status role="status" aria-live="polite">Submitting opens WhatsApp with your enquiry formatted and ready to send. Nothing is stored on this site.</p>
+          <div class="actions">
+            <button class="btn btn--gold" type="submit">Submit Procurement Inquiry</button>
+            <button class="btn btn--ghost" type="button" data-whatsapp>Send via WhatsApp instead</button>
+          </div>
+          <p class="form__status" data-form-status role="status" aria-live="polite">Your enquiry and any specification sheet are emailed directly to info@riacorpinternational.com. WhatsApp is optional and sends the text only, without attachments.</p>
         </div>
       </form>
     </div>
@@ -515,7 +537,7 @@
       <div class="terms">
         <article class="term">
           <h3>Samples</h3>
-          <p>Free across every grade; you cover the courier, typically USD 30&ndash;80 by DHL or FedEx. Despatched within 2&ndash;3 working days, drawn from the same grade supplied in bulk.</p>
+          <p>Free across every grade; you cover the courier, typically USD 30&ndash;80 by DHL or FedEx. Despatched within <b>2&ndash;4 working days</b> for flagship Churpi and Spices grades, on <b>custom timelines</b> for bio-ingredients, and drawn from the same grade supplied in bulk.</p>
         </article>
         <article class="term">
           <h3>Incoterms</h3>
@@ -570,7 +592,8 @@
         <ul>
           <li><a href="mailto:info@riacorpinternational.com">info@riacorpinternational.com</a></li>
           <li><a href="tel:+918826985830">+91 88269 85830</a></li>
-          <li>Darjeeling, West Bengal 734101<br>India</li>
+          <li><span class="footer__label">Commercial &amp; Logistics Hub</span>Siliguri, West Bengal, India</li>
+          <li><span class="footer__label">Sourcing &amp; Registered Office</span>Darjeeling, West Bengal 734101, India</li>
         </ul>
       </div>
     </div>

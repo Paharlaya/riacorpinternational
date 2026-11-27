@@ -18,6 +18,6 @@ stay, the CC BY-SA images need a visible credit on the live site.
 
 ## Home page hero
 
-`assets/img/hero-client-*.jpg` is Riacorp's own photograph of the Himalayan
-range, supplied by the client. No credit required. The file is the 1280 px
-copy sent over WhatsApp; swap in the full-size original when it arrives.
+`assets/img/hero-mountain-*.jpg` is Riacorp's own full-resolution photograph
+of the Himalayan range, supplied by the client. No credit required. Location
+and camera metadata were stripped from the web files.

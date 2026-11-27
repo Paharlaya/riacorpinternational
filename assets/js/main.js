@@ -201,61 +201,82 @@
       if (wrap) wrap.classList.toggle("is-invalid", bad);
     };
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    /* Email is the primary route: once the fields check out, the form posts
+       natively to FormSubmit, which emails the enquiry and the attached
+       specification sheet to the company inbox. WhatsApp is a secondary,
+       text-only route. */
+    var MAX_FILE = 10 * 1024 * 1024;
+    var spec = form.querySelector("[data-spec]");
+    var subjectField = form.querySelector("[data-subject]");
+    var val = function (n) { var f = form.querySelector('[name="' + n + '"]'); return f ? f.value.trim() : ""; };
 
-      if (form.querySelector(".honey input").value) return; // bot
-
+    var validate = function () {
       var required = form.querySelectorAll("[required]");
       var firstBad = null;
       Array.prototype.forEach.call(required, function (field) {
-        var bad = !field.value.trim();
+        var bad = field.type === "checkbox" ? !field.checked : !field.value.trim();
         if (!bad && field.type === "email") bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(field.value.trim());
         setInvalid(field, bad);
         if (bad && !firstBad) firstBad = field;
       });
-
       if (firstBad) {
         status.textContent = "Please complete the highlighted fields.";
         status.className = "form__status is-error";
         firstBad.focus();
-        return;
+        return false;
       }
-
-      var val = function (n) { var f = form.querySelector('[name="' + n + '"]'); return f ? f.value.trim() : ""; };
-      var lines = [
-        "CORPORATE INQUIRY — Riacorp International",
-        "",
-        "Full name:            " + val("name"),
-        "Corporate email:      " + val("email"),
-        "Company legal name:   " + val("company"),
-        "Company website:      " + (val("website_url") || "—"),
-        "Country of destination: " + val("country"),
-        "",
-        "Product category:     " + val("category"),
-        "Specific material:    " + val("material"),
-        "Format / purity:      " + val("grade"),
-        "Estimated volume:     " + val("volume"),
-        "Application industry: " + val("industry"),
-        "",
-        "Technical specifications / packaging:",
-        val("message") || "—"
-      ];
-      var body = lines.join("\n");
-      var subject = "Bulk quotation request — " + (val("material") || val("category"));
-
-      var wa = WHATSAPP_NUMBER.replace(/\D/g, "");
-      if (/^\d{8,15}$/.test(wa)) {
-        status.textContent = "Opening WhatsApp with your enquiry ready to send.";
-        window.location.href = "https://wa.me/" + wa + "?text=" + encodeURIComponent(body);
-      } else {
-        status.textContent = "Opening your email client with the enquiry ready to send. We reply within 24–48 hours.";
-        window.location.href = "mailto:" + SITE_EMAIL +
-          "?subject=" + encodeURIComponent(subject) +
-          "&body=" + encodeURIComponent(body);
+      if (spec && spec.files && spec.files[0] && spec.files[0].size > MAX_FILE) {
+        status.textContent = "The specification sheet is over 10 MB. Please attach a smaller file or send it by email.";
+        status.className = "form__status is-error";
+        spec.focus();
+        return false;
       }
+      return true;
+    };
+
+    form.addEventListener("submit", function (e) {
+      if (form.querySelector(".honey input").value) { e.preventDefault(); return; } // bot
+      if (!validate()) { e.preventDefault(); return; }
+      if (subjectField) subjectField.value = "Bulk quotation request — " + (val("material") || val("category")) + " — " + val("company");
+      status.textContent = "Sending your enquiry to info@riacorpinternational.com…";
       status.className = "form__status is-ok";
     });
+
+    var waButton = form.querySelector("[data-whatsapp]");
+    if (waButton) {
+      waButton.addEventListener("click", function () {
+        if (!validate()) return;
+        var lines = [
+          "CORPORATE INQUIRY — Riacorp International",
+          "",
+          "Full name:            " + val("name"),
+          "Corporate email:      " + val("email"),
+          "Company legal name:   " + val("company"),
+          "Company website:      " + (val("website_url") || "—"),
+          "Country of destination: " + val("country"),
+          "",
+          "Product category:     " + val("category"),
+          "Specific material:    " + val("material"),
+          "Format / purity:      " + val("grade"),
+          "Estimated volume:     " + val("volume"),
+          "Application industry: " + val("industry"),
+          "",
+          "Technical specifications / packaging:",
+          val("message") || "—"
+        ];
+        if (spec && spec.files && spec.files[0]) lines.push("", "(Specification sheet to follow in this chat: " + spec.files[0].name + ")");
+        var wa = WHATSAPP_NUMBER.replace(/\D/g, "");
+        status.textContent = "Opening WhatsApp with your enquiry ready to send. Attach your specification sheet in the chat.";
+        status.className = "form__status is-ok";
+        window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
+      });
+    }
+
+    /* Back from FormSubmit with ?sent=1: confirm the enquiry went through. */
+    var sentNote = form.querySelector("[data-form-sent]");
+    if (sentNote && new URLSearchParams(window.location.search).get("sent") === "1") {
+      sentNote.hidden = false;
+    }
   })();
 
   /* ---- Product/certificate image slots -----------------------------------
@@ -347,46 +368,6 @@
         ease: "none",
         scrollTrigger: { trigger: path.closest(".section, .page-hero") || path, start: "top 85%", end: "bottom 55%", scrub: 0.8 }
       });
-    });
-  }
-
-  /* ---- Corridor flow: a pulse travels each gateway lane, origin to port --
-     The dashed lane stays as the track. A short solid segment and a glowing
-     head run along it with eased SMIL timing, fade out at the port and
-     repeat. Both animations share one clock, so the head stays on the
-     segment's leading edge. */
-  if (!reduceMotion) {
-    var SVGNS = "http://www.w3.org/2000/svg";
-    var TRAIL = 0.16;
-    var make = function (tag, attrs) {
-      var el = document.createElementNS(SVGNS, tag);
-      Object.keys(attrs).forEach(function (k) { el.setAttribute(k, attrs[k]); });
-      return el;
-    };
-    document.querySelectorAll(".gateway__map .lane").forEach(function (lane, i) {
-      var timing = { dur: "4.4s", begin: (i * 0.6) + "s", repeatCount: "indefinite" };
-      var ease = "0.45 0 0.55 1; 0 0 1 1";
-      var group = make("g", { "aria-hidden": "true" });
-      group.appendChild(make("animate", Object.assign({
-        attributeName: "opacity", values: "0;1;1;0", keyTimes: "0;0.08;0.82;1"
-      }, timing)));
-      var flow = make("path", {
-        class: "lane-flow", d: lane.getAttribute("d"), pathLength: "1",
-        "stroke-dasharray": TRAIL + " 1", "stroke-dashoffset": String(TRAIL)
-      });
-      flow.appendChild(make("animate", Object.assign({
-        attributeName: "stroke-dashoffset", values: TRAIL + ";" + (TRAIL - 1) + ";" + (TRAIL - 1),
-        keyTimes: "0;0.82;1", calcMode: "spline", keySplines: ease
-      }, timing)));
-      var head = make("circle", { class: "lane-head", r: "4.5" });
-      head.appendChild(make("animateMotion", Object.assign({
-        path: lane.getAttribute("d"), keyPoints: "0;1;1", keyTimes: "0;0.82;1",
-        calcMode: "spline", keySplines: ease
-      }, timing)));
-      group.appendChild(flow);
-      group.appendChild(head);
-      // Under the station nodes, so the pulse passes behind each stop.
-      lane.parentNode.insertBefore(group, lane.nextSibling);
     });
   }
 
