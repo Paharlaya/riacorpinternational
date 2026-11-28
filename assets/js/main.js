@@ -63,6 +63,34 @@
     });
   }
 
+  /* ---- Glass header over the photo hero ---------------------------------- */
+  /* The CSS pulls the hero up under the utility bar and header by --chrome-h;
+     measure the real height so the copy never tucks under the bar. While the
+     hero is behind the header it stays glass; past it (or with the mobile
+     drawer open) it turns solid white. */
+  var siteHeader = document.querySelector(".site-header");
+  var photoHero = document.querySelector(".hero");
+  if (siteHeader && photoHero) {
+    var utilityBar = document.querySelector(".utility-bar");
+    var siteNav = document.querySelector("[data-nav]");
+    var measureChrome = function () {
+      var h = siteHeader.offsetHeight + (utilityBar ? utilityBar.offsetHeight : 0);
+      document.documentElement.style.setProperty("--chrome-h", h + "px");
+    };
+    var updateGlass = function () {
+      var past = photoHero.getBoundingClientRect().bottom <= siteHeader.offsetHeight + 24;
+      var open = siteNav && siteNav.classList.contains("is-open");
+      siteHeader.classList.toggle("is-solid", past || !!open);
+    };
+    measureChrome();
+    updateGlass();
+    window.addEventListener("scroll", updateGlass, { passive: true });
+    window.addEventListener("resize", function () { measureChrome(); updateGlass(); });
+    if (siteNav && "MutationObserver" in window) {
+      new MutationObserver(updateGlass).observe(siteNav, { attributes: true, attributeFilter: ["class"] });
+    }
+  }
+
   /* ---- Route progress: a ship sails the header line as you read ---------- */
   var routeDone = document.querySelector("[data-route-done]");
   var routeShip = document.querySelector("[data-route-ship]");

@@ -15,6 +15,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const read = (f) => fs.readFileSync(f, "utf8");
 const head = read("src/partials/head.html");
@@ -23,6 +24,15 @@ const footer = read("src/partials/footer.html");
 const sprite = read("src/partials/sprite.html");
 const hero = read("src/partials/hero.html");
 const lanes = read("src/partials/lanes.html");
+
+// Cache-busting: each page links the stylesheet and script with a short hash
+// of their contents, so a browser never keeps running a stale copy after an
+// edit. Rebuild after changing either file.
+const hash = (f) => crypto.createHash("sha256").update(fs.readFileSync(f)).digest("hex").slice(0, 10);
+const bust = (html) =>
+  html
+    .replaceAll('href="assets/css/style.css"', `href="assets/css/style.css?v=${hash("assets/css/style.css")}"`)
+    .replaceAll('src="assets/js/main.js"', `src="assets/js/main.js?v=${hash("assets/js/main.js")}"`);
 
 const files = fs.readdirSync("src/pages").filter((f) => f.endsWith(".html")).sort();
 let built = 0;
@@ -56,7 +66,7 @@ for (const file of files) {
     "\n\n" +
     footer;
 
-  fs.writeFileSync(file, page);
+  fs.writeFileSync(file, bust(page));
   console.log(`  ${file.padEnd(22)} ${String(page.split("\n").length).padStart(4)} lines`);
   built++;
 }

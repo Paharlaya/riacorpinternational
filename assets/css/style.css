@@ -254,21 +254,24 @@ ul, ol { padding: 0; list-style: none; }
 }
 
 /* Header + route progress ------------------------------------------------ */
+/* Theme bar: deep Himalayan emerald, white type, gold accents. It stays
+   pinned; on the homepage it starts as frosted glass over the hero (see
+   "Glass header" below) and settles into this once the hero is passed. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  /* Frosted deep forest (#0F1E1A): the light crest keeps full contrast and
-     the page scrolls softly blurred beneath it. */
-  background: rgba(15, 30, 26, 0.94);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-          backdrop-filter: saturate(160%) blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.18);
+  isolation: isolate;
+  background: rgba(13, 62, 54, 0.95);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+          backdrop-filter: saturate(160%) blur(16px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 12px 32px -18px rgba(7, 40, 31, 0.55);
+  transition: background-color 380ms var(--ease), border-color 380ms var(--ease), box-shadow 380ms var(--ease);
 }
 
 /* Utility bar: a thin export-desk strip above the nav, not pinned. */
-.utility-bar { background: #0a1512; color: rgba(255, 255, 255, 0.72); font-size: 0.78rem; }
+.utility-bar { background: var(--emerald-deep); border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.78); font-size: 0.78rem; }
 .utility-bar__inner {
   display: flex;
   flex-wrap: wrap;
@@ -279,7 +282,8 @@ ul, ol { padding: 0; list-style: none; }
   padding-block: 0.35rem;
 }
 .utility-bar__desk { margin-right: auto; color: var(--gold); font-weight: 600; letter-spacing: 0.06em; }
-.utility-bar a { color: rgba(255, 255, 255, 0.82); text-decoration: none; transition: color 200ms var(--ease); }
+.utility-bar__desk::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 0.55rem; background: var(--gold); transform: translateY(-1px) rotate(45deg); }
+.utility-bar a { color: rgba(255, 255, 255, 0.9); text-decoration: none; transition: color 200ms var(--ease); }
 .utility-bar a:hover { color: var(--gold); }
 @media (max-width: 640px) {
   .utility-bar__inner { justify-content: center; text-align: center; }
@@ -301,7 +305,7 @@ ul, ol { padding: 0; list-style: none; }
   text-decoration: none;
   color: var(--paper);
 }
-/* Light crest on the dark bar. */
+/* Light crest on the emerald bar. */
 .brand__mark { width: 54px; height: auto; display: block; flex: none; }
 .brand__name { display: grid; line-height: 1; }
 .brand__name b {
@@ -320,7 +324,7 @@ ul, ol { padding: 0; list-style: none; }
   margin-right: -0.335em;
   margin-top: 0.5rem;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--gold);
 }
 @media (max-width: 899px) { :root { --header-h: 68px; } .brand__mark { width: 46px; } }
 @media (max-width: 420px) {
@@ -339,27 +343,39 @@ ul, ol { padding: 0; list-style: none; }
   border-radius: var(--r-pill);
   font-weight: 500;
   font-size: var(--fs-6);
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  transition: color 220ms var(--ease), transform 220ms var(--ease);
+  transition: color 220ms var(--ease);
 }
-/* Hover: a gold rule grows out from the centre and the label lifts slightly.
-   The current page keeps the rule. */
+/* Hover: a frosted white pill swells in behind the label.
+   Current page: white label with the gold diamond (the same mark as the
+   registrations banner) set beneath it, like a summit marker. */
 .nav__list > .nav__item > .nav__link::before {
   content: "";
   position: absolute;
-  left: 0.72rem; right: 0.72rem; bottom: 0.2rem;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 280ms var(--ease);
+  inset: 0.15rem 0.1rem;
+  z-index: -1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: scale(0.82);
+  transition: opacity 240ms var(--ease), transform 280ms var(--ease);
 }
-.nav__list > .nav__item > .nav__link:hover { color: var(--paper); transform: translateY(-1px); }
-.nav__list > .nav__item > .nav__link:hover::before,
-.nav__list > .nav__item > .nav__link[aria-current="page"]::before,
-.nav__list > .nav__item > .nav__link[aria-current="true"]::before { transform: scaleX(1); }
+.nav__list > .nav__item > .nav__link { z-index: 0; }
+.nav__list > .nav__item > .nav__link:hover { color: var(--paper); }
+.nav__list > .nav__item > .nav__link:hover::before { opacity: 1; transform: scale(1); }
+/* On the <li>, not the link: the Products link's ::after is its chevron. */
+.nav__list > .nav__item:has(> .nav__link[aria-current])::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.3rem;
+  pointer-events: none;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  transform: translateX(-50%) rotate(45deg);
+}
 .nav__link[aria-current="page"],
 .nav__link[aria-current="true"] { color: var(--paper); font-weight: 600; }
 
@@ -370,13 +386,13 @@ ul, ol { padding: 0; list-style: none; }
   display: none;
   width: 44px; height: 44px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
   background: transparent;
   cursor: pointer;
   position: relative;
 }
-.nav-toggle:hover { background: rgba(255, 255, 255, 0.1); }
+.nav-toggle:hover { background: rgba(255, 255, 255, 0.12); }
 .nav-toggle span {
   position: absolute;
   left: 12px; right: 12px;
@@ -394,14 +410,14 @@ ul, ol { padding: 0; list-style: none; }
 
 @media (max-width: 899px) {
   .nav-toggle { display: block; }
-  /* The drawer continues the dark bar. */
+  /* The drawer continues the emerald bar. */
   .nav {
     position: absolute;
     top: 100%;
     left: 0; right: 0;
     display: none;
-    background: #0f1e1a;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--emerald);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.35);
     box-shadow: var(--shadow-soft);
     padding: var(--space-2) var(--gutter) var(--space-4);
   }
@@ -414,11 +430,11 @@ ul, ol { padding: 0; list-style: none; }
     font-size: var(--fs-4);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .nav__link:hover { background: transparent; }
-  .nav__list > .nav__item > .nav__link::before { display: none; }
-  .nav__list > .nav__item > .nav__link:hover { transform: none; }
+  .nav__link:hover { background: transparent; color: var(--gold); }
+  .nav__list > .nav__item > .nav__link::before,
+  .nav__list > .nav__item:has(> .nav__link[aria-current])::after { display: none; }
   .nav__link[aria-current="page"],
-  .nav__link[aria-current="true"] { color: var(--gold); }
+  .nav__link[aria-current="true"] { color: var(--gold); box-shadow: inset 3px 0 0 var(--gold); padding-left: 0.85rem; }
   .nav__cta { display: inline-flex; margin-top: var(--space-3); }
 }
 
@@ -429,7 +445,7 @@ ul, ol { padding: 0; list-style: none; }
   position: absolute;
   left: 0; right: 0;
   top: 5px;
-  border-top: 1px dashed var(--rule-mid);
+  border-top: 1px dashed rgba(255, 255, 255, 0.22);
 }
 .route__done {
   position: absolute;
@@ -458,7 +474,7 @@ ul, ol { padding: 0; list-style: none; }
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: #0f1e1a;
+  background: var(--emerald-deep);
   color: var(--paper);
   padding-top: var(--space-5);
 }
@@ -471,7 +487,7 @@ ul, ol { padding: 0; list-style: none; }
   object-fit: cover;
   object-position: 55% 48%;
 }
-/* Forest-to-charcoal overlay, 65-75%: densest behind the copy, lighter on the
+/* Theme-emerald overlay, 60-80%: densest behind the copy, lighter on the
    right so the peaks still read behind the glass card. */
 .hero::before {
   content: "";
@@ -479,8 +495,8 @@ ul, ol { padding: 0; list-style: none; }
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(100deg, rgba(10, 28, 23, 0.76) 0%, rgba(13, 36, 30, 0.70) 45%, rgba(17, 24, 39, 0.65) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(8, 18, 15, 0.35) 100%);
+    linear-gradient(100deg, rgba(7, 40, 31, 0.80) 0%, rgba(13, 62, 54, 0.72) 45%, rgba(13, 62, 54, 0.60) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(7, 40, 31, 0.40) 100%);
 }
 /* Desktop: exactly one screen tall below the utility bar and header, so the
    registrations banner always lands on the first view. */
@@ -493,6 +509,63 @@ ul, ol { padding: 0; list-style: none; }
   }
   .hero > .hero__grid { flex: 1; align-items: center; }
   .hero__marquee { margin-top: clamp(1rem, 3vh, 2.5rem) !important; }
+}
+
+/* Glass header ------------------------------------------------------------
+   On a page with the photo hero, the utility bar and header sit ON the hero
+   (the hero is pulled up underneath them by --chrome-h, which main.js
+   measures) and read as frosted glass dissolving into the photo: the blur
+   and tint fade out towards the bottom edge instead of stopping at a hard
+   line. Once the hero scrolls out from under it, main.js adds .is-solid and
+   the bar settles into the white frosted header. White text on the blurred,
+   overlay-darkened photo keeps the links at full contrast throughout. */
+:root { --chrome-h: 124px; }
+@media (max-width: 899px) { :root { --chrome-h: 116px; } }
+@media (max-width: 640px) { :root { --chrome-h: 140px; } }
+
+html:has(.hero) .utility-bar { position: relative; z-index: 51; }
+html:has(.hero) .hero { margin-top: calc(-1 * var(--chrome-h)); padding-top: calc(var(--chrome-h) + var(--space-5)); }
+@media (min-width: 900px) {
+  html:has(.hero) .hero { min-height: 100svh; padding-top: calc(var(--chrome-h) + clamp(1rem, 3.4vh, 2.75rem)); }
+}
+
+/* Utility bar on the hero: a faint dark glass strip. */
+html:has(.hero) .utility-bar {
+  background: rgba(7, 40, 31, 0.32);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+html:has(.hero) .utility-bar__desk { color: var(--gold); }
+html:has(.hero) .utility-bar a { color: rgba(255, 255, 255, 0.9); }
+html:has(.hero) .utility-bar a:hover { color: var(--gold); }
+
+/* The glass itself lives on ::before so it can be masked to dissolve. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -28px 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.07) 70%, rgba(255, 255, 255, 0) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+          backdrop-filter: blur(18px) saturate(150%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+  transition: opacity 380ms var(--ease);
+}
+html:has(.hero) .site-header:not(.is-solid) {
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+html:has(.hero) .site-header:not(.is-solid)::before { opacity: 1; }
+@media (min-width: 900px) {
+  html:has(.hero) .site-header:not(.is-solid) .nav__list > .nav__item > .nav__link { text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28); }
 }
 .hero__grid { display: grid; gap: var(--space-4); align-items: center; }
 @media (min-width: 900px) {
@@ -578,7 +651,7 @@ ul, ol { padding: 0; list-style: none; }
 .hero__marquee {
   position: relative;
   margin-top: var(--space-5);
-  background: rgba(8, 20, 17, 0.78);
+  background: rgba(13, 62, 54, 0.88);
   border-top: 1px solid rgba(212, 175, 55, 0.28);
   overflow: hidden;
 }
@@ -591,8 +664,8 @@ ul, ol { padding: 0; list-style: none; }
   width: 7%;
   pointer-events: none;
 }
-.hero__marquee::before { left: 0; background: linear-gradient(90deg, rgba(8, 20, 17, 0.95), transparent); }
-.hero__marquee::after { right: 0; background: linear-gradient(270deg, rgba(8, 20, 17, 0.95), transparent); }
+.hero__marquee::before { left: 0; background: linear-gradient(90deg, rgba(13, 62, 54, 0.98), transparent); }
+.hero__marquee::after { right: 0; background: linear-gradient(270deg, rgba(13, 62, 54, 0.98), transparent); }
 .hero__marquee-track { display: flex; width: max-content; }
 .hero__trust {
   display: flex;
@@ -1434,8 +1507,6 @@ ul, ol { padding: 0; list-style: none; }
     visibility: visible;
     transform: translateY(0);
   }
-  /* The panel is white, but .nav__link is white for the emerald bar — without
-     resetting the colour here the dropdown renders as a blank box. */
   .nav__sub .nav__link {
     display: block;
     padding: 0.5rem 0.75rem;
@@ -1450,7 +1521,7 @@ ul, ol { padding: 0; list-style: none; }
 @media (max-width: 899px) {
   .nav__sub { padding-left: var(--space-3); }
   .nav__sub .nav__link { opacity: 0.85; }
-  .nav__note { color: rgba(255, 255, 255, 0.6); }
+  .nav__note { color: rgba(255, 255, 255, 0.62); }
   .nav__subfoot { border-top-color: rgba(255, 255, 255, 0.12); }
 }
 
